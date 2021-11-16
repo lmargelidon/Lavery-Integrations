@@ -1,0 +1,70 @@
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\pingServices.exe.config
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\pingServices.exe
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\pingServices.pdb
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\Interfaces.dll
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\LsaAspects.dll
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\LsaEventClass.dll
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\LsaEventPropagation.dll
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\lsaTools.dll
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\WcfPersistEventClient.dll
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\WcfBaseClient.dll
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\Interfaces.pdb
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\LsaAspects.pdb
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\LsaEventClass.pdb
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\LsaEventPropagation.pdb
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\lsaTools.pdb
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\WcfPersistEventClient.pdb
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\bin\Debug\WcfBaseClient.pdb
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\obj\x86\Debug\pingServices.exe
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\obj\x86\Debug\pingServices.pdb
+C:\Visual Studio Code Source\Projects 2010\LSAComponents\pingServices\obj\x86\Debug\pingServices.csprojResolveAssemblyReference.cache
+D:\Projects\LSAComponents\pingServices\obj\x86\Debug\pingServices.csprojResolveAssemblyReference.cache
+D:\Projects\LSAComponents\pingServices\bin\Debug\pingServices.exe.config
+D:\Projects\LSAComponents\pingServices\bin\Debug\pingServices.exe
+D:\Projects\LSAComponents\pingServices\bin\Debug\pingServices.pdb
+D:\Projects\LSAComponents\pingServices\bin\Debug\Interfaces.dll
+D:\Projects\LSAComponents\pingServices\bin\Debug\LsaAspects.dll
+D:\Projects\LSAComponents\pingServices\bin\Debug\LsaEventClass.dll
+D:\Projects\LSAComponents\pingServices\bin\Debug\LsaEventPropagation.dll
+D:\Projects\LSAComponents\pingServices\bin\Debug\LSALibraries.dll
+D:\Projects\LSAComponents\pingServices\bin\Debug\lsaTools.dll
+D:\Projects\LSAComponents\pingServices\bin\Debug\WcfPersistEventClient.dll
+D:\Projects\LSAComponents\pingServices\bin\Debug\WcfBrmsClient.dll
+D:\Projects\LSAComponents\pingServices\bin\Debug\MySql.Data.dll
+D:\Projects\LSAComponents\pingServices\bin\Debug\WcfBaseClient.dll
+D:\Projects\LSAComponents\pingServices\bin\Debug\Interfaces.pdb
+D:\Projects\LSAComponents\pingServices\bin\Debug\LsaAspects.pdb
+D:\Projects\LSAComponents\pingServices\bin\Debug\LsaEventClass.pdb
+D:\Projects\LSAComponents\pingServices\bin\Debug\LsaEventPropagation.pdb
+D:\Projects\LSAComponents\pingServices\bin\Debug\LSALibraries.pdb
+D:\Projects\LSAComponents\pingServices\bin\Debug\lsaTools.pdb
+D:\Projects\LSAComponents\pingServices\bin\Debug\WcfPersistEventClient.pdb
+D:\Projects\LSAComponents\pingServices\bin\Debug\WcfBrmsClient.pdb
+D:\Projects\LSAComponents\pingServices\bin\Debug\WcfBaseClient.pdb
+D:\Projects\LSAComponents\pingServices\obj\x86\Debug\pingServices.exe
+D:\Projects\LSAComponents\pingServices\obj\x86\Debug\pingServices.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\pingServices.exe.config
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\pingServices.exe
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\pingServices.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\Interfaces.dll
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\LsaAspects.dll
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\LsaEventClass.dll
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\LsaEventPropagation.dll
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\LSALibraries.dll
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\lsaTools.dll
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\WcfPersistEventClient.dll
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\WcfBrmsClient.dll
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\MySql.Data.dll
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\WcfBaseClient.dll
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\Interfaces.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\LsaAspects.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\LsaEventClass.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\LsaEventPropagation.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\LSALibraries.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\lsaTools.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\WcfPersistEventClient.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\WcfBrmsClient.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\bin\Debug\WcfBaseClient.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\obj\x86\Debug\pingServices.exe
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\obj\x86\Debug\pingServices.pdb
+C:\Visual Studio Code Source\Projetcs 2012\LSAComponents\pingServices\obj\x86\Debug\pingServices.csprojResolveAssemblyReference.cache

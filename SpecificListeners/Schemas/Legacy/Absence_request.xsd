@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-16"?>
+-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:b="http://schemas.microsoft.com/BizTalk/2003">
+<xs:element type="absence_request" nillable="true" name="absence_request"/>
+	-<xs:complexType name="absence_request">
+		-<xs:sequence>
+			<xs:element type="xs:int" name="absence_request_id" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:int" name="user_id" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:int" name="absence_type_id" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:dateTime" name="date_from" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:dateTime" name="date_to" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:decimal" name="nb_hours" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:boolean" name="is_approved" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:dateTime" name="date_received" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:dateTime" name="date_approved" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:string" name="comment" maxOccurs="1" minOccurs="0"/>
+			<xs:element type="xs:boolean" name="is_exception" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:boolean" name="is_invisible" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:boolean" name="is_cancel" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:boolean" name="is_denied" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:dateTime" name="date_cancellation" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:string" name="denied_reason" maxOccurs="1" minOccurs="0"/>
+			<xs:element type="xs:int" name="absence_ref" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:boolean" name="is_adjustment" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:decimal" name="nb_days" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:boolean" name="is_supervisor_approved" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:boolean" name="is_deleted" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:int" name="group_id" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:string" name="comment2" maxOccurs="1" minOccurs="0"/>
+			<xs:element type="xs:boolean" name="is_pending_cancel" maxOccurs="1" minOccurs="1"/>
+			<xs:element type="xs:int" name="schedule_Bitmask" maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

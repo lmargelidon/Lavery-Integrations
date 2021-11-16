@@ -1,0 +1,187 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="f7f7ab98-0cad-4b6f-adf8-cd069ba0eef1" LowerBound="1.1" HigherBound="43.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="AssiduityFlow" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="ServiceDeclaration" OID="36a5a7da-9f55-4b85-b131-d773a19f9521" ParentLink="Module_ServiceDeclaration" LowerBound="25.1" HigherBound="42.1">
+            <om:Property Name="InitializedTransactionType" Value="False" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="AssiduiteFlow" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="MessageDeclaration" OID="4950262a-8935-4cb3-bfe7-257f3f53cf21" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="32.1" HigherBound="33.1">
+                <om:Property Name="Type" Value="AssiduityFlow.Request" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="RequestMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="d371c07e-7624-48f2-96ea-84f6bf2c8b88" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="33.1" HigherBound="34.1">
+                <om:Property Name="Type" Value="AssiduityFlow.Response" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="OutputMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="ServiceBody" OID="eda3b390-8078-4abe-b13e-826e745c00eb" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Receive" OID="332f821e-6fc6-4564-8cf4-1382040f5b49" ParentLink="ServiceBody_Statement" LowerBound="36.1" HigherBound="38.1">
+                    <om:Property Name="Activate" Value="True" />
+                    <om:Property Name="PortName" Value="ReceiveTimeSheetPort" />
+                    <om:Property Name="MessageName" Value="RequestMessage" />
+                    <om:Property Name="OperationName" Value="ReceiveTimeSheet" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="GetAssiduiteInformation" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="Send" OID="c9eec64c-082c-4418-b239-5ba267840cbc" ParentLink="ServiceBody_Statement" LowerBound="38.1" HigherBound="40.1">
+                    <om:Property Name="PortName" Value="tracePort" />
+                    <om:Property Name="MessageName" Value="RequestMessage" />
+                    <om:Property Name="OperationName" Value="TraceMessage" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="TraceTimeSheet" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="8e5d020d-5a6e-4b44-95ad-398510c97c84" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="28.1" HigherBound="30.1">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Right" />
+                <om:Property Name="PortIndex" Value="10" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="AssiduityFlow.TracePortType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="tracePort" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="c09b866b-ac6c-4a36-8c40-cebe830022d6" ParentLink="PortDeclaration_CLRAttribute" LowerBound="28.1" HigherBound="29.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="4515228c-09da-4c13-822f-39a301cbddd0" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="30.1" HigherBound="32.1">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="-1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="AssiduityFlow.ReceiveTimeSheetPortType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ReceiveTimeSheetPort" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="b07d8f11-d2cd-4f43-8bbd-d1fa826d52dc" ParentLink="PortDeclaration_CLRAttribute" LowerBound="30.1" HigherBound="31.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="fe7e3a09-0409-46d1-bb11-d5ecf02b59c3" ParentLink="Module_PortType" LowerBound="4.1" HigherBound="11.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="TracePortType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="6563dc82-29b8-42de-9c4e-dd0f23a6a1fb" ParentLink="PortType_OperationDeclaration" LowerBound="6.1" HigherBound="10.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="TraceMessage" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="3c296def-f0bc-4a75-b097-9ac52701fd24" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="8.13" HigherBound="8.20">
+                    <om:Property Name="Ref" Value="AssiduityFlow.Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="4f0415d4-21b2-4e64-b9bf-2e8e6e572bcb" ParentLink="Module_PortType" LowerBound="11.1" HigherBound="18.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="PortType_1" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="8690c528-73e0-4dfa-ba7f-c1f19c8d2dcc" ParentLink="PortType_OperationDeclaration" LowerBound="13.1" HigherBound="17.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="sendOutPutMessageToFile" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="5edef4d9-4b33-40da-b5a6-398edaaa9e84" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="15.13" HigherBound="15.21">
+                    <om:Property Name="Ref" Value="AssiduityFlow.Response" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="SendTrace" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="2af6e15d-8fc1-4f6f-9807-2144a16e93bc" ParentLink="Module_PortType" LowerBound="18.1" HigherBound="25.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ReceiveTimeSheetPortType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="98ca63af-ac8f-4850-948e-dbd4b3c6888e" ParentLink="PortType_OperationDeclaration" LowerBound="20.1" HigherBound="24.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ReceiveTimeSheet" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="e98ee872-2f04-4893-b0e7-09ef7a8f9906" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="22.13" HigherBound="22.20">
+                    <om:Property Name="Ref" Value="AssiduityFlow.Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+module AssiduityFlow
+{
+    internal porttype TracePortType
+    {
+        oneway TraceMessage
+        {
+            Request
+        };
+    };
+    internal porttype PortType_1
+    {
+        oneway sendOutPutMessageToFile
+        {
+            Response
+        };
+    };
+    internal porttype ReceiveTimeSheetPortType
+    {
+        oneway ReceiveTimeSheet
+        {
+            Request
+        };
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    internal service AssiduiteFlow
+    {
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port uses TracePortType tracePort;
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port implements ReceiveTimeSheetPortType ReceiveTimeSheetPort;
+        message Request RequestMessage;
+        message Response OutputMessage;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("332f821e-6fc6-4564-8cf4-1382040f5b49")]
+            activate receive (ReceiveTimeSheetPort.ReceiveTimeSheet, RequestMessage);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("c9eec64c-082c-4418-b239-5ba267840cbc")]
+            send (tracePort.TraceMessage, RequestMessage);
+        }
+    }
+}
+

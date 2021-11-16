@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>swaggerBase</RootNamespace>
+    <AssemblyName>swaggerBase</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Org.OpenAPITools">
+      <HintPath>..\Lavery.E3\src\Org.OpenAPITools\bin\Debug\Org.OpenAPITools.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentDownloadDMSAttachmentAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentDownloadDMSAttachmentRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentDownloadICAttachmentAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentDownloadICAttachmentRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentGetAttachmentsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentGetAttachmentsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentGetDMSParametersAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentGetDMSParametersRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentUploadDMSAttachmentAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentUploadDMSAttachmentRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentUploadFileAttachmentAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentUploadFileAttachmentRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentUploadICAttachmentAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\AttachmentUploadICAttachmentRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientCreateClientAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientCreateClientRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientGetClientsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientGetClientSchemaAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientGetClientSchemaRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientGetClientsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientModelFromClientsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientModelFromClientsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientUpdateClientAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientUpdateClientRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientValidateClientsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\ClientValidateClientsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\CostCreatePendingCostCardAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\CostCreatePendingCostCardRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\CostGetPendingCostCardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\CostGetPendingCostCardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\CostGetPostedCostCardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\CostGetPostedCostCardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\CostUpdatePendingCostCardAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\CostUpdatePendingCostCardRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\CostValidatePendingCostCardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\CostValidatePendingCostCardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\EntityCloneEntityAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\EntityCloneEntityRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\EntityCreateOrganizationAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\EntityCreateOrganizationRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\EntityDeleteEntityAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\EntityDeleteEntityRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\EntityGetAllEntitiesAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\EntityGetAllEntitiesRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\EntityUpdateEntityAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\EntityUpdateEntityRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterCreateMatterAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterCreateMatterNicknameAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterCreateMatterNicknameRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterCreateMatterRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterCreateTempMatterAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterCreateTempMatterRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterDeleteMatterNicknameAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterDeleteMatterNicknameRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterGetMatterNicknamesAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterGetMatterNicknamesRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterGetMattersAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterGetMattersRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterGetTempMatterNameListAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterGetTempMatterNameListRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterReplaceTempMatterAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterReplaceTempMatterRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterUpdateMatterAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterUpdateMatterNicknameAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterUpdateMatterNicknameRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterUpdateMatterRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterValidateMattersAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\MatterValidateMattersRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\RelatedPartyCreateRelatedPartyAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\RelatedPartyCreateRelatedPartyRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\RelatedPartyGetRelatedPartiesAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\RelatedPartyGetRelatedPartiesRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\RelatedPartyUpdateRelatedPartyAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\RelatedPartyUpdateRelatedPartyRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\RelatedPartyValidateRelatedPartiesAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\RelatedPartyValidateRelatedPartiesRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeApplyTimeCaptureModelAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeApplyTimeCaptureModelRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeCleanupPendingTimecardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeCleanupPendingTimecardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeClearTimecapturePostExceptionsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeClearTimecapturePostExceptionsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeClonePendingTimecardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeClonePendingTimecardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeCreatePendingTimecardAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeCreatePendingTimecardRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeCreateTimeCaptureModelAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeCreateTimeCaptureModelRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeDeletePendingTimecardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeDeletePendingTimecardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeDeleteTimeCaptureModelAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeDeleteTimeCaptureModelRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetCalendarReportAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetCalendarReportRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetPendingTimecardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetPendingTimecardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetPostedTimecardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetPostedTimecardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetTimeCaptureAllCardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetTimeCaptureAllCardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetTimeCaptureModelsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetTimeCaptureModelsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetTimecardsGroupedByDayAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeGetTimecardsGroupedByDayRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimekeeperCreateTimekeeperAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimekeeperCreateTimekeeperRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimekeeperGetTimekeepersAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimekeeperGetTimekeepersRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimekeeperUpdateTimekeeperAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimekeeperUpdateTimekeeperRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimekeeperValidateTimekeepersAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimekeeperValidateTimekeepersRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimePostPendingTimecardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimePostPendingTimecardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeQueryTimeCaptureAllCardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeQueryTimeCaptureAllCardsRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeStartStopTimerAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeStartStopTimerRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeUpdatePendingTimecardAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeUpdatePendingTimecardRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeUpdateTimeCaptureModelAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeUpdateTimeCaptureModelRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeValidatePendingTimecardsAsyncRequest.cs" />
+    <Compile Include="ApiFacade\ApiFacadeRequest\TimeValidatePendingTimecardsRequest.cs" />
+    <Compile Include="ApiFacade\AttachmentApiFacade.cs" />
+    <Compile Include="ApiFacade\ClientApiFacade.cs" />
+    <Compile Include="ApiFacade\CostApiFacade.cs" />
+    <Compile Include="ApiFacade\EntityApiFacade.cs" />
+    <Compile Include="ApiFacade\MatterApiFacade.cs" />
+    <Compile Include="ApiFacade\RelatedPartyApiFacade.cs" />
+    <Compile Include="ApiFacade\TimeApiFacade.cs" />
+    <Compile Include="ApiFacade\TimekeeperApiFacade.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LaveryGeneric\Lavery.Tools\Lavery.Tools.csproj">
+      <Project>{aff8dbe0-e162-44bd-8fcd-9f8da78e1457}</Project>
+      <Name>Lavery.Tools</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

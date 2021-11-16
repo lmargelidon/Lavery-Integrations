@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B0CC43FD-8B45-4C64-A691-F6332CDDD5BE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>pingServices</RootNamespace>
+    <AssemblyName>pingServices</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="testSocket.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{ED7105E4-956B-4C25-ADA7-AC3F5F6325E9}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LsaAspects\LsaAspects.csproj">
+      <Project>{817867C1-C61E-4527-AAC5-7C59998B40BA}</Project>
+      <Name>LsaAspects %28LsaAspects\LsaAspects%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LsaEventClass\LsaEventClass.csproj">
+      <Project>{21FFF264-029A-4AF2-AA68-75D9C0991710}</Project>
+      <Name>LsaEventClass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LsaEventPropagation\LsaEventPropagation.csproj">
+      <Project>{8858A620-B26C-4E4B-8F05-EFD197062F2F}</Project>
+      <Name>LsaEventPropagation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LSALibraries\LSALibraries.csproj">
+      <Project>{a624db75-18e1-49d4-b2c4-ee254172d9cf}</Project>
+      <Name>LSALibraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\lsaTools\LSATools.csproj">
+      <Project>{ff1f2617-78a1-4bbe-aee0-2bbb0b4e87a2}</Project>
+      <Name>LSATools</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- ======================================================================
+        Custom Build Target for MSBuild and Release Management integration
+      ====================================================================== -->
+  <!-- Target to allow MSBuild to compile into a separate folder -->
+  <Import Project="../alm.targets" />
+  <!-- Trnasform Release for Release Management -->
+  <!--
+  <Target Name="TransformConfigFiles" AfterTargets="AfterBuild" Condition="'$(TransformConfigFiles)'=='true'">
+    <ItemGroup>
+      <DeleteAfterBuild Include="$(WebProjectOutputDir)\app.*.config" />
+    </ItemGroup>
+    <TransformXml Source="app.config" Transform="$(ProjectConfigTransformFileName)" Destination="$(WebProjectOutputDir)\app.config" />
+    <Delete Files="@(DeleteAfterBuild)" />
+  </Target>
+  -->
+</Project>

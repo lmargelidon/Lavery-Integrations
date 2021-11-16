@@ -1,0 +1,383 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlDependency", "SqlDependency\SqlDependency.csproj", "{5DFF5F4D-8169-4677-9C67-36D0F5285FC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.AzureFrameWork", "AzureFrameWork\Lavery.AzureFrameWork.csproj", "{0F6D2A48-5DFB-4200-B8D1-9BF12A93D1AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Streams Inbound-Outbound", "Streams Inbound-Outbound", "{DCB69FE0-55D6-4FCD-B426-795CAC48341D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Tools", "LaveryGeneric\Lavery.Tools\Lavery.Tools.csproj", "{AFF8DBE0-E162-44BD-8FCD-9F8DA78E1457}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BizTalk", "BizTalk", "{753667DF-326B-427F-AB28-83FEB5864F55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure", "Azure", "{CED61BC1-A625-443A-A04A-A1D15792BEC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LaveryGenerics", "LaveryGenerics", "{72855F22-7159-47A2-A163-1A59076F8709}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpecificListeners", "SpecificListeners", "{DED5981F-F9E1-48FC-A12A-AA634D19A198}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{ACB5C28C-4508-4A3B-BA1F-F067B2E476C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Connectors", "LaveryGeneric\Lavery.Connector\Lavery.Connectors.csproj", "{D98372C4-16D9-4ADA-8CD6-D651B967B97D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protocoles", "Protocoles", "{DBEA845D-2CC5-46CE-8599-97FFC3BC544E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssiduityProcess", "AssiduityProcess\AssiduityProcess.btproj", "{BCC42D3E-6936-43F4-9894-50FDE4BE804B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Constants", "LaveryGeneric\Lavery.Constants\Lavery.Constants.csproj", "{955F3353-A900-47D4-9E6A-0E593C3CBA02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaveryInboundOutBoundStream", "Lavery.InboundOutboundStream\LaveryInboundOutBoundStream.csproj", "{2DD743FB-CB3D-4E6D-A4D1-227C27767C16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{F13A4978-C43A-426E-84B8-F862E63E1CA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Client.E3", "APIs\Lavery.Client.E3\Lavery.Client.E3.csproj", "{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lavery.Wcf", "Lavery.Wcf", "{27CB9C13-1055-470F-B321-AD1F4DB6DB3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lavery.Wcf.Servers", "Lavery.Wcf.Servers", "{0F2FE9DE-7829-4580-B75D-FCCAD7CD1B43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lavery.Wcf.Clients", "Lavery.Wcf.Clients", "{B0105F83-4602-461B-90DB-FF912156DC14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lavery.Wcf.Interfaces", "Lavery.Wcf.Interfaces", "{3BB4F519-F041-4E46-88CC-0C12BCB7D0E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Wcf.Api.E3", "APIs\Lavery.Wcf\Lavery.Wcf.Servers\Lavery.Wcf.Api.E3\Lavery.Wcf.Api.E3.csproj", "{141D7128-2972-4CE8-81FE-4BAD27C7E82E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Wcf.Interface.E3", "APIs\Lavery.Wcf\Lavery.Wcf.Interfaces\Lavery.Wcf.Interface.E3\Lavery.Wcf.Interface.E3.csproj", "{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lavery.Wcf.Base", "Lavery.Wcf.Base", "{9249D521-A1CD-450F-9765-2AB7C31246EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Wcf.Base.E3", "APIs\Lavery.Wcf\Lavery.Wcf.Base\Lavery.Wcf.Base.E3\Lavery.Wcf.Base.E3.csproj", "{A7BDB42A-B35B-41FD-8606-0B91B52A57C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Helpers", "SpecificListeners\Lavery.Helpers\Lavery.Helpers.csproj", "{DF48E1AD-9299-4B06-B594-E1B32F56FB2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Schemas", "SpecificListeners\Schemas\Lavery.Schemas.csproj", "{0CBED6FF-A024-4F7B-984A-E3330CBA616E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.ListenerAssiduity", "SpecificListeners\Lavery.Listener.Assiduite\Lavery.ListenerAssiduity.csproj", "{5F69EF0E-F1FB-4234-8820-46D959B3DD3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Listener.AssiduityServiceBus", "SpecificListeners\Lavery.Listener.AssiduityServiceBus\Lavery.Listener.AssiduityServiceBus.csproj", "{AFE6986C-9E43-454C-BCAA-9158911271AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Objects.Base", "LaveryGeneric\Lavery.Listener.Base\Lavery.Objects.Base.csproj", "{53766E9E-F85C-431C-868D-54E4B3191EC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.ListenerErsNet", "SpecificListeners\Lavery.Listener.ErsNet\Lavery.ListenerErsNet.csproj", "{A3AF9261-1BB7-4085-8425-1D8563BE58D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Listeners.Wcf.Services", "Lavery.Listeners.Wcf.Services\Lavery.Listeners.Wcf.Services.csproj", "{73C19CF5-F45A-416C-A868-9145944CB484}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Wcf.Api.Client.E3", "Lavery.Wcg.Api.Client.E3\Lavery.Wcf.Api.Client.E3.csproj", "{0F4D3579-DBF2-4A9B-AA35-91E75D2EA898}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dynamicListeners", "dynamicListeners", "{1EA4D4AF-E2D2-4DEF-A163-0A82F03DFA07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.dynamicConfiguration", "SpecificListeners\dynamicListerners\Lavery.dynamicConfiguration\Lavery.dynamicConfiguration.csproj", "{211598FE-49E4-42D6-BFDA-B6837EEED0A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavery.Generic.Helpers", "reflectionDynamicLoader\Lavery.Generic.Helpers.csproj", "{6461D0F2-D27A-439E-9FB7-CF23DD0F454E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DFF5F4D-8169-4677-9C67-36D0F5285FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DFF5F4D-8169-4677-9C67-36D0F5285FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DFF5F4D-8169-4677-9C67-36D0F5285FC8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5DFF5F4D-8169-4677-9C67-36D0F5285FC8}.Debug|x86.Build.0 = Debug|Any CPU
+		{5DFF5F4D-8169-4677-9C67-36D0F5285FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DFF5F4D-8169-4677-9C67-36D0F5285FC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DFF5F4D-8169-4677-9C67-36D0F5285FC8}.Release|x86.ActiveCfg = Release|Any CPU
+		{5DFF5F4D-8169-4677-9C67-36D0F5285FC8}.Release|x86.Build.0 = Release|Any CPU
+		{0F6D2A48-5DFB-4200-B8D1-9BF12A93D1AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6D2A48-5DFB-4200-B8D1-9BF12A93D1AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6D2A48-5DFB-4200-B8D1-9BF12A93D1AA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F6D2A48-5DFB-4200-B8D1-9BF12A93D1AA}.Debug|x86.Build.0 = Debug|Any CPU
+		{0F6D2A48-5DFB-4200-B8D1-9BF12A93D1AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6D2A48-5DFB-4200-B8D1-9BF12A93D1AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6D2A48-5DFB-4200-B8D1-9BF12A93D1AA}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F6D2A48-5DFB-4200-B8D1-9BF12A93D1AA}.Release|x86.Build.0 = Release|Any CPU
+		{AFF8DBE0-E162-44BD-8FCD-9F8DA78E1457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF8DBE0-E162-44BD-8FCD-9F8DA78E1457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF8DBE0-E162-44BD-8FCD-9F8DA78E1457}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AFF8DBE0-E162-44BD-8FCD-9F8DA78E1457}.Debug|x86.Build.0 = Debug|Any CPU
+		{AFF8DBE0-E162-44BD-8FCD-9F8DA78E1457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF8DBE0-E162-44BD-8FCD-9F8DA78E1457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF8DBE0-E162-44BD-8FCD-9F8DA78E1457}.Release|x86.ActiveCfg = Release|Any CPU
+		{AFF8DBE0-E162-44BD-8FCD-9F8DA78E1457}.Release|x86.Build.0 = Release|Any CPU
+		{D98372C4-16D9-4ADA-8CD6-D651B967B97D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D98372C4-16D9-4ADA-8CD6-D651B967B97D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D98372C4-16D9-4ADA-8CD6-D651B967B97D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D98372C4-16D9-4ADA-8CD6-D651B967B97D}.Debug|x86.Build.0 = Debug|Any CPU
+		{D98372C4-16D9-4ADA-8CD6-D651B967B97D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D98372C4-16D9-4ADA-8CD6-D651B967B97D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D98372C4-16D9-4ADA-8CD6-D651B967B97D}.Release|x86.ActiveCfg = Release|Any CPU
+		{D98372C4-16D9-4ADA-8CD6-D651B967B97D}.Release|x86.Build.0 = Release|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Debug|x86.Build.0 = Debug|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Debug|x86.Deploy.0 = Debug|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Release|x86.ActiveCfg = Release|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Release|x86.Build.0 = Release|Any CPU
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B}.Release|x86.Deploy.0 = Release|Any CPU
+		{955F3353-A900-47D4-9E6A-0E593C3CBA02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{955F3353-A900-47D4-9E6A-0E593C3CBA02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{955F3353-A900-47D4-9E6A-0E593C3CBA02}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{955F3353-A900-47D4-9E6A-0E593C3CBA02}.Debug|x86.Build.0 = Debug|Any CPU
+		{955F3353-A900-47D4-9E6A-0E593C3CBA02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{955F3353-A900-47D4-9E6A-0E593C3CBA02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{955F3353-A900-47D4-9E6A-0E593C3CBA02}.Release|x86.ActiveCfg = Release|Any CPU
+		{955F3353-A900-47D4-9E6A-0E593C3CBA02}.Release|x86.Build.0 = Release|Any CPU
+		{2DD743FB-CB3D-4E6D-A4D1-227C27767C16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD743FB-CB3D-4E6D-A4D1-227C27767C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD743FB-CB3D-4E6D-A4D1-227C27767C16}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2DD743FB-CB3D-4E6D-A4D1-227C27767C16}.Debug|x86.Build.0 = Debug|Any CPU
+		{2DD743FB-CB3D-4E6D-A4D1-227C27767C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD743FB-CB3D-4E6D-A4D1-227C27767C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DD743FB-CB3D-4E6D-A4D1-227C27767C16}.Release|x86.ActiveCfg = Release|Any CPU
+		{2DD743FB-CB3D-4E6D-A4D1-227C27767C16}.Release|x86.Build.0 = Release|Any CPU
+		{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34}.Debug|x86.Build.0 = Debug|Any CPU
+		{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34}.Release|x86.ActiveCfg = Release|Any CPU
+		{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34}.Release|x86.Build.0 = Release|Any CPU
+		{141D7128-2972-4CE8-81FE-4BAD27C7E82E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141D7128-2972-4CE8-81FE-4BAD27C7E82E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141D7128-2972-4CE8-81FE-4BAD27C7E82E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{141D7128-2972-4CE8-81FE-4BAD27C7E82E}.Debug|x86.Build.0 = Debug|Any CPU
+		{141D7128-2972-4CE8-81FE-4BAD27C7E82E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141D7128-2972-4CE8-81FE-4BAD27C7E82E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{141D7128-2972-4CE8-81FE-4BAD27C7E82E}.Release|x86.ActiveCfg = Release|Any CPU
+		{141D7128-2972-4CE8-81FE-4BAD27C7E82E}.Release|x86.Build.0 = Release|Any CPU
+		{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6}.Debug|x86.Build.0 = Debug|Any CPU
+		{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6}.Release|x86.ActiveCfg = Release|Any CPU
+		{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6}.Release|x86.Build.0 = Release|Any CPU
+		{A7BDB42A-B35B-41FD-8606-0B91B52A57C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7BDB42A-B35B-41FD-8606-0B91B52A57C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7BDB42A-B35B-41FD-8606-0B91B52A57C1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A7BDB42A-B35B-41FD-8606-0B91B52A57C1}.Debug|x86.Build.0 = Debug|Any CPU
+		{A7BDB42A-B35B-41FD-8606-0B91B52A57C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7BDB42A-B35B-41FD-8606-0B91B52A57C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7BDB42A-B35B-41FD-8606-0B91B52A57C1}.Release|x86.ActiveCfg = Release|Any CPU
+		{A7BDB42A-B35B-41FD-8606-0B91B52A57C1}.Release|x86.Build.0 = Release|Any CPU
+		{DF48E1AD-9299-4B06-B594-E1B32F56FB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF48E1AD-9299-4B06-B594-E1B32F56FB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF48E1AD-9299-4B06-B594-E1B32F56FB2E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DF48E1AD-9299-4B06-B594-E1B32F56FB2E}.Debug|x86.Build.0 = Debug|Any CPU
+		{DF48E1AD-9299-4B06-B594-E1B32F56FB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF48E1AD-9299-4B06-B594-E1B32F56FB2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF48E1AD-9299-4B06-B594-E1B32F56FB2E}.Release|x86.ActiveCfg = Release|Any CPU
+		{DF48E1AD-9299-4B06-B594-E1B32F56FB2E}.Release|x86.Build.0 = Release|Any CPU
+		{0CBED6FF-A024-4F7B-984A-E3330CBA616E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CBED6FF-A024-4F7B-984A-E3330CBA616E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CBED6FF-A024-4F7B-984A-E3330CBA616E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0CBED6FF-A024-4F7B-984A-E3330CBA616E}.Debug|x86.Build.0 = Debug|Any CPU
+		{0CBED6FF-A024-4F7B-984A-E3330CBA616E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CBED6FF-A024-4F7B-984A-E3330CBA616E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CBED6FF-A024-4F7B-984A-E3330CBA616E}.Release|x86.ActiveCfg = Release|Any CPU
+		{0CBED6FF-A024-4F7B-984A-E3330CBA616E}.Release|x86.Build.0 = Release|Any CPU
+		{5F69EF0E-F1FB-4234-8820-46D959B3DD3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F69EF0E-F1FB-4234-8820-46D959B3DD3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F69EF0E-F1FB-4234-8820-46D959B3DD3A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5F69EF0E-F1FB-4234-8820-46D959B3DD3A}.Debug|x86.Build.0 = Debug|Any CPU
+		{5F69EF0E-F1FB-4234-8820-46D959B3DD3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F69EF0E-F1FB-4234-8820-46D959B3DD3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F69EF0E-F1FB-4234-8820-46D959B3DD3A}.Release|x86.ActiveCfg = Release|Any CPU
+		{5F69EF0E-F1FB-4234-8820-46D959B3DD3A}.Release|x86.Build.0 = Release|Any CPU
+		{AFE6986C-9E43-454C-BCAA-9158911271AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE6986C-9E43-454C-BCAA-9158911271AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE6986C-9E43-454C-BCAA-9158911271AA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AFE6986C-9E43-454C-BCAA-9158911271AA}.Debug|x86.Build.0 = Debug|Any CPU
+		{AFE6986C-9E43-454C-BCAA-9158911271AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE6986C-9E43-454C-BCAA-9158911271AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFE6986C-9E43-454C-BCAA-9158911271AA}.Release|x86.ActiveCfg = Release|Any CPU
+		{AFE6986C-9E43-454C-BCAA-9158911271AA}.Release|x86.Build.0 = Release|Any CPU
+		{53766E9E-F85C-431C-868D-54E4B3191EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53766E9E-F85C-431C-868D-54E4B3191EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53766E9E-F85C-431C-868D-54E4B3191EC1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{53766E9E-F85C-431C-868D-54E4B3191EC1}.Debug|x86.Build.0 = Debug|Any CPU
+		{53766E9E-F85C-431C-868D-54E4B3191EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53766E9E-F85C-431C-868D-54E4B3191EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53766E9E-F85C-431C-868D-54E4B3191EC1}.Release|x86.ActiveCfg = Release|Any CPU
+		{53766E9E-F85C-431C-868D-54E4B3191EC1}.Release|x86.Build.0 = Release|Any CPU
+		{A3AF9261-1BB7-4085-8425-1D8563BE58D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3AF9261-1BB7-4085-8425-1D8563BE58D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3AF9261-1BB7-4085-8425-1D8563BE58D0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A3AF9261-1BB7-4085-8425-1D8563BE58D0}.Debug|x86.Build.0 = Debug|Any CPU
+		{A3AF9261-1BB7-4085-8425-1D8563BE58D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3AF9261-1BB7-4085-8425-1D8563BE58D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3AF9261-1BB7-4085-8425-1D8563BE58D0}.Release|x86.ActiveCfg = Release|Any CPU
+		{A3AF9261-1BB7-4085-8425-1D8563BE58D0}.Release|x86.Build.0 = Release|Any CPU
+		{73C19CF5-F45A-416C-A868-9145944CB484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73C19CF5-F45A-416C-A868-9145944CB484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73C19CF5-F45A-416C-A868-9145944CB484}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{73C19CF5-F45A-416C-A868-9145944CB484}.Debug|x86.Build.0 = Debug|Any CPU
+		{73C19CF5-F45A-416C-A868-9145944CB484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73C19CF5-F45A-416C-A868-9145944CB484}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73C19CF5-F45A-416C-A868-9145944CB484}.Release|x86.ActiveCfg = Release|Any CPU
+		{73C19CF5-F45A-416C-A868-9145944CB484}.Release|x86.Build.0 = Release|Any CPU
+		{0F4D3579-DBF2-4A9B-AA35-91E75D2EA898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F4D3579-DBF2-4A9B-AA35-91E75D2EA898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F4D3579-DBF2-4A9B-AA35-91E75D2EA898}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F4D3579-DBF2-4A9B-AA35-91E75D2EA898}.Debug|x86.Build.0 = Debug|Any CPU
+		{0F4D3579-DBF2-4A9B-AA35-91E75D2EA898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F4D3579-DBF2-4A9B-AA35-91E75D2EA898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F4D3579-DBF2-4A9B-AA35-91E75D2EA898}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F4D3579-DBF2-4A9B-AA35-91E75D2EA898}.Release|x86.Build.0 = Release|Any CPU
+		{211598FE-49E4-42D6-BFDA-B6837EEED0A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{211598FE-49E4-42D6-BFDA-B6837EEED0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{211598FE-49E4-42D6-BFDA-B6837EEED0A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{211598FE-49E4-42D6-BFDA-B6837EEED0A1}.Debug|x86.Build.0 = Debug|Any CPU
+		{211598FE-49E4-42D6-BFDA-B6837EEED0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{211598FE-49E4-42D6-BFDA-B6837EEED0A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{211598FE-49E4-42D6-BFDA-B6837EEED0A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{211598FE-49E4-42D6-BFDA-B6837EEED0A1}.Release|x86.Build.0 = Release|Any CPU
+		{6461D0F2-D27A-439E-9FB7-CF23DD0F454E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6461D0F2-D27A-439E-9FB7-CF23DD0F454E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6461D0F2-D27A-439E-9FB7-CF23DD0F454E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6461D0F2-D27A-439E-9FB7-CF23DD0F454E}.Debug|x86.Build.0 = Debug|Any CPU
+		{6461D0F2-D27A-439E-9FB7-CF23DD0F454E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6461D0F2-D27A-439E-9FB7-CF23DD0F454E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6461D0F2-D27A-439E-9FB7-CF23DD0F454E}.Release|x86.ActiveCfg = Release|Any CPU
+		{6461D0F2-D27A-439E-9FB7-CF23DD0F454E}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5DFF5F4D-8169-4677-9C67-36D0F5285FC8} = {ACB5C28C-4508-4A3B-BA1F-F067B2E476C4}
+		{0F6D2A48-5DFB-4200-B8D1-9BF12A93D1AA} = {CED61BC1-A625-443A-A04A-A1D15792BEC4}
+		{AFF8DBE0-E162-44BD-8FCD-9F8DA78E1457} = {72855F22-7159-47A2-A163-1A59076F8709}
+		{D98372C4-16D9-4ADA-8CD6-D651B967B97D} = {DBEA845D-2CC5-46CE-8599-97FFC3BC544E}
+		{DBEA845D-2CC5-46CE-8599-97FFC3BC544E} = {72855F22-7159-47A2-A163-1A59076F8709}
+		{BCC42D3E-6936-43F4-9894-50FDE4BE804B} = {753667DF-326B-427F-AB28-83FEB5864F55}
+		{955F3353-A900-47D4-9E6A-0E593C3CBA02} = {72855F22-7159-47A2-A163-1A59076F8709}
+		{2DD743FB-CB3D-4E6D-A4D1-227C27767C16} = {DCB69FE0-55D6-4FCD-B426-795CAC48341D}
+		{CB1E2AC9-670A-4E85-9E21-72BD4DADAD34} = {F13A4978-C43A-426E-84B8-F862E63E1CA4}
+		{27CB9C13-1055-470F-B321-AD1F4DB6DB3B} = {F13A4978-C43A-426E-84B8-F862E63E1CA4}
+		{0F2FE9DE-7829-4580-B75D-FCCAD7CD1B43} = {27CB9C13-1055-470F-B321-AD1F4DB6DB3B}
+		{B0105F83-4602-461B-90DB-FF912156DC14} = {27CB9C13-1055-470F-B321-AD1F4DB6DB3B}
+		{3BB4F519-F041-4E46-88CC-0C12BCB7D0E9} = {27CB9C13-1055-470F-B321-AD1F4DB6DB3B}
+		{141D7128-2972-4CE8-81FE-4BAD27C7E82E} = {0F2FE9DE-7829-4580-B75D-FCCAD7CD1B43}
+		{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6} = {3BB4F519-F041-4E46-88CC-0C12BCB7D0E9}
+		{9249D521-A1CD-450F-9765-2AB7C31246EE} = {27CB9C13-1055-470F-B321-AD1F4DB6DB3B}
+		{A7BDB42A-B35B-41FD-8606-0B91B52A57C1} = {9249D521-A1CD-450F-9765-2AB7C31246EE}
+		{DF48E1AD-9299-4B06-B594-E1B32F56FB2E} = {DED5981F-F9E1-48FC-A12A-AA634D19A198}
+		{0CBED6FF-A024-4F7B-984A-E3330CBA616E} = {DED5981F-F9E1-48FC-A12A-AA634D19A198}
+		{5F69EF0E-F1FB-4234-8820-46D959B3DD3A} = {DED5981F-F9E1-48FC-A12A-AA634D19A198}
+		{AFE6986C-9E43-454C-BCAA-9158911271AA} = {DED5981F-F9E1-48FC-A12A-AA634D19A198}
+		{53766E9E-F85C-431C-868D-54E4B3191EC1} = {72855F22-7159-47A2-A163-1A59076F8709}
+		{A3AF9261-1BB7-4085-8425-1D8563BE58D0} = {DED5981F-F9E1-48FC-A12A-AA634D19A198}
+		{73C19CF5-F45A-416C-A868-9145944CB484} = {DED5981F-F9E1-48FC-A12A-AA634D19A198}
+		{0F4D3579-DBF2-4A9B-AA35-91E75D2EA898} = {B0105F83-4602-461B-90DB-FF912156DC14}
+		{1EA4D4AF-E2D2-4DEF-A163-0A82F03DFA07} = {DED5981F-F9E1-48FC-A12A-AA634D19A198}
+		{211598FE-49E4-42D6-BFDA-B6837EEED0A1} = {1EA4D4AF-E2D2-4DEF-A163-0A82F03DFA07}
+		{6461D0F2-D27A-439E-9FB7-CF23DD0F454E} = {72855F22-7159-47A2-A163-1A59076F8709}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DBAE24E-DCE2-4FC6-A5FE-209617D8CA7D}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 22
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.lavery.qc.ca/tfs/lavery
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = AssiduityProcess\\AssiduityProcess.btproj
+		SccProjectTopLevelParentUniqueName1 = LaveryIntegration.sln
+		SccProjectName1 = AssiduityProcess
+		SccLocalPath1 = AssiduityProcess
+		SccProjectUniqueName2 = AzureFrameWork\\Lavery.AzureFrameWork.csproj
+		SccProjectTopLevelParentUniqueName2 = LaveryIntegration.sln
+		SccProjectName2 = AzureFrameWork
+		SccLocalPath2 = AzureFrameWork
+		SccProjectUniqueName3 = SqlDependency\\SqlDependency.csproj
+		SccProjectTopLevelParentUniqueName3 = LaveryIntegration.sln
+		SccProjectName3 = SqlDependency
+		SccLocalPath3 = SqlDependency
+		SccProjectUniqueName4 = Lavery.InboundOutboundStream\\LaveryInboundOutBoundStream.csproj
+		SccProjectTopLevelParentUniqueName4 = LaveryIntegration.sln
+		SccProjectName4 = Lavery.InboundOutboundStream
+		SccLocalPath4 = Lavery.InboundOutboundStream
+		SccProjectUniqueName5 = APIs\\Lavery.Client.E3\\Lavery.Client.E3.csproj
+		SccProjectTopLevelParentUniqueName5 = LaveryIntegration.sln
+		SccProjectName5 = APIs/Lavery.Client.E3
+		SccLocalPath5 = APIs\\Lavery.Client.E3
+		SccProjectUniqueName6 = APIs\\Lavery.Wcf\\Lavery.Wcf.Servers\\Lavery.Wcf.Api.E3\\Lavery.Wcf.Api.E3.csproj
+		SccProjectTopLevelParentUniqueName6 = LaveryIntegration.sln
+		SccProjectName6 = APIs/Lavery.Wcf/Lavery.Wcf.Servers/Lavery.Wcf.Api.E3
+		SccLocalPath6 = APIs\\Lavery.Wcf\\Lavery.Wcf.Servers\\Lavery.Wcf.Api.E3
+		SccProjectUniqueName7 = APIs\\Lavery.Wcf\\Lavery.Wcf.Interfaces\\Lavery.Wcf.Interface.E3\\Lavery.Wcf.Interface.E3.csproj
+		SccProjectTopLevelParentUniqueName7 = LaveryIntegration.sln
+		SccProjectName7 = APIs/Lavery.Wcf/Lavery.Wcf.Interfaces/Lavery.Wcf.Interface.E3
+		SccLocalPath7 = APIs\\Lavery.Wcf\\Lavery.Wcf.Interfaces\\Lavery.Wcf.Interface.E3
+		SccProjectUniqueName8 = APIs\\Lavery.Wcf\\Lavery.Wcf.Base\\Lavery.Wcf.Base.E3\\Lavery.Wcf.Base.E3.csproj
+		SccProjectTopLevelParentUniqueName8 = LaveryIntegration.sln
+		SccProjectName8 = APIs/Lavery.Wcf/Lavery.Wcf.Base/Lavery.Wcf.Base.E3
+		SccLocalPath8 = APIs\\Lavery.Wcf\\Lavery.Wcf.Base\\Lavery.Wcf.Base.E3
+		SccProjectUniqueName9 = SpecificListeners\\Lavery.Helpers\\Lavery.Helpers.csproj
+		SccProjectTopLevelParentUniqueName9 = LaveryIntegration.sln
+		SccProjectName9 = SpecificListeners/Lavery.Helpers
+		SccLocalPath9 = SpecificListeners\\Lavery.Helpers
+		SccProjectUniqueName10 = SpecificListeners\\Schemas\\Lavery.Schemas.csproj
+		SccProjectTopLevelParentUniqueName10 = LaveryIntegration.sln
+		SccProjectName10 = SpecificListeners/Schemas
+		SccLocalPath10 = SpecificListeners\\Schemas
+		SccProjectUniqueName11 = SpecificListeners\\Lavery.Listener.Assiduite\\Lavery.ListenerAssiduity.csproj
+		SccProjectTopLevelParentUniqueName11 = LaveryIntegration.sln
+		SccProjectName11 = SpecificListeners/Lavery.Listener.Assiduite
+		SccLocalPath11 = SpecificListeners\\Lavery.Listener.Assiduite
+		SccProjectUniqueName12 = SpecificListeners\\Lavery.Listener.AssiduityServiceBus\\Lavery.Listener.AssiduityServiceBus.csproj
+		SccProjectTopLevelParentUniqueName12 = LaveryIntegration.sln
+		SccProjectName12 = SpecificListeners/Lavery.Listener.AssiduityServiceBus
+		SccLocalPath12 = SpecificListeners\\Lavery.Listener.AssiduityServiceBus
+		SccProjectUniqueName13 = SpecificListeners\\Lavery.Listener.ErsNet\\Lavery.ListenerErsNet.csproj
+		SccProjectTopLevelParentUniqueName13 = LaveryIntegration.sln
+		SccProjectName13 = SpecificListeners/Lavery.Listener.ErsNet
+		SccLocalPath13 = SpecificListeners\\Lavery.Listener.ErsNet
+		SccProjectUniqueName14 = Lavery.Listeners.Wcf.Services\\Lavery.Listeners.Wcf.Services.csproj
+		SccProjectTopLevelParentUniqueName14 = LaveryIntegration.sln
+		SccProjectName14 = Lavery.Listeners.Wcf.Services
+		SccLocalPath14 = Lavery.Listeners.Wcf.Services
+		SccProjectUniqueName15 = LaveryGeneric\\Lavery.Connector\\Lavery.Connectors.csproj
+		SccProjectTopLevelParentUniqueName15 = LaveryIntegration.sln
+		SccProjectName15 = LaveryGeneric/Lavery.Connector
+		SccLocalPath15 = LaveryGeneric\\Lavery.Connector
+		SccProjectUniqueName16 = LaveryGeneric\\Lavery.Constants\\Lavery.Constants.csproj
+		SccProjectTopLevelParentUniqueName16 = LaveryIntegration.sln
+		SccProjectName16 = LaveryGeneric/Lavery.Constants
+		SccLocalPath16 = LaveryGeneric\\Lavery.Constants
+		SccProjectUniqueName17 = LaveryGeneric\\Lavery.Listener.Base\\Lavery.Objects.Base.csproj
+		SccProjectTopLevelParentUniqueName17 = LaveryIntegration.sln
+		SccProjectName17 = LaveryGeneric/Lavery.Listener.Base
+		SccLocalPath17 = LaveryGeneric\\Lavery.Listener.Base
+		SccProjectUniqueName18 = LaveryGeneric\\Lavery.Tools\\Lavery.Tools.csproj
+		SccProjectTopLevelParentUniqueName18 = LaveryIntegration.sln
+		SccProjectName18 = LaveryGeneric/Lavery.Tools
+		SccLocalPath18 = LaveryGeneric\\Lavery.Tools
+		SccProjectUniqueName19 = Lavery.Wcg.Api.Client.E3\\Lavery.Wcf.Api.Client.E3.csproj
+		SccProjectTopLevelParentUniqueName19 = LaveryIntegration.sln
+		SccProjectName19 = Lavery.Wcg.Api.Client.E3
+		SccLocalPath19 = Lavery.Wcg.Api.Client.E3
+		SccProjectUniqueName20 = SpecificListeners\\dynamicListerners\\Lavery.dynamicConfiguration\\Lavery.dynamicConfiguration.csproj
+		SccProjectTopLevelParentUniqueName20 = LaveryIntegration.sln
+		SccProjectName20 = SpecificListeners/dynamicListerners/Lavery.dynamicConfiguration
+		SccLocalPath20 = SpecificListeners\\dynamicListerners\\Lavery.dynamicConfiguration
+		SccProjectUniqueName21 = reflectionDynamicLoader\\Lavery.Generic.Helpers.csproj
+		SccProjectTopLevelParentUniqueName21 = LaveryIntegration.sln
+		SccProjectName21 = reflectionDynamicLoader
+		SccLocalPath21 = reflectionDynamicLoader
+	EndGlobalSection
+EndGlobal

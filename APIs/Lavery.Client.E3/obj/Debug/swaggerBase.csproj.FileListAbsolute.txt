@@ -1,0 +1,6 @@
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\swaggerBase\obj\Debug\swaggerBase.csproj.AssemblyReference.cache
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\swaggerBase\obj\Debug\swaggerBase.csproj.CoreCompileInputs.cache
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\swaggerBase\bin\Debug\swaggerBase.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\swaggerBase\bin\Debug\swaggerBase.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\swaggerBase\obj\Debug\swaggerBase.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\swaggerBase\obj\Debug\swaggerBase.pdb

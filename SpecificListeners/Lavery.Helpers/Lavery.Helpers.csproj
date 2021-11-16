@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DF48E1AD-9299-4B06-B594-E1B32F56FB2E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lavery.Helpers</RootNamespace>
+    <AssemblyName>Lavery.Helpers</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LaveryGeneric\Lavery.Listener.Base\Lavery.Objects.Base.csproj">
+      <Project>{53766e9e-f85c-431c-868d-54e4b3191ec1}</Project>
+      <Name>Lavery.Objects.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LaveryGeneric\Lavery.Tools\Lavery.Tools.csproj">
+      <Project>{aff8dbe0-e162-44bd-8fcd-9f8da78e1457}</Project>
+      <Name>Lavery.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\dynamicListerners\Lavery.dynamicConfiguration\Lavery.dynamicConfiguration.csproj">
+      <Project>{211598fe-49e4-42d6-bfda-b6837eeed0a1}</Project>
+      <Name>Lavery.dynamicConfiguration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavery.Listener.Assiduite\Lavery.ListenerAssiduity.csproj">
+      <Project>{5f69ef0e-f1fb-4234-8820-46d959b3dd3a}</Project>
+      <Name>Lavery.ListenerAssiduity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavery.Listener.AssiduityServiceBus\Lavery.Listener.AssiduityServiceBus.csproj">
+      <Project>{afe6986c-9e43-454c-bcaa-9158911271aa}</Project>
+      <Name>Lavery.Listener.AssiduityServiceBus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavery.Listener.ErsNet\Lavery.ListenerErsNet.csproj">
+      <Project>{a3af9261-1bb7-4085-8425-1d8563be58d0}</Project>
+      <Name>Lavery.ListenerErsNet</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{73C19CF5-F45A-416C-A868-9145944CB484}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lavery.Listeners.Wcf.Services</RootNamespace>
+    <AssemblyName>Lavery.Listeners.Wcf.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ListenerWcfE3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\APIs\Lavery.Wcf\Lavery.Wcf.Base\Lavery.Wcf.Base.E3\Lavery.Wcf.Base.E3.csproj">
+      <Project>{a7bdb42a-b35b-41fd-8606-0b91b52a57c1}</Project>
+      <Name>Lavery.Wcf.Base.E3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\APIs\Lavery.Wcf\Lavery.Wcf.Interfaces\Lavery.Wcf.Interface.E3\Lavery.Wcf.Interface.E3.csproj">
+      <Project>{217eea4d-bf3b-41c6-b3a9-570c3bf05ee6}</Project>
+      <Name>Lavery.Wcf.Interface.E3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\APIs\Lavery.Wcf\Lavery.Wcf.Servers\Lavery.Wcf.Api.E3\Lavery.Wcf.Api.E3.csproj">
+      <Project>{141d7128-2972-4ce8-81fe-4bad27c7e82e}</Project>
+      <Name>Lavery.Wcf.Api.E3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LaveryGeneric\Lavery.Connector\Lavery.Connectors.csproj">
+      <Project>{d98372c4-16d9-4ada-8cd6-d651b967b97d}</Project>
+      <Name>Lavery.Connectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LaveryGeneric\Lavery.Constants\Lavery.Constants.csproj">
+      <Project>{955f3353-a900-47d4-9e6a-0e593c3cba02}</Project>
+      <Name>Lavery.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LaveryGeneric\Lavery.Listener.Base\Lavery.Objects.Base.csproj">
+      <Project>{53766e9e-f85c-431c-868d-54e4b3191ec1}</Project>
+      <Name>Lavery.Objects.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LaveryGeneric\Lavery.Tools\Lavery.Tools.csproj">
+      <Project>{aff8dbe0-e162-44bd-8fcd-9f8da78e1457}</Project>
+      <Name>Lavery.Tools</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
