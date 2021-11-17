@@ -60,12 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ListenerAssiduityBase.cs" />
-    <Compile Include="MsMqEvents.cs" />
-    <Compile Include="MsMqValidateEvents.cs" />
-    <Compile Include="MsSqlValidateEvents.cs" />
-    <Compile Include="MsSqlPendingEvents.cs" />
+    <Compile Include="MsMqTimeCardEvents.cs" />
+    <Compile Include="MsSqlTimeCardEvents.cs" />
+    <Compile Include="MsSqlTimeCardPendingEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MsSqlEvents.cs" />
     <Compile Include="ListenerAssiduityServingAccess.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +93,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ListenerAssiduity.cd" />
     <None Include="packages.config" />
     <None Include="XMLSchema1.xsd" />
   </ItemGroup>

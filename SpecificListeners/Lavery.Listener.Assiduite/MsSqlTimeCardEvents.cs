@@ -15,16 +15,13 @@ using Lavery.Tools.Configuration.Management;
 using Lavery.Events.Listeners;
 using Lavery.Constants;
 using Lavery.Connector;
-using Lavery.Tools.DBLibrary;
-using Lavery.Tools.ConnectionPool;
-using Lavery.Tools.Connections;
-using Lavery.Tools.Interfaces;
+
 
 
 
 namespace Lavery.Listeners
 {
-    public class MsSqlValidateEvents : ListenerAssiduityBase
+    public class MsSqlTimeCardEvents : ListenerAssiduityBase
     {
         
         ModelToTableMapper<TimeCard> mapper;
@@ -32,9 +29,9 @@ namespace Lavery.Listeners
         SqlTableDependency<TimeCard> dep;       
         jsonSerializer<TimeCard> oSerializer = new jsonSerializer<TimeCard>();
         MsMq<TimeCard> oMq;
-        CDBDataBase oDb;
+        
 
-        public MsSqlValidateEvents(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory) 
+        public MsSqlTimeCardEvents(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory) 
         {
             try
             {
@@ -49,11 +46,7 @@ namespace Lavery.Listeners
                     OGuidContext = oGuid;
                 else
                     OGuidContext = Guid.NewGuid();
-                oDb = new CDBDataBase(Tools.Interfaces.ConnType.eConnType.SQLSERVER, OConnectionFactory.getKeyValueString("EliteDatabase"));
-                oDb.SConnectString = OConnectionFactory.ConnectionString("ConnectionSourceAdminMode");
-                oDb.OPool = new ConnectionPoolDatabases<IGenericConnection>(1);
-                oDb.enableNotification(OConnectionFactory.getKeyValueString("EliteDatabase"));
-                
+               
 
             }
             catch (Exception ex)

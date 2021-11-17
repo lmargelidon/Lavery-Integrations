@@ -3,27 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Lavery.Tools.Configuration.Management;
-using TableDependency.SqlClient.Base.Enums;
-using TableDependency.SqlClient.Base.EventArgs;
+using Lavery.Tools.DBLibrary;
+using Lavery.Tools.Connections;
+using Lavery.Tools.Interfaces;
 
-using Lavery.Listeners;
-using Lavery.Schemas.Legacy;
-using Lavery.Constants;
-using Lavery.Tools;
-using Lavery.Events.Listeners;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace Lavery.Listeners
 {
     public class ListenerAssiduityBase : ListenerBase
     {             
         Boolean Disposed;
+        CDBDataBase oDb;
 
         public ListenerAssiduityBase( connectionFactory oConnectionFactory) : base(oConnectionFactory)
         {
+            oDb = new CDBDataBase(Tools.Interfaces.ConnType.eConnType.SQLSERVER, OConnectionFactory.getKeyValueString("EliteDatabase"));
+            oDb.SConnectString = OConnectionFactory.ConnectionString("ConnectionSourceAdminMode");
+            oDb.OPool = new ConnectionPoolDatabases<IGenericConnection>(1);
+            oDb.enableNotification(OConnectionFactory.getKeyValueString("EliteDatabase"));
         }
 
         protected override void Dispose(bool disposing)

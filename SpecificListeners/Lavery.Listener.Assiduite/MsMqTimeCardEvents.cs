@@ -13,13 +13,13 @@ using Lavery.Constants;
 
 namespace Lavery.Listeners
 {
-    public class MsMqValiadteEvents : ListenerAssiduityBase
+    public class MsMqTimeCardEvents : ListenerAssiduityBase
     {
 
         MsMq<TimeCard> oMq;
         jsonSerializer<TimeCard> oSerializer = new jsonSerializer<TimeCard>();
 
-        public MsMqValiadteEvents(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory)
+        public MsMqTimeCardEvents(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory)
         {
             try
             {
@@ -31,6 +31,7 @@ namespace Lavery.Listeners
                     OGuidContext = oGuid;
                 else
                     OGuidContext = Guid.NewGuid();
+               
             }
             catch (Exception ex)
             {
@@ -70,9 +71,7 @@ namespace Lavery.Listeners
         {
             // Check to see if Dispose has already been called.
             if (!Disposed)
-            {
-                // If disposing equals true, dispose all managed
-                // and unmanaged resources.
+            {   
                 if (disposing)
                 {
                     oMq.Dispose();
@@ -114,8 +113,7 @@ namespace Lavery.Listeners
         {
             Boolean bRet = true;
             try
-            {
-                //Envelopp<TimeSheet> oEnv = default(Envelopp<TimeSheet>);
+            {                
                 TimeCard oTS = default(TimeCard);
 
                 if (oMq.isTransactional())

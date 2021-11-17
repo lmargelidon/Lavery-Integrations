@@ -16,34 +16,35 @@ using Lavery.Events.Listeners;
 using Lavery.Constants;
 
 
+
+
 namespace Lavery.Listeners
 {
-    public class MsSqlEvents : ListenerBase
+    public class MsSqlTimeCardPendingEvents : ListenerAssiduityBase
     {
         
-        ModelToTableMapper<TimeSheet> mapper;
+        ModelToTableMapper<TimeCardPending> mapper;
         String sMutextHost;
-        SqlTableDependency<TimeSheet> dep;
-        String sTargetPath;        
-        XMLSerializer<TimeSheet> oSerializer;
-        Boolean Disposed;
+        SqlTableDependency<TimeCardPending> dep;       
+        jsonSerializer<TimeCardPending> oSerializer = new jsonSerializer<TimeCardPending>();       
+       
 
-        public MsSqlEvents(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory) 
+        public MsSqlTimeCardPendingEvents(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory) 
         {
             try
             {
                 
-                this.oSerializer = new XMLSerializer<TimeSheet>();
-                this.sTargetPath = OConnectionFactory.getKeyValueString("AssiduiteTargetDirectory");
+                this.oSerializer = new jsonSerializer<TimeCardPending>();                
                 this.sMutextHost = OConnectionFactory.getKeyValueString("MutexHost");
                 this.IWaitOnMutex = OConnectionFactory.getKeyValueInt("MutexTimeOut");
                 this.SPrefixeName = SPrefixeName;
-                this.mapper = new ModelToTableMapper<TimeSheet>();
-                this.mapper.AddMapping(c => c.status, "status");
+                this.mapper = new ModelToTableMapper<TimeCardPending>();
+                this.mapper.AddMapping(c => c.TimeCardPendingID, "TimeCardPendingID");
                 if (oGuid != default(Guid))
                     OGuidContext = oGuid;
                 else
                     OGuidContext = Guid.NewGuid();
+
             }
             catch (Exception ex)
             {
@@ -65,12 +66,27 @@ namespace Lavery.Listeners
                 Disposed = true;
             }
         }
+        public Boolean performTransaction(Object oObjectMessage, String sJson)
+        {
+            Boolean bRet = true;
+            try
+            {
+                ODataReferentialManagement.registerLink(((TimeCardPending)oObjectMessage).TimeCardPendingID, -1, ((TimeCardPending)oObjectMessage).refGuid, "TimeCardPending", sJson);
+                ODataReferentialManagement.registerRequestProcessed(true, "Table-TimeCardPending", ((TimeCardPending)oObjectMessage).TimeCardPendingID);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            return bRet;
+        }
         public override Boolean doInitialize()
         {
             Boolean bRet = true;
             try
             {
-                dep = new SqlTableDependency<TimeSheet>(OConnectionFactory.ConnectionString("ConnectionSource"), "TimeSheet", mapper: mapper, includeOldValues: true);
+
+                dep = new SqlTableDependency<TimeCardPending>(OConnectionFactory.ConnectionString("ConnectionSource"), "TimeCardPending", mapper: mapper, includeOldValues: true);
                
                 dep.OnChanged += Changed;
                 dep.OnError += OnError;
@@ -104,27 +120,27 @@ namespace Lavery.Listeners
             Boolean bRet = true;
             try
             {
-                /*
                 //Envelopp<TimeSheet> oEnv = default(Envelopp<TimeSheet>);
-                TimeSheet oTS = default(TimeSheet);
-                if ((oTS = (TimeSheet)OStackEnvelopp.pop()) != default(TimeSheet))
+                TimeCardPending oTS = default(TimeCardPending);
+                if ((oTS = (TimeCardPending)OStackEnvelopp.pop()) != default(TimeCardPending) && oTS.IsNB == 1)
                 {
                     try
                     {
                         using (new SynchronizeGlobalInstance(IWaitOnMutex, OConnectionFactory.getKeyValueString("AssiduiteMutexGlobalValue")))
                         {
 
-                            if (ODataReferentialManagement.canProcessRequest(true, "TableTimeSheetEvents", oTS.id))
+                            if (ODataReferentialManagement.canProcessRequest(true, "TableTimeSheetEvents", oTS.TimeCardPendingID))
                             {
 
                                 Guid oGuid = Guid.NewGuid();
-                                oSerializer.SerializeToFile(oTS, TimeSheet.XmlSerializerNamespaces, Encoding.UTF8, sTargetPath + "\\" + SPrefixeName + oGuid.ToString() + ".xml");
-                                ODataReferentialManagement.registerRequestProcessed(true, "TableTimeSheetEvents", oTS.id);
+                                String sMessageOut = oSerializer.serialize(oTS);
+
+                                performTransaction(oTS, sMessageOut);                                
 
                                 persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduitySqlNotification.ToString(),
                                                       LaveryBusinessFunctions.eBusinessFunction.CatchNotification.ToString(),
                                                       OConnectionFactory.getKeyValueString("Environment"),
-                                                      oSerializer.Serialize(oTS, TimeSheet.XmlSerializerNamespaces, Encoding.UTF8),
+                                                      sMessageOut,
                                                       oTS.refGuid.ToString(), SPrefixeName);
                             }
                         }
@@ -134,12 +150,11 @@ namespace Lavery.Listeners
                         persistEventManager.logError(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
                                                  LaveryBusinessFunctions.eBusinessFunction.DeleteAbsenceRequest.ToString(),
                                                  OConnectionFactory.getKeyValueString("Environment"),
-                                                 String.Format("Operation Falied : {0}\n{1}", oSerializer.Serialize(oTS, TimeSheet.XmlSerializerNamespaces, Encoding.UTF8), ex.Message),
+                                                 String.Format("Operation Falied : {0}\n{1}", oSerializer.serialize(oTS), ex.Message),
                                                  oTS.refGuid.ToString(), SPrefixeName);
                         bRet = false;
                     }
-                } 
-                */
+                }  
             }
             catch (Exception ex)
             {
@@ -186,33 +201,28 @@ namespace Lavery.Listeners
         }
 
 
-        private void Changed(object sender, RecordChangedEventArgs<TimeSheet> e)
+        private void Changed(object sender, RecordChangedEventArgs<TimeCardPending> e)
         {
-            
-
-
-            TimeSheet oTS = new TimeSheet();
-            /*
+            TimeCardPending changedEntity;
             if (e.ChangeType == ChangeType.Insert)
             {
-                TimeSheet changedEntity = e.Entity;
+                changedEntity = e.Entity;
 
-                oTS = changedEntity;                
-                oTS.etypeEnvelopp = typeEnvelopp.Insert;
-                oTS.refGuid = Guid.NewGuid();
-                OStackEnvelopp.push(oTS);
+                changedEntity = e.Entity;
+                changedEntity.etypeEnvelopp = typeEnvelopp.Insert;
+                changedEntity.refGuid = Guid.NewGuid();
+                OStackEnvelopp.push(changedEntity);
             }
             else
             {
-                TimeSheet changedEntity = e.Entity;
-                Guid oGuid = this.ODataReferentialManagement.getLinkCorrelationId(changedEntity.id);
+                changedEntity = e.Entity;
+                Guid oGuid = this.ODataReferentialManagement.getLinkCorrelationId(changedEntity.TimeCardPendingID);
                 if (e.ChangeType == ChangeType.Update)
                 {
                     if (e.EntityOldValues != null)
                     {
-                        TimeSheet changedEntityOld = e.EntityOldValues;                        
-                    }
-                    
+                        TimeCardPending changedEntityOld = e.EntityOldValues;                        
+                    }                    
 
                     changedEntity.etypeEnvelopp = typeEnvelopp.Update;
                     changedEntity.refGuid = oGuid;
@@ -226,7 +236,7 @@ namespace Lavery.Listeners
                     OStackEnvelopp.push(changedEntity);
                 }             
             }
-            */
         }
+       
     }
 }
