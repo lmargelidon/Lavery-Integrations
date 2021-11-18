@@ -152,7 +152,11 @@ namespace Lavery.Listeners
             }
             return bRet;
         }
-
+        /*
+         
+         Specifiques....
+         */
+          
         private int insertAssiduity(TimeCard oTimeCard)
         {
             int iRet = default(int);
@@ -161,7 +165,7 @@ namespace Lavery.Listeners
 
                 using (var command = new SqlCommand("[dbo].[absence__insert_bis]", OConnectionTarget))
                 {
-                    /*
+                    
                     var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
 
@@ -169,14 +173,14 @@ namespace Lavery.Listeners
 
                     var result = returnParameter.Value;
 
-                    int iVal = ODataReferentialManagement.registerLink(Convert.ToInt32(oTimeCard.id_origine), (int)result, oTimeCard.group_id);
+                    int iVal = ODataReferentialManagement.registerLink(Convert.ToInt32(oTimeCard.TimecardID), (int)result, oTimeCard.refGuid);
 
                     persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
                                                   LaveryBusinessFunctions.eBusinessFunction.InsertAbsenceRequest.ToString(),
                                                   OConnectionFactory.getKeyValueString("Environment"),
-                                                  String.Format("{0}", oSerializer.Serialize(oTimeCard)),
-                                                  oTimeCard.group_id.ToString(), SPrefixeName);
-                    */
+                                                  String.Format("{0}", oSerializer.serialize(oTimeCard)),
+                                                  oTimeCard.refGuid.ToString(), SPrefixeName);
+                    
                 }
             }
             catch (Exception ex)
@@ -197,8 +201,8 @@ namespace Lavery.Listeners
             try
             {
 
-                /*
-                int iUpdateKey = ODataReferentialManagement.getLinkAssiduityId(Convert.ToInt32(oTimeCard.id_origine));
+               
+                int iUpdateKey = ODataReferentialManagement.getLinkAssiduityId(Convert.ToInt32(oTimeCard.TimecardID));
 
                 if (iUpdateKey > 0)
                     using (var command = new SqlCommand("[dbo].[absence__update]", OConnectionTarget))
@@ -209,13 +213,13 @@ namespace Lavery.Listeners
                         persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
                                                   LaveryBusinessFunctions.eBusinessFunction.UpdateAbsenceRequest.ToString(),
                                                   OConnectionFactory.getKeyValueString("Environment"),
-                                                  String.Format("{0}", oSerializer.Serialize(oTimeCard)),
-                                                  oTimeCard.group_id.ToString(), SPrefixeName);
+                                                  String.Format("{0}", oSerializer.serialize(oTimeCard)),
+                                                  oTimeCard.refGuid.ToString(), SPrefixeName);
 
                     }
                 else
-                    throw (new Exception(String.Format("Update failure no corresponding id <{0}> found in the referential link", oTimeCard.id_origine)));
-                */
+                    throw (new Exception(String.Format("Update failure no corresponding id <{0}> found in the referential link", oTimeCard.TimecardID)));
+               
             }
             catch (Exception ex)
             {
