@@ -74,7 +74,7 @@ namespace Lavery.Listeners
             Boolean bRet = true;
             try
             {
-                ODataReferentialManagement.registerLink(((TimeCard)oObjectMessage).TimecardID, -1, ((TimeCard)oObjectMessage).refGuid, "TimeCard", sJson);
+                ODataReferentialManagement.registerLink(((TimeCard)oObjectMessage).TimecardID, ((TimeCard)oObjectMessage).TimeStamp, -1, ((TimeCard)oObjectMessage).refGuid, "TimeCard", sJson);
                 
                 ODataReferentialManagement.registerRequestProcessed(true, "Table-TimeCard", ((TimeCard)oObjectMessage).TimecardID);
             }

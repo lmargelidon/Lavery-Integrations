@@ -14,6 +14,10 @@ using Lavery.Tools;
 using Lavery.Tools.Configuration.Management;
 using Lavery.Events.Listeners;
 using Lavery.Constants;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 
 
 
@@ -71,7 +75,7 @@ namespace Lavery.Listeners
             Boolean bRet = true;
             try
             {
-                ODataReferentialManagement.registerLink(((TimeCardPending)oObjectMessage).TimeCardPendingID, -1, ((TimeCardPending)oObjectMessage).refGuid, "TimeCardPending", sJson);
+                ODataReferentialManagement.registerLink(((TimeCardPending)oObjectMessage).TimeCardPendingID, ((TimeCardPending)oObjectMessage).TimeStamp, - 1, ((TimeCardPending)oObjectMessage).refGuid, "TimeCardPending", sJson);
                 ODataReferentialManagement.registerRequestProcessed(true, "Table-TimeCardPending", ((TimeCardPending)oObjectMessage).TimeCardPendingID);
             }
             catch (Exception ex)
@@ -85,6 +89,38 @@ namespace Lavery.Listeners
             Boolean bRet = true;
             try
             {
+                using (new SynchronizeGlobalInstance(IWaitOnMutex, OConnectionFactory.getKeyValueString("AssiduiteMutexGlobalValue")))
+                {
+                    DateTime oLastDT = ODataReferentialManagement.getLastRegisteredDate("TimeCardPending");
+
+                    if (oLastDT < DateTime.MaxValue)
+                    {
+                        Console.WriteLine("\t\t\tretrieve some notifications from {0} ...", oLastDT);
+                        String sJson = ODataReferentialManagement.getAllEntries(oLastDT, "TimeCardPending", OConnectionSource);
+                        JObject data = JObject.Parse(sJson);
+                        JArray jArray = (JArray)data.First.First;
+                        foreach (JObject item in jArray) 
+                        {
+                            String sVal = item.ToString();                            
+                            TimeCardPending oPending = oSerializer.deserialize(sVal, "dd/MM/yyyy");
+                            Guid oGuid = this.ODataReferentialManagement.getLinkCorrelationId(oPending.TimeCardPendingID);
+                            if (oGuid != default(Guid))
+                            {
+                                oPending.etypeEnvelopp = typeEnvelopp.Update;
+                                oPending.refGuid = oGuid;
+                            }
+                            else
+                            {
+                                oPending.etypeEnvelopp = typeEnvelopp.Insert;
+                                oPending.refGuid = Guid.NewGuid();
+                            }
+                            OStackEnvelopp.push(oPending);
+                        }
+                    }
+                    else
+                        Console.WriteLine("\t\t\tNo notifications to be retrieved ...");
+                    
+                }
 
                 dep = new SqlTableDependency<TimeCardPending>(OConnectionFactory.ConnectionString("ConnectionSource"), "TimeCardPending", mapper: mapper, includeOldValues: true);
                
@@ -129,7 +165,7 @@ namespace Lavery.Listeners
                         using (new SynchronizeGlobalInstance(IWaitOnMutex, OConnectionFactory.getKeyValueString("AssiduiteMutexGlobalValue")))
                         {
 
-                            if (ODataReferentialManagement.canProcessRequest(true, "TableTimeSheetEvents", oTS.TimeCardPendingID))
+                            if (ODataReferentialManagement.canProcessRequest(true, "TimeCardPending", oTS.TimeCardPendingID))
                             {
 
                                 Guid oGuid = Guid.NewGuid();

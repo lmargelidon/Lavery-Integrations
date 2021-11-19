@@ -38,6 +38,10 @@
     <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\APIs\Lavery.Client.E3\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -145,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DynamicAssemblies\" />
+    <Folder Include="JSon\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\reflectionDynamicLoader\Lavery.Generic.Helpers.csproj">

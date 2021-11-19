@@ -19,8 +19,8 @@ namespace Lavery.Tools
 
         public DataReferentialManagement(SqlConnection oConnectionReferential)
         {
-            this.oConnectionReferential = oConnectionReferential;            
-           
+            this.oConnectionReferential = oConnectionReferential;
+
         }
         public void Dispose()
         {
@@ -39,12 +39,12 @@ namespace Lavery.Tools
                 {
 
                 }
-                               
+
                 disposed = true;
             }
         }
         ~DataReferentialManagement()
-        {            
+        {
             Dispose(disposing: false);
         }
         /*
@@ -97,7 +97,45 @@ namespace Lavery.Tools
             { }
             return bRet;
         }
-        public int registerLink(Guid idSource, int idTarget, Guid oGuid, String sTableSource, String sDetail)
+        public DateTime getLastRegisteredDate(String sListenerName)
+        {
+            DateTime oRet = DateTime.MaxValue;
+            try
+            {
+                int iFound = default(int);
+                lock (ReintranceLock)
+                {
+                    using (var cmd = new SqlCommand("SELECT max(TimeStamp) FROM dbo.AssiduityMasterDataLink WHERE  [trxSource]=@ListenerName", oConnectionReferential))
+                    {
+                        cmd.Parameters.Add("@ListenerName", SqlDbType.NVarChar).Value = sListenerName;
+                        oRet = (DateTime)cmd.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            { }
+            return oRet;
+        }
+        public String getAllEntries(DateTime dtFrom, String sListenerName, SqlConnection oConnectionSource)
+        {
+            String sRet = default(String);
+            try
+            {
+                int iFound = default(int);
+                lock (ReintranceLock)
+                {
+                    using (var cmd = new SqlCommand(String.Format("SELECT * FROM [dbo].[{0}] WHERE TimeStamp > @TimeStamp FOR JSON PATH, Root('TimeCards')", sListenerName), oConnectionSource))
+                    {                        
+                        cmd.Parameters.Add("@TimeStamp", SqlDbType.DateTime).Value = dtFrom;
+                        sRet = (String)cmd.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            { }
+            return sRet;
+        }
+        public int registerLink(Guid idSource, DateTime tsValue, int idTarget, Guid oGuid, String sTableSource, String sDetail)
         {
             int iRet = default(int);
             try
@@ -105,9 +143,10 @@ namespace Lavery.Tools
                 lock (ReintranceLock)
                 {
                     if(getLinkCorrelationId(idSource) == default(Guid))
-                        using (var cmd1 = new SqlCommand("insert into dbo.AssiduityMasterDataLink ([refCorrelation], [idSource], [idTarget], [trxSource], [is_deleted]) values(@refCorrelation, @idSource,@idTarget,@trxSource, @is_deleted )", oConnectionReferential))
+                        using (var cmd1 = new SqlCommand("insert into dbo.AssiduityMasterDataLink ([refCorrelation], [idSource], [idTarget], [trxSource], [is_deleted], [TimeStamp]) values(@refCorrelation, @idSource,@idTarget,@trxSource, @is_deleted, @TimeStamp )", oConnectionReferential))
                         {
                             cmd1.Parameters.Add("@idSource", SqlDbType.NVarChar).Value = idSource.ToString();
+                            cmd1.Parameters.Add("@TimeStamp", SqlDbType.DateTime).Value = tsValue;
                             cmd1.Parameters.Add("@trxSource", SqlDbType.NVarChar).Value = sTableSource;
                             cmd1.Parameters.Add("@idTarget", SqlDbType.Int).Value = idTarget;
                             cmd1.Parameters.Add("@is_deleted", SqlDbType.Bit).Value = 0;

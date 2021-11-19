@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text;
 using System.Runtime.Serialization.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace Lavery.Tools
@@ -16,13 +18,19 @@ namespace Lavery.Tools
             I outputObj;
             using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(inputJson)))
             {
-                // Deserialization from JSON
+                // Deserialization from JSON                
                 DataContractJsonSerializer deserializer = new DataContractJsonSerializer(typeof(I));
                 outputObj = (I)deserializer.ReadObject(ms);
             }
 
             return outputObj;
         }
+        public I deserialize(String inputJson, String sWithDateFormat)
+        {
+            I outputObj =  JsonConvert.DeserializeObject<I>(inputJson, new IsoDateTimeConverter { DateTimeFormat = sWithDateFormat });
+            return outputObj;
+        }
+        
         public String serialize(Object inputObj)
         {
             
