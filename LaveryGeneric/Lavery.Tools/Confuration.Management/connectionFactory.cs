@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Lavery.Tools.Configuration.Management
 {
-    public class connectionFactory
+    [Serializable]
+    public class connectionFactory: Object
     {
       
         public connectionFactory()

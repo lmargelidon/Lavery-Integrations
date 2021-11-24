@@ -115,8 +115,11 @@ namespace Lavery.Tools
         List<ClassRequest> requests;
         AssemblyName[] aAssemblyReferenced;
         Assembly oAssembly;
+       
         AppDomain oDomain;
-        loaderHelper oLoadderHelper;
+        static Object lockObject = new Object();
+        static AppDomain oDomainPlugIn;
+        static loaderHelper oLoadderHelper;
 
         private bool _disposedValue;
 
@@ -156,16 +159,30 @@ namespace Lavery.Tools
                 String sPath1 = String.Format(@"{0}\{1}.dll", Path.GetDirectoryName(typeof(Loader).Assembly.Location), "reflectionDynamicLoader");
                 String sPath2 = String.Format(@"{0}\{1}.dll", Path.GetDirectoryName(typeof(Loader).Assembly.Location), sAssemblyName);
                 //AppDomain domain = AppDomain.CreateDomain("PluginDomain");
-                oDomain = AppDomain.CreateDomain("PluginDomain");
-                oDomain.AssemblyResolve += ReflectionAssembly.assemblyResolve;
-                AssemblyName assemblyName = new AssemblyName();
-                assemblyName.CodeBase = sPath1;
-                oDomain.Load(assemblyName);
-                Boolean bRet = ReflectionAssembly.isAssemblyFullyLoaded( "reflectionDynamicLoader", oDomain);
-                oLoadderHelper = (loaderHelper)oDomain.CreateInstanceAndUnwrap(typeof(loaderHelper).Assembly.FullName, typeof(loaderHelper).FullName);
-                oLoadderHelper.loadAssembly(sPath2, "sAssemblyName");
+                
+                lock (lockObject)
+                {
+                    if (oDomainPlugIn == null)
+                        oDomainPlugIn = AppDomain.CreateDomain("PluginDomain");
+                } 
+                
+                /*
+                oDomain = AppDomain.CreateDomain(sAssemblyName);
+                
+                */
+
+                //AssemblyName assemblyName = new AssemblyName();
+                //assemblyName.CodeBase = sPath1;
+                //oDomain.Load(assemblyName);
+                //Boolean bRet = ReflectionAssembly.isAssemblyFullyLoaded( "reflectionDynamicLoader", oDomain);
+               /*
+                oLoadderHelper = (loaderHelper)oDomainPlugIn.CreateInstanceAndUnwrap(typeof(loaderHelper).Assembly.FullName, typeof(loaderHelper).FullName);
+                oLoadderHelper.loadAssembly(sPath2, "sAssemblyName", oDomainPlugIn);
 
                 this.oAssembly = oLoadderHelper.AssemblyLoaded;
+                this.oDomain = oLoadderHelper.AppDomainForLoadAssembly;
+                this.oDomain.AssemblyResolve += ReflectionAssembly.assemblyResolve;
+               */
                 
                 aAssemblyReferenced = oAssembly.GetReferencedAssemblies();
 
@@ -190,6 +207,7 @@ namespace Lavery.Tools
             {
                 if (disposing)
                 {
+                    
                     AppDomain.Unload(oDomain);
                 }
 
@@ -225,5 +243,22 @@ namespace Lavery.Tools
         public List<ClassRequest> Requests { get => requests; }
         public AssemblyName[] AAssemblyReferenced { get => aAssemblyReferenced; set => aAssemblyReferenced = value; }
         public AppDomain ODomain { get => oDomain; set => oDomain = value; }
+    }
+    class LoadeMyAssembly : MarshalByRefObject
+    {
+        private Assembly _assembly;
+        System.Type MyType = null;
+        object inst = null;
+
+        public Assembly Assembly { get => _assembly; }
+
+        public override object InitializeLifetimeService()
+        {
+            return null;
+        }
+        public void LoadAssembly(string path)
+        {
+            _assembly = Assembly.Load(AssemblyName.GetAssemblyName(path));
+        }       
     }
 }

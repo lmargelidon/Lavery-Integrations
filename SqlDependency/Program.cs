@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using System.Transactions;
 using Lavery.Listeners;
 using Lavery.specific.Listeners;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ using System.Reflection;
 using Lavery.Tools.Configuration.Management;
 using Org.OpenAPITools.Model;
 using Newtonsoft.Json;
+using System.Messaging;
+
 
 
 
@@ -70,6 +73,58 @@ namespace SqlDependency
             */
             return bRet;
         }
+        static public void send(MessageQueue rmQ, String sMessage)
+        {
+
+            try
+            {
+                if (rmQ == default(MessageQueue))
+                    throw (new Exception("MSMQ not Accessible"));
+
+                if (rmQ.Transactional == true)
+                {
+                    MessageQueueTransaction transaction = new MessageQueueTransaction();
+                    try
+                    {
+                        // Begin the transaction.
+                        transaction.Begin();
+                        
+                        // Send the message.
+                        rmQ.Send(sMessage, transaction);
+
+                        // Commit the transaction.
+                        transaction.Commit();
+                    }
+                    catch (MessageQueueException e)
+                    {
+                        transaction.Abort();
+
+                        throw e;
+                        // Handle other sources of MessageQueueException.
+                    }
+                    catch (System.Exception e)
+                    {
+                        // Cancel the transaction.
+                        transaction.Abort();
+
+                        // Propagate the exception.
+                        throw e;
+                    }
+                    finally
+                    {
+                        // Dispose of the transaction object.
+                        transaction.Dispose();
+                    }
+                }
+                
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+
+
+        }
         
         public static void Main(string[] args)
         {
@@ -99,10 +154,27 @@ namespace SqlDependency
                 Currency = "CAD"
 
             };
+            /*
             jsonSerializer<TimeCard> oSeial = new jsonSerializer<TimeCard>();
 
             String sValue = oSeial.serialize(timeCard);
             TimeCard oSuite = oSeial.deserialize(sValue);
+            using (TransactionScope scope = new TransactionScope())
+            {
+                //using (MessageQueue rmQ1 = new MessageQueue(@".\private$\System.Lavery.assiduitydPending"))
+                using (MessageQueue rmQ2 = new MessageQueue(@".\private$\System.Lavery.assiduitydValidate"))
+                {
+                    
+                    //rmQ1.Send("aaaaaaaaaaaaaaaaa", MessageQueueTransactionType.Automatic);
+                    rmQ2.Send(sValue,  MessageQueueTransactionType.Automatic);
+                }                
+            }
+           
+            using (MessageQueue rmQ2 = new MessageQueue(@".\private$\System.Lavery.assiduitydValidate"))
+            {
+                send(rmQ2, sValue);
+            }
+            */
             /*
 
             TimeApiFacade oFacade = new TimeApiFacade(new connectionFactory());
@@ -148,7 +220,50 @@ namespace SqlDependency
                 Thread.Sleep(500);
             }
             */
+            /*
+            String StrPath = @".\ListenerAssiduite.dll";
+            AppDomain newDomain = null;
+            loaderHelper loader = default(loaderHelper) ;
+            try
+            {
+                //FullPath to the Assembly
+                AppDomainSetup setup = AppDomain.CurrentDomain.SetupInformation;
+                newDomain = AppDomain.CreateDomain("newDomain", AppDomain.CurrentDomain.Evidence, setup); //Create an instance of loader class in new appdomain  
+                System.Runtime.Remoting.ObjectHandle obj = newDomain.CreateInstance(typeof(loaderHelper).Assembly.FullName, typeof(loaderHelper).FullName);
 
+                loader = (loaderHelper)obj.Unwrap();//As the object we are creating is from another appdomain hence we will get that object in wrapped format and hence in the next step we have unwrapped it  
+
+                //Call loadassembly method so that the assembly will be loaded into the new appdomain and the object will also remain in the new appdomain only.  
+                loader.loadAssembly(StrPath, "ListenerAssiduite");
+                Object[] oParam = { new connectionFactory(), "main", Guid.NewGuid() };
+
+                loader.ExecuteConstructor("ListenerAssiduite", "MsSqlTimeCardPendingEvents", oParam);
+
+                //Call exceuteMethod and pass the name of the method from assembly and the parameters.  
+                try
+                {
+                    Object[] oParam1 = { true };
+                    loader.ExecuteMethod("ListenerAssiduite", "start", oParam1);
+
+                    while (loader.ExecuteMethod("ListenerAssiduite", "IsAlive", null))
+                        Thread.Sleep(1000);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception Catched : {0}", ex.Message);
+                }
+
+                //ReflectionAssembly.isAssemblyFullyLoaded("AssiduityServiceBus", newDomain);
+                loader.isLoaded("AssiduityServiceBus");
+
+            }
+            finally
+            {
+                loader.unLoadAssembly("AssiduityServiceBus");
+                //AppDomain.Unload(newDomain);
+                ReflectionAssembly.isAssemblyFullyLoaded("AssiduityServiceBus", newDomain);
+            }
+            */
             persistEventManager.init();
             Guid oGuid = Guid.NewGuid();
             LaveryReflection.getHashCode(@"C:\Integrations\services\OutboundErsNet\Assisuity{9D0EEF19-646C-4690-A828-ABC85E8C2899}.xml");

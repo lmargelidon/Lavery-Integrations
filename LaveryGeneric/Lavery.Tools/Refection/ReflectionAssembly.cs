@@ -115,6 +115,14 @@ namespace Lavery.Tools
             }
 
         }
+        
+        static public ReflectionAssembly ReflectionBuilder(String sPathOfAssembly, String sAssemblyName)
+        {
+
+            ReflectionAssembly oReflection = new ReflectionAssembly(sPathOfAssembly, sAssemblyName);
+
+            return oReflection;
+        }
         static public Boolean isAssemblyFullyLoaded(String sName, AppDomain oDomain = null)
         {
             Boolean bRet = true;
@@ -141,7 +149,7 @@ namespace Lavery.Tools
             Assembly oAss = aAss.FirstOrDefault(x => x.FullName.Split(',')[0].Equals(sName, StringComparison.CurrentCultureIgnoreCase));
             return oAss;
         }
-        static public  Assembly assemblyResolve(object sender, ResolveEventArgs args)
+        static public Assembly assemblyResolve(object sender, ResolveEventArgs args)
         {
             // Ignore missing resources
             if (args.Name.Contains(".resources"))
@@ -149,16 +157,16 @@ namespace Lavery.Tools
 
             Assembly oAssemb = default(Assembly);
             // check for assemblies already loaded
-            if((oAssemb = getAsssemblyLoaded(args.Name)) !=null)            
+            if ((oAssemb = getAsssemblyLoaded(args.Name)) != null)
                 return oAssemb;
-            
+
             string filename = args.Name.Split(',')[0] + ".dll".ToLower();
 
             string asmFile = Path.Combine(@".\", filename);
 
             try
             {
-               Assembly AssTemp = System.Reflection.Assembly.LoadFrom(asmFile);
+                Assembly AssTemp = System.Reflection.Assembly.LoadFrom(asmFile);
                 return AssTemp;
             }
             catch (Exception ex)
@@ -166,14 +174,7 @@ namespace Lavery.Tools
                 return null;
             }
         }
-        static public ReflectionAssembly ReflectionBuilder(String sPathOfAssembly, String sAssemblyName)
-        {
 
-            ReflectionAssembly oReflection = new ReflectionAssembly(sPathOfAssembly, sAssemblyName);
-
-            return oReflection;
-        }
-        
         public void GenerateTypes(String sPathOfGeneration, String sNameSpace)
         {
 

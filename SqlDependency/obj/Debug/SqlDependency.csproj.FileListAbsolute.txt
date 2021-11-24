@@ -75,6 +75,7 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lave
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.dynamicConfiguration.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.ErsNet.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Helpers.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Listeners.Wcf.Services.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Tools.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Wcf.Api.E3.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Wcf.Base.E3.dll
@@ -116,6 +117,7 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Azur
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\AzureFrameWork.dll.config
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\LaveryInboundOutboundStream.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\LaveryInboundOutboundStream.exe.config
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Listeners.Wcf.Services.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Wcg.Api.Client.E3.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Constants.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\ListenerTableEvents.pdb
@@ -156,5 +158,3 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\obj\Debug\SqlD
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\obj\Debug\SqlDependency.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\obj\Debug\SqlDependency.exe
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\obj\Debug\SqlDependency.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Listeners.Wcf.Services.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Listeners.Wcf.Services.pdb

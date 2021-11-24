@@ -113,8 +113,8 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Hel
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\ListenerTableEvents.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Newtonsoft.Json.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\reflectionDynamicLoader.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Schemas.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Lavery.Connector.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Schemas.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Lavery.Constants.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\TableDependency.SqlClient.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\swaggerBase.dll
@@ -141,8 +141,8 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Hel
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Lavery.ErsNet.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Lavery.ErsNet.dll.config
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\reflectionDynamicLoader.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Schemas.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Lavery.Connector.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Schemas.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Lavery.Constants.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\swaggerBase.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Org.OpenAPITools.pdb

@@ -34,3 +34,4 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Schemas\ob
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Schemas\obj\Debug\Lavery.Schemas.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Schemas\obj\Debug\Schemas.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Schemas\obj\Debug\Schemas.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Schemas\obj\Debug\Lavery.Schemas.csproj.AssemblyReference.cache

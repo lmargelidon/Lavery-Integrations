@@ -58,6 +58,10 @@
       <Project>{aff8dbe0-e162-44bd-8fcd-9f8da78e1457}</Project>
       <Name>Lavery.Tools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\reflectionDynamicLoader\Lavery.Generic.Helpers.csproj">
+      <Project>{6461d0f2-d27a-439e-9fb7-cf23dd0f454e}</Project>
+      <Name>Lavery.Generic.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\dynamicListerners\Lavery.dynamicConfiguration\Lavery.dynamicConfiguration.csproj">
       <Project>{211598fe-49e4-42d6-bfda-b6837eeed0a1}</Project>
       <Name>Lavery.dynamicConfiguration</Name>

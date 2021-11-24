@@ -17,7 +17,9 @@ namespace Lavery.Listeners
     {
         ServiceRelayServer oRelayServer;
         XMLSerializer<absence_request> oSerializer;
-
+        public ListenerAssiduityServiceBus() : base(default(connectionFactory))
+        { 
+        }
         public ListenerAssiduityServiceBus(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory)
         {
             try

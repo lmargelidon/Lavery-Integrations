@@ -14,6 +14,7 @@ namespace Lavery.specific.Listeners
 {
     public class Helpers
     {
+        /*
         public class listenerWrapper : IDisposable
         {
             ListenerBase oBase;            
@@ -63,7 +64,11 @@ namespace Lavery.specific.Listeners
 
 
         }
-        static private List<listenerWrapper> lListener = new List<listenerWrapper>();
+        */
+        //static private List<listenerWrapper> lListener = new List<listenerWrapper>();
+        
+        static AppDomain newDomain = null;
+        static loaderHelper loader = default(loaderHelper);
         static private ListenerConfig myConfig;
         static private Boolean bStop = false;
         static private Boolean bInit = false;
@@ -71,43 +76,89 @@ namespace Lavery.specific.Listeners
        
 
         public static async Task Start(Boolean bWait, String sServicePrefix, Guid oGuid = default(Guid))
-        {           
-            /*
-            if(!bInit)
-                AppDomain.CurrentDomain.AssemblyResolve += ReflectionAssembly.assemblyResolve;
-            */
+        {   
             bInit = true;
-            await buildListeners(sServicePrefix, oGuid);
-            
+            await buildListeners(sServicePrefix, oGuid);            
         }
         public static void Stop(Boolean bWait)
         {
+            /*
             foreach (listenerWrapper oBase in lListener)
                 oBase.OBase.stop(bWait);
+            */
+            foreach (ListenerSectionElement instance in myConfig.ListenerConfigInstances)
+            {
+                String[] aString = instance.ClassName.Split(';');
+                foreach (String sClasse in aString)
+                {
+                    if (loader.ExecuteMethod(instance.Assembly, sClasse, "IsAlive", null))
+                    {
+                        Object[] oParam1 = { true };
+                        loader.ExecuteMethod(instance.Assembly,  sClasse, "stop", oParam1);
+                    }
+                }
+            }
+                    
         }
         private static async Task buildListeners(String sServicePrefix, Guid oGuid = default(Guid))
         {
             await Task.Run(() => {                
                 while (!bStop)
+                {
+                    try
                     {
-                        try
-                        {
 
                         System.Configuration.ConfigurationManager.RefreshSection("Listeners");
                         myConfig = (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");
                         foreach (ListenerSectionElement instance in myConfig.ListenerConfigInstances)
                         {
-                            // Write the instance information to the Console
-                            /*  Console.WriteLine("{0} {1} {2} {3}",
-                              instance.Name,
-                              instance.NameSpace,
-                              instance.ClassName,
-                              instance.Path);
-                            */
-                            // *****************************
-                            // se mettre dans le repertoire cible et loader a partir du repertoire courant..
-                            // *****************************
-                            if (!ReflectionAssembly.isAssemblyFullyLoaded(instance.Assembly) &&
+
+                            if (loader == default(loaderHelper))
+                            {
+                                //FullPath to the Assembly
+                                AppDomainSetup setup = AppDomain.CurrentDomain.SetupInformation;
+                                newDomain = AppDomain.CreateDomain("newDomain", AppDomain.CurrentDomain.Evidence, setup); //Create an instance of loader class in new appdomain  
+                                System.Runtime.Remoting.ObjectHandle obj = newDomain.CreateInstance(typeof(loaderHelper).Assembly.FullName, typeof(loaderHelper).FullName);
+
+                                loader = (loaderHelper)obj.Unwrap();//As the object we are creating is from another appdomain hence we will get that object in wrapped format and hence in the next step we have unwrapped it  
+                            }
+
+                            if (!loader.isLoaded(instance.Assembly) &&
+                                    instance.Active.Equals("True", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                loader.loadAssembly(instance.Path + instance.Assembly + ".dll", instance.Assembly);
+
+                                String[] aString = instance.ClassName.Split(';');
+                                foreach (String sClasse in aString)
+                                {
+
+                                    Object[] oParam = { oCF, sServicePrefix, oGuid };
+                                    loader.ExecuteConstructor(instance.Assembly, sClasse, oParam);
+                                    Object[] oParam1 = { true };
+                                    loader.ExecuteMethod(instance.Assembly, sClasse, "start", oParam1);
+
+                                    System.Console.WriteLine(String.Format("\tStart Listener<{0}>", sClasse));
+                                }
+                            }
+                            else
+                                if (loader.isLoaded(instance.Assembly) &&
+                                    instance.Active.Equals("False", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                String[] aString = instance.ClassName.Split(';');
+                                foreach (String sClasse in aString)
+                                {
+                                    Object[] oParam1 = { true };
+                                    loader.ExecuteMethod(instance.Assembly, sClasse, "stop", oParam1);
+                                }
+                                loader.unLoadAssembly(instance.Assembly);
+                            }
+
+
+
+                            /*
+                            ReflectionDataStructures oDs = getReflectionDataStructure(instance);
+
+                            if (!ReflectionAssembly.isAssemblyFullyLoaded(instance.Assembly , oDs != default(ReflectionDataStructures) ? oDs.ODomain: default(AppDomain)) &&
                                 instance.Active.Equals("True", StringComparison.InvariantCultureIgnoreCase))
                             {
                                 ReflectionAssembly oReflection = ReflectionAssembly.ReflectionBuilder(instance.Path + instance.Assembly + ".dll", instance.Assembly );
@@ -131,69 +182,88 @@ namespace Lavery.specific.Listeners
                                         oBase.start(true);
                                         System.Console.WriteLine(String.Format("\tStart Listener<{0}>", sClasse));
                                     }
-                                    
+
                                 }
 
                             }
                             else
-                                if (ReflectionAssembly.isAssemblyFullyLoaded(instance.Assembly) &&
+                                if (ReflectionAssembly.isAssemblyFullyLoaded(instance.Assembly , oDs != default(ReflectionDataStructures) ? oDs.ODomain : default(AppDomain)) &&
                                     instance.Active.Equals("False", StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    String[] aString = instance.ClassName.Split(';');
-                                    ReflectionDataStructures oDS = default(ReflectionDataStructures);
-                                    foreach (String sListener in aString)
+
+                                    if (oDs != default(ReflectionDataStructures))
                                     {
-                                        foreach (listenerWrapper oWrapper in lListener)
-                                            if (oWrapper.isMe(sListener))
-                                            {
-                                                oDS = oWrapper.OListenerDS;
-                                                break;
-                                            }
-                                        if (oDS != default(ReflectionDataStructures))
-                                            break;
-                                    }
-                                    if (oDS != default(ReflectionDataStructures))
-                                    {
-                                        List<listenerWrapper> oSubList = lListener.Where(x => x.OListenerDS == oDS).ToList();
-                                        lListener.RemoveAll(x => x.OListenerDS == oDS);
+                                        List<listenerWrapper> oSubList = lListener.Where(x => x.OListenerDS == oDs).ToList();
+                                        lListener.RemoveAll(x => x.OListenerDS == oDs);
                                         foreach (listenerWrapper oW in oSubList)
                                         {
                                             oW.OBase.stop(true);
                                             oW.OBase.Dispose();
                                         }
-                                        System.Console.WriteLine(String.Format("Unload Assembly <{0}> from AppDomaine<{1}> ", oDS.OAssembly.FullName, oDS.ODomain.FriendlyName));
-                                        
-                                        oDS.Dispose();
-                                        
+                                        System.Console.WriteLine(String.Format("Unload Assembly <{0}> from AppDomaine<{1}> ", oDs.OAssembly.FullName, oDs.ODomain.FriendlyName));
+
+                                        oDs.Dispose();
+
                                     }
                                     //AppDomain.Unload(instance.Assembly);
                                 }
+                            }
 
+                            */
 
-
-                                Thread.Sleep(100);
-
-                        }  
+                            Thread.Sleep(100);
+                        }
                     }
-                        catch (Exception ex)
-                        { }                
+                    catch (Exception ex)
+                    { }                
                     }  
                     
                }                
             );
 
         }
+        /*
+        static private ReflectionDataStructures getReflectionDataStructure(ListenerSectionElement instance)
+        {
+            ReflectionDataStructures oRet = default(ReflectionDataStructures);
+            String[] aString = instance.ClassName.Split(';');
+            
+            foreach (String sListener in aString)
+            {
+                foreach (listenerWrapper oWrapper in lListener)
+                    if (oWrapper.isMe(sListener))
+                    {
+                        oRet = oWrapper.OListenerDS;                        
+                        break;
+                    }
+                if (oRet != default(ReflectionDataStructures))
+                {                    
+                    break;
+                }
+            }
+            return oRet;
+        }
+        */
         public static Boolean isOneListenerAlive(List<ListenerBase> Listeners)
         {
             Boolean bRet = false;
             try
             {
+                /*
                 foreach (ListenerBase oListener in Listeners)
                     if (oListener.IsAlive())
                     {
                         bRet = true;
                         break;
                     }
+                */
+                foreach (ListenerSectionElement instance in myConfig.ListenerConfigInstances)
+                    if (loader.ExecuteMethod(instance.Assembly, "IsAlive", null))
+                    {
+                        bRet = true;
+                        break;
+                    }
+
 
             }
             catch (Exception ex)
@@ -207,10 +277,18 @@ namespace Lavery.specific.Listeners
             Boolean bRet = true;
             try
             {
+                /*
                 foreach (ListenerBase oListener in Listeners)
                     if (!oListener.IsAlive())
                     {
                         bRet = false;
+                        break;
+                    }
+                */
+                foreach (ListenerSectionElement instance in myConfig.ListenerConfigInstances)
+                    if (!loader.ExecuteMethod(instance.Assembly, "IsAlive", null))
+                    {
+                        bRet = true;
                         break;
                     }
 
