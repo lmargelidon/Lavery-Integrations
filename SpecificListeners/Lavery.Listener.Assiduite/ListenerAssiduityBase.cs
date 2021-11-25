@@ -13,7 +13,7 @@ namespace Lavery.Listeners
 {
     public class ListenerAssiduityBase : ListenerBase
     {             
-        Boolean Disposed;
+        Boolean Disposed1;
         CDBDataBase oDb;
 
         public ListenerAssiduityBase( connectionFactory oConnectionFactory) : base(oConnectionFactory)
@@ -27,7 +27,7 @@ namespace Lavery.Listeners
         protected override void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
-            if (!Disposed)
+            if (!Disposed1)
             {
                 // If disposing equals true, dispose all managed
                 // and unmanaged resources.

@@ -720,6 +720,11 @@ namespace AssiduityProcess
                     __svc__.TraceRequestPort.Close(this, null);
                     __svc__.TraceRequestPort = null;
                 }
+                if (__svc__.SendAssiduityPort != null)
+                {
+                    __svc__.SendAssiduityPort.Close(this, null);
+                    __svc__.SendAssiduityPort = null;
+                }
                 if (__svc__.ReceiveRequestAssiduity != null)
                 {
                     __svc__.ReceiveRequestAssiduity.Close(this, null);
@@ -729,11 +734,6 @@ namespace AssiduityProcess
                 {
                     __svc__.TraceAssiduityPort.Close(this, null);
                     __svc__.TraceAssiduityPort = null;
-                }
-                if (__svc__.SendAssiduityPort != null)
-                {
-                    __svc__.SendAssiduityPort.Close(this, null);
-                    __svc__.SendAssiduityPort = null;
                 }
                 base.Finally();
             }

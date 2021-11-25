@@ -11,7 +11,7 @@ using Lavery.Tools.Configuration.Management;
 
 namespace Lavery.Listeners
 {
-    public abstract class ListenerBase:Object, IDisposable
+    public abstract class ListenerBase: MarshalByRefObject, IDisposable
     {
         connectionFactory oConnectionFactory;
         DataReferentialManagement oDataReferentialManagement;

@@ -7,13 +7,13 @@ namespace Lavery.Constants
     {
         public enum eCategory
         {
-            None, ListenerConsoleService, ListenerInboundService , ListenerOutboundService, ListenerAssiduitySqlNotification, ListenerAssiduityMsMq, ListenerErsFileSystemWatcher
+            None, ListenerHelpper, ListenerConsoleService, ListenerInboundService , ListenerOutboundService, ListenerAssiduitySqlNotification, ListenerAssiduityMsMq, ListenerErsFileSystemWatcher
         }
 
         public enum eBusinessFunction
         {
             None, Start, Stop,Initialize, CollectExistingFile, CleaningExistingFile, PerformEntry, Terminate, CatchNotification, 
-            InsertAbsenceRequest, UpdateAbsenceRequest,DeleteAbsenceRequest
+            InsertAbsenceRequest, UpdateAbsenceRequest,DeleteAbsenceRequest, MainLoop, testStatus
         }
         
         static public Dictionary<eBusinessFunction, String> oBusinessFunction = new Dictionary<eBusinessFunction, string>()

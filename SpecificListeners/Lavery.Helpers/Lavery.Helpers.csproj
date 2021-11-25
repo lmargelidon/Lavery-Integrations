@@ -50,6 +50,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\LaveryGeneric\Lavery.Constants\Lavery.Constants.csproj">
+      <Project>{955f3353-a900-47d4-9e6a-0e593c3cba02}</Project>
+      <Name>Lavery.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\LaveryGeneric\Lavery.Listener.Base\Lavery.Objects.Base.csproj">
       <Project>{53766e9e-f85c-431c-868d-54e4b3191ec1}</Project>
       <Name>Lavery.Objects.Base</Name>

@@ -81,7 +81,14 @@ namespace LaveryInboundOutboundStream
             timer.Start();
 
             oGuid = Guid.NewGuid();
-            Helpers.Start(true, "Main", oGuid);
+            try
+            {
+                Helpers.Start(true, "Main", oGuid);
+            }
+            catch (Exception ex)
+            { 
+
+            }
            
 
             eventLogComponent.WriteEntry("LaveryInboundOutboundService Started...");

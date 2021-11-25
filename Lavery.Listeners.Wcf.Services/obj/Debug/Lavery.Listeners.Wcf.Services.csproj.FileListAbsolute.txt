@@ -25,8 +25,8 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Service
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\Org.OpenAPITools.dll.config
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\reflectionDynamicLoader.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\RestSharp.xml
-C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.csproj.AssemblyReference.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.csproj.AssemblyReference.cache

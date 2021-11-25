@@ -114,12 +114,10 @@ namespace Lavery.Tools
         List<ClassDetail> classes;
         List<ClassRequest> requests;
         AssemblyName[] aAssemblyReferenced;
-        Assembly oAssembly;
-       
-        AppDomain oDomain;
-        static Object lockObject = new Object();
-        static AppDomain oDomainPlugIn;
-        static loaderHelper oLoadderHelper;
+        //Assembly oAssembly;       
+        //AppDomain oDomain;
+        
+        assemblyLoaderHelper oLoadderHelper;
 
         private bool _disposedValue;
 
@@ -127,7 +125,7 @@ namespace Lavery.Tools
 
         public ReflectionDataStructures(Assembly assembly)
         {
-            this.oAssembly = assembly;
+            oLoadderHelper.Assembly = assembly;
             aAssemblyReferenced = assembly.GetReferencedAssemblies();
             classes = new List<ClassDetail>();
             requests = new List<ClassRequest>();
@@ -136,55 +134,16 @@ namespace Lavery.Tools
         public ReflectionDataStructures(String sAsemblyPath, String sAssemblyName)
         {
             try
-            {
-                /*
+            {   
+                
                 AppDomainSetup setup = AppDomain.CurrentDomain.SetupInformation;
-                ODomain = AppDomain.CreateDomain("Domain_" + sAssemblyName, AppDomain.CurrentDomain.Evidence, setup); //Create an instance of loader class in new appdomain 
-                ODomain.AssemblyResolve += ReflectionAssembly.assemblyResolve;
+                AppDomain newDomain = AppDomain.CreateDomain(sAssemblyName + "-Domain", AppDomain.CurrentDomain.Evidence, setup); //Create an instance of loader class in new appdomain  
+                System.Runtime.Remoting.ObjectHandle obj = newDomain.CreateInstance(typeof(assemblyLoaderHelper).Assembly.FullName, typeof(assemblyLoaderHelper).FullName);
 
-                AssemblyName assemblyName = new AssemblyName();
-                assemblyName.CodeBase = sAsemblyPath;            
-                this.oAssembly = ODomain.Load(assemblyName); 
-                */
-                /*
-                String sLoader = nameof(Loader) + "-"+ sAssemblyName;
-                ODomain = AppDomain.CreateDomain(sLoader, AppDomain.CurrentDomain.Evidence, new AppDomainSetup { ApplicationBase = Path.GetDirectoryName(typeof(Loader).Assembly.Location) });
-                var loader = (Loader)ODomain.CreateInstanceAndUnwrap(typeof(Loader).Assembly.FullName, typeof(Loader).FullName);
-
-                String oPath = Path.GetDirectoryName(typeof(Loader).Assembly.Location);
-                loader.Load(String.Format(@"{0}\{1}.dll", oPath, sAssemblyName));
-                this.oAssembly = loader.AssemblyLoaded;
-                */
-                
-                String sPath1 = String.Format(@"{0}\{1}.dll", Path.GetDirectoryName(typeof(Loader).Assembly.Location), "reflectionDynamicLoader");
-                String sPath2 = String.Format(@"{0}\{1}.dll", Path.GetDirectoryName(typeof(Loader).Assembly.Location), sAssemblyName);
-                //AppDomain domain = AppDomain.CreateDomain("PluginDomain");
-                
-                lock (lockObject)
-                {
-                    if (oDomainPlugIn == null)
-                        oDomainPlugIn = AppDomain.CreateDomain("PluginDomain");
-                } 
-                
-                /*
-                oDomain = AppDomain.CreateDomain(sAssemblyName);
-                
-                */
-
-                //AssemblyName assemblyName = new AssemblyName();
-                //assemblyName.CodeBase = sPath1;
-                //oDomain.Load(assemblyName);
-                //Boolean bRet = ReflectionAssembly.isAssemblyFullyLoaded( "reflectionDynamicLoader", oDomain);
-               /*
-                oLoadderHelper = (loaderHelper)oDomainPlugIn.CreateInstanceAndUnwrap(typeof(loaderHelper).Assembly.FullName, typeof(loaderHelper).FullName);
-                oLoadderHelper.loadAssembly(sPath2, "sAssemblyName", oDomainPlugIn);
-
-                this.oAssembly = oLoadderHelper.AssemblyLoaded;
-                this.oDomain = oLoadderHelper.AppDomainForLoadAssembly;
-                this.oDomain.AssemblyResolve += ReflectionAssembly.assemblyResolve;
-               */
-                
-                aAssemblyReferenced = oAssembly.GetReferencedAssemblies();
+                oLoadderHelper = (assemblyLoaderHelper)obj.Unwrap();//As the object we are creating is from another appdomain hence we will get that object in wrapped format and hence in the next step we have unwrapped it  
+                oLoadderHelper.ODomain = newDomain;
+                oLoadderHelper.loadAssembly(sAsemblyPath, sAssemblyName);
+                aAssemblyReferenced = oLoadderHelper.Assembly.GetReferencedAssemblies();
 
                 classes = new List<ClassDetail>();
                 requests = new List<ClassRequest>();
@@ -208,7 +167,7 @@ namespace Lavery.Tools
                 if (disposing)
                 {
                     
-                    AppDomain.Unload(oDomain);
+                    AppDomain.Unload(oLoadderHelper.ODomain);
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer
@@ -238,11 +197,11 @@ namespace Lavery.Tools
         }
 
 
-        public Assembly OAssembly { get => oAssembly; }
+        public Assembly OAssembly { get => oLoadderHelper.Assembly; }
         public List<ClassDetail> Classes { get => classes; }
         public List<ClassRequest> Requests { get => requests; }
         public AssemblyName[] AAssemblyReferenced { get => aAssemblyReferenced; set => aAssemblyReferenced = value; }
-        public AppDomain ODomain { get => oDomain; set => oDomain = value; }
+        public AppDomain ODomain { get => oLoadderHelper.ODomain; set => oLoadderHelper.ODomain = value; }
     }
     class LoadeMyAssembly : MarshalByRefObject
     {
