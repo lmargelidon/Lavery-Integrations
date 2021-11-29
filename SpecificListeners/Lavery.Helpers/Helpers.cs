@@ -17,20 +17,22 @@ namespace Lavery.specific.Listeners
 {
     public class Helpers
     {
-        static List<assemblyLoaderHelper> lAssemblyLoader = new List<assemblyLoaderHelper>();
-        static private ListenerConfig myConfig;
+        static List<assemblyLoaderHelper> lAssemblyLoader = new List<assemblyLoaderHelper>();        
         static private Boolean bStop = false;
         static private Boolean bInit = false;
+        static private Boolean bAllConfigPassed = false;
         static private connectionFactory oCF = new connectionFactory();
         static Guid oGuid;
         static String sPrefix;
+
+        public static List<assemblyLoaderHelper> LAssemblyLoader { get => lAssemblyLoader; }
 
         public static assemblyLoaderHelper getAssembly(String sAssemblyname)
         {
             assemblyLoaderHelper oAss = default(assemblyLoaderHelper);
             try
             {
-                oAss = lAssemblyLoader.First(m => m.isMe(sAssemblyname));
+                oAss = LAssemblyLoader.First(m => m.isMe(sAssemblyname));
             }
             catch (Exception ex)
             {
@@ -39,20 +41,43 @@ namespace Lavery.specific.Listeners
 
             return oAss;
         }
-
-        public static async Task Start(Boolean bWait, String sServicePrefix, Guid oGuid = default(Guid))
+        
+        public static void Start(Boolean bWait, String sServicePrefix, Guid oGuid = default(Guid))
         {
             try
             {
                 bInit = true;
                 Helpers.oGuid = oGuid;
                 Helpers.sPrefix = sServicePrefix;
-                await buildListeners(sServicePrefix, oGuid);
+                buildListeners(sServicePrefix, oGuid, bWait);
+                
                 persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerHelpper.ToString(),
                                                    LaveryBusinessFunctions.eBusinessFunction.Start.ToString(),
                                                    oCF.getKeyValueString("Environment"),
                                                    "All Listener started...",
                                                    oGuid.ToString(), sPrefix);
+                if (bWait)
+                {
+                    Thread.Sleep(5000);
+                    ListenerConfig myConfig = Helpers.getDynamicConfig();
+                    foreach (ListenerSectionElement instance in myConfig.ListenerConfigInstances)
+                    {
+                        assemblyLoaderHelper loader;
+                        while ((loader = getAssembly(instance.Assembly) )== default(assemblyLoaderHelper));                        
+                        {
+                            String[] aString = instance.ClassName.Split(';');
+                            foreach (String sClasse in aString)
+                            {                               
+                                while (loader.OClassInstance == default(Object))
+                                    Thread.Sleep(10);
+                                while (!loader.ExecuteMethod(sClasse.Trim(), "IsAlive", null))
+                                    Thread.Sleep(10);
+                            }
+                            Thread.Sleep(10);
+                        }
+                    }
+                }
+
 
             }
             catch (Exception ex)
@@ -68,7 +93,7 @@ namespace Lavery.specific.Listeners
         }
         public static void Stop(Boolean bWait)
         {
-
+            ListenerConfig myConfig = Helpers.getDynamicConfig();
             foreach (ListenerSectionElement instance in myConfig.ListenerConfigInstances)
             {
                 try
@@ -79,10 +104,10 @@ namespace Lavery.specific.Listeners
                         String[] aString = instance.ClassName.Split(';');
                         foreach (String sClasse in aString)
                         {
-                            if (loader.ExecuteMethod(sClasse, "IsAlive", null))
+                            if (loader.ExecuteMethod(sClasse.Trim(), "IsAlive", null))
                             {
-                                Object[] oParam1 = { true };
-                                loader.ExecuteMethod(sClasse, "stop", oParam1);
+                                Object[] oParam1 = { bWait };
+                                loader.ExecuteMethod(sClasse.Trim(), "stop", oParam1);
                             }
                         }
                     }
@@ -100,23 +125,30 @@ namespace Lavery.specific.Listeners
                                                     "Exception Catch : " + ex.Message,
                                                     oGuid.ToString(), sPrefix);
                 }
-            }
-                    
+            }            
+
         }
-        private static async Task buildListeners(String sServicePrefix, Guid oGuid = default(Guid))
+        private static ListenerConfig getDynamicConfig()
+        {
+            System.Configuration.ConfigurationManager.RefreshSection("Listeners");
+            return  (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");
+        }
+        private static async Task buildListeners(String sServicePrefix, Guid oGuid = default(Guid), Boolean bWait =false)
         {
             await Task.Run(() => {                
                 while (!bStop)
                 {
-                    
 
-                    System.Configuration.ConfigurationManager.RefreshSection("Listeners");
-                    myConfig = (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");
+
+                    ListenerConfig myConfig = Helpers.getDynamicConfig();
+                    int iPassed = 0;
                     foreach (ListenerSectionElement instance in myConfig.ListenerConfigInstances)
                     {
 
                         try
                         {
+                            
+                            bAllConfigPassed = myConfig.ListenerConfigInstances.Count == iPassed;
                             assemblyLoaderHelper loader = getAssembly(instance.Assembly);
                             if (loader == default(assemblyLoaderHelper) &&
                                     instance.Active.Equals("True", StringComparison.InvariantCultureIgnoreCase))
@@ -128,7 +160,7 @@ namespace Lavery.specific.Listeners
                                 loader = (assemblyLoaderHelper)obj.Unwrap();//As the object we are creating is from another appdomain hence we will get that object in wrapped format and hence in the next step we have unwrapped it  
                                 loader.ODomain = newDomain;
                                 loader.loadAssembly(instance.Path + instance.Assembly + ".dll", instance.Assembly);
-                                lAssemblyLoader.Add(loader);
+                                LAssemblyLoader.Add(loader);
 
                                 String[] aString = instance.ClassName.Split(';');
                                 foreach (String sClasse in aString)
@@ -136,8 +168,8 @@ namespace Lavery.specific.Listeners
 
                                     Object[] oParam = { oCF, sServicePrefix, oGuid };
                                     loader.ExecuteConstructor( sClasse, oParam);
-                                    Object[] oParam1 = { true };
-                                    loader.ExecuteMethod( sClasse, "start", oParam1);
+                                    Object[] oParam1 = { bWait };
+                                    loader.ExecuteMethod( sClasse.Trim(), "start", oParam1);
                                     persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerHelpper.ToString(),
                                                   LaveryBusinessFunctions.eBusinessFunction.Start.ToString(),
                                                   oCF.getKeyValueString("Environment"),
@@ -154,8 +186,8 @@ namespace Lavery.specific.Listeners
                                 String[] aString = instance.ClassName.Split(';');
                                 foreach (String sClasse in aString)
                                 {
-                                    Object[] oParam1 = { true };
-                                    loader.ExecuteMethod( sClasse, "stop", oParam1);
+                                    Object[] oParam1 = { bWait };
+                                    loader.ExecuteMethod( sClasse.Trim(), "stop", oParam1);
                                     persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerHelpper.ToString(),
                                                  LaveryBusinessFunctions.eBusinessFunction.Stop.ToString(),
                                                  oCF.getKeyValueString("Environment"),
@@ -163,11 +195,12 @@ namespace Lavery.specific.Listeners
                                                  oGuid.ToString(), sPrefix);
                                 }
 
-                                lAssemblyLoader.RemoveAll(m => m.isMe(instance.Assembly));
+                                LAssemblyLoader.RemoveAll(m => m.isMe(instance.Assembly));
 
                                 AppDomain.Unload(loader.ODomain);
                             }
                             Thread.Sleep(100);
+                            iPassed++;
                         }
                         catch (Exception ex)
                         {
@@ -176,6 +209,7 @@ namespace Lavery.specific.Listeners
                                                        oCF.getKeyValueString("Environment"),
                                                        "Exception Catch : " + ex.Message,
                                                        oGuid.ToString(), sPrefix);
+                            throw (ex);
                         }
                     }
                     
@@ -190,7 +224,8 @@ namespace Lavery.specific.Listeners
         {
             Boolean bRet = false;
             try
-            {                
+            {
+                ListenerConfig myConfig = Helpers.getDynamicConfig();
                 foreach (ListenerSectionElement instance in myConfig.ListenerConfigInstances)
                 {
                     assemblyLoaderHelper loader = getAssembly(instance.Assembly);
@@ -219,7 +254,9 @@ namespace Lavery.specific.Listeners
         {
             Boolean bRet = true;
             try
-            {               
+            {
+                ListenerConfig myConfig = Helpers.getDynamicConfig();
+
                 foreach (ListenerSectionElement instance in myConfig.ListenerConfigInstances)
                 {
                     assemblyLoaderHelper loader = getAssembly(instance.Assembly);
@@ -243,5 +280,6 @@ namespace Lavery.specific.Listeners
             return bRet;
 
         }
+       
     }
 }

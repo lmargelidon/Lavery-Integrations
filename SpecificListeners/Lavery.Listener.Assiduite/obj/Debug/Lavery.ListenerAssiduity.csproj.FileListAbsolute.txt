@@ -75,8 +75,8 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Lis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.Assiduite\bin\Debug\Org.OpenAPITools.dll.config
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.Assiduite\bin\Debug\RestSharp.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.Assiduite\bin\Debug\reflectionDynamicLoader.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.Assiduite\obj\Debug\Lavery.ListenerAssiduity.csproj.AssemblyReference.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.Assiduite\obj\Debug\Lavery.ListenerAssiduity.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.Assiduite\obj\Debug\Lavery.ListenerAssiduity.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.Assiduite\obj\Debug\ListenerAssiduite.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.Assiduite\obj\Debug\ListenerAssiduite.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.Assiduite\obj\Debug\Lavery.ListenerAssiduity.csproj.AssemblyReference.cache

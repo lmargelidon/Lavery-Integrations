@@ -104,4 +104,3 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Lis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\obj\Debug\Lavery.ListenerErsNet.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\obj\Debug\Lavery.ErsNet.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\obj\Debug\Lavery.ErsNet.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\obj\Debug\Lavery.ListenerErsNet.csproj.AssemblyReference.cache

@@ -16,11 +16,12 @@ namespace Lavery.Tools
         Assembly _assembly;
         AppDomain oDomain;
         System.Type MyType;
-        object ClassObj;
+        object oClassInstance;
         Boolean _disposedValue;
 
         public AppDomain ODomain { get => oDomain; set => oDomain = value; }
         public Assembly Assembly { get => _assembly; set => _assembly = value; }
+        public object OClassInstance { get => oClassInstance;  }
 
         public void loadAssembly(string path, String sAssemblyname)
         {
@@ -56,9 +57,9 @@ namespace Lavery.Tools
                     MyType.InvokeMember("Dispose",
                                   BindingFlags.Default | BindingFlags.InvokeMethod,
                                        null,
-                                       ClassObj,
+                                       oClassInstance,
                                        null);
-                    ClassObj = default(Object);
+                    oClassInstance = default(Object);
                 }              
                 
                 _disposedValue = true;
@@ -78,13 +79,13 @@ namespace Lavery.Tools
                             
                             MyType = type;
                             // create an instance of the object
-                            if (ClassObj == default(Object))
-                                ClassObj = Activator.CreateInstance(type);
+                            if (oClassInstance == default(Object))
+                                oClassInstance = Activator.CreateInstance(type);
                             // Dynamically Invoke the method
                             MyType.InvokeMember(methodName,
                                 BindingFlags.Default | BindingFlags.InvokeMethod,
                                     null,
-                                    ClassObj,
+                                    oClassInstance,
                                     args);
                            
                             bRet = true;
@@ -105,13 +106,13 @@ namespace Lavery.Tools
             Boolean bRet = false;
             try
             {
-                if (ClassObj == default(Object))
+                if (oClassInstance == default(Object))
                     throw (new Exception("Object not created..."));
                 // Dynamically Invoke the method
                 MyType.InvokeMember(methodName,
                     BindingFlags.Default | BindingFlags.InvokeMethod,
                         null,
-                        ClassObj,
+                        oClassInstance,
                         args);            
             bRet = true;
             }
@@ -135,7 +136,7 @@ namespace Lavery.Tools
                         {
                             MyType = type;
                             // create an instance of the object
-                            ClassObj = Activator.CreateInstance(type, args);
+                            oClassInstance = Activator.CreateInstance(type, args);
                             bRet = true;
 
                         }

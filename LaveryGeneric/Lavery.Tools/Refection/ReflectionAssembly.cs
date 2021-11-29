@@ -126,14 +126,14 @@ namespace Lavery.Tools
         static public Boolean isAssemblyFullyLoaded(String sName, AppDomain oDomain = null)
         {
             Boolean bRet = true;
-            Assembly ass = getAsssemblyLoaded(sName, oDomain);
+            Assembly ass = getAssemblyLoaded(sName, oDomain);
             if (ass == null)
                 bRet = false;
             else
             {
                 AssemblyName[] aSS = ass.GetReferencedAssemblies();
                 foreach (AssemblyName oneAss in aSS)
-                    if (getAsssemblyLoaded(oneAss.Name, oDomain) == null)
+                    if (getAssemblyLoaded(oneAss.Name, oDomain) == null)
                     {
                         bRet = false;
                         break;
@@ -141,7 +141,7 @@ namespace Lavery.Tools
             }
             return bRet;
         }
-        static public Assembly getAsssemblyLoaded(String sName, AppDomain oDomain = null)
+        static public Assembly getAssemblyLoaded(String sName, AppDomain oDomain = null)
         {
             if (oDomain == null)
                 oDomain = AppDomain.CurrentDomain;
@@ -157,7 +157,7 @@ namespace Lavery.Tools
 
             Assembly oAssemb = default(Assembly);
             // check for assemblies already loaded
-            if ((oAssemb = getAsssemblyLoaded(args.Name)) != null)
+            if ((oAssemb = getAssemblyLoaded(args.Name)) != null)
                 return oAssemb;
 
             string filename = args.Name.Split(',')[0] + ".dll".ToLower();

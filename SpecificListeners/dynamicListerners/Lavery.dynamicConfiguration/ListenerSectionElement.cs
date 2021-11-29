@@ -82,7 +82,7 @@ namespace Lavery.dynamicConfiguration
                 base["assembly"] = value;
             }
         }
-        [ConfigurationProperty("active", IsRequired = true)]
+        [ConfigurationProperty("active", IsRequired = true, DefaultValue = "True")]        
         public String Active
         {
             get
