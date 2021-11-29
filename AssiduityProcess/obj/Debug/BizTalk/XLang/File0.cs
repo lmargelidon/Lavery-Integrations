@@ -715,6 +715,11 @@ namespace AssiduityProcess
                 AssiduityOrchestration __svc__ = (AssiduityOrchestration)_service;
                 __AssiduityOrchestration_root_0 __ctx0__ = (__AssiduityOrchestration_root_0)(__svc__._stateMgrs[0]);
 
+                if (__svc__.TraceRequestPort != null)
+                {
+                    __svc__.TraceRequestPort.Close(this, null);
+                    __svc__.TraceRequestPort = null;
+                }
                 if (__svc__.ReceiveRequestAssiduity != null)
                 {
                     __svc__.ReceiveRequestAssiduity.Close(this, null);
@@ -724,11 +729,6 @@ namespace AssiduityProcess
                 {
                     __svc__.TraceAssiduityPort.Close(this, null);
                     __svc__.TraceAssiduityPort = null;
-                }
-                if (__svc__.TraceRequestPort != null)
-                {
-                    __svc__.TraceRequestPort.Close(this, null);
-                    __svc__.TraceRequestPort = null;
                 }
                 if (__svc__.SendAssiduityPort != null)
                 {
@@ -775,15 +775,15 @@ namespace AssiduityProcess
                 AssiduityOrchestration __svc__ = (AssiduityOrchestration)_service;
                 __AssiduityOrchestration_1 __ctx1__ = (__AssiduityOrchestration_1)(__svc__._stateMgrs[1]);
 
-                if (__ctx1__ != null && __ctx1__.__MessageAssiduity != null)
-                {
-                    __ctx1__.UnrefMessage(__ctx1__.__MessageAssiduity);
-                    __ctx1__.__MessageAssiduity = null;
-                }
                 if (__ctx1__ != null && __ctx1__.__MessageRequest != null)
                 {
                     __ctx1__.UnrefMessage(__ctx1__.__MessageRequest);
                     __ctx1__.__MessageRequest = null;
+                }
+                if (__ctx1__ != null && __ctx1__.__MessageAssiduity != null)
+                {
+                    __ctx1__.UnrefMessage(__ctx1__.__MessageAssiduity);
+                    __ctx1__.__MessageAssiduity = null;
                 }
                 base.Finally();
             }
@@ -956,8 +956,8 @@ namespace AssiduityProcess
         {
             Microsoft.XLANGs.Core.Segment __seg__ = _segments[0];
             Microsoft.XLANGs.Core.Context __ctx__ = (Microsoft.XLANGs.Core.Context)_stateMgrs[0];
-            __AssiduityOrchestration_1 __ctx1__ = (__AssiduityOrchestration_1)_stateMgrs[1];
             __AssiduityOrchestration_root_0 __ctx0__ = (__AssiduityOrchestration_root_0)_stateMgrs[0];
+            __AssiduityOrchestration_1 __ctx1__ = (__AssiduityOrchestration_1)_stateMgrs[1];
 
             switch (__seg__.Progress)
             {
@@ -1004,8 +1004,8 @@ namespace AssiduityProcess
             Microsoft.XLANGs.Core.Envelope __msgEnv__ = null;
             Microsoft.XLANGs.Core.Segment __seg__ = _segments[1];
             Microsoft.XLANGs.Core.Context __ctx__ = (Microsoft.XLANGs.Core.Context)_stateMgrs[1];
-            __AssiduityOrchestration_1 __ctx1__ = (__AssiduityOrchestration_1)_stateMgrs[1];
             __AssiduityOrchestration_root_0 __ctx0__ = (__AssiduityOrchestration_root_0)_stateMgrs[0];
+            __AssiduityOrchestration_1 __ctx1__ = (__AssiduityOrchestration_1)_stateMgrs[1];
 
             switch (__seg__.Progress)
             {

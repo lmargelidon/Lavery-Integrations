@@ -123,7 +123,7 @@ namespace Lavery.Tools
 
             return oReflection;
         }
-        static public Boolean isAssemblyFullyLoaded(String sName, AppDomain oDomain = null)
+        static public Boolean isAssemblyFullyLoaded(String sName, AppDomain oDomain = null, Boolean isTestAllDependencies = false)
         {
             Boolean bRet = true;
             Assembly ass = getAssemblyLoaded(sName, oDomain);
@@ -131,13 +131,17 @@ namespace Lavery.Tools
                 bRet = false;
             else
             {
-                AssemblyName[] aSS = ass.GetReferencedAssemblies();
-                foreach (AssemblyName oneAss in aSS)
-                    if (getAssemblyLoaded(oneAss.Name, oDomain) == null)
-                    {
-                        bRet = false;
-                        break;
-                    }
+                if (isTestAllDependencies)
+                {
+                    AssemblyName[] aSS = ass.GetReferencedAssemblies();
+                    foreach (AssemblyName oneAss in aSS)
+                        if (getAssemblyLoaded(oneAss.Name, oDomain) == null &&
+                            getAssemblyLoaded(oneAss.Name) == null)
+                        {
+                            bRet = false;
+                            break;
+                        }
+                }
             }
             return bRet;
         }
@@ -145,7 +149,7 @@ namespace Lavery.Tools
         {
             if (oDomain == null)
                 oDomain = AppDomain.CurrentDomain;
-            Assembly[] aAss = AppDomain.CurrentDomain.GetAssemblies();
+            Assembly[] aAss = oDomain.GetAssemblies();
             Assembly oAss = aAss.FirstOrDefault(x => x.FullName.Split(',')[0].Equals(sName, StringComparison.CurrentCultureIgnoreCase));
             return oAss;
         }

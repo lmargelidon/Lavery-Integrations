@@ -150,6 +150,10 @@
       <Project>{0f4d3579-dbf2-4a9b-aa35-91e75d2ea898}</Project>
       <Name>Lavery.Wcf.Api.Client.E3</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LaveryGeneric\Lavery.Connector\Lavery.Connectors.csproj">
+      <Project>{d98372c4-16d9-4ada-8cd6-d651b967b97d}</Project>
+      <Name>Lavery.Connectors</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LaveryGeneric\Lavery.Constants\Lavery.Constants.csproj">
       <Project>{955f3353-a900-47d4-9e6a-0e593c3cba02}</Project>
       <Name>Lavery.Constants</Name>

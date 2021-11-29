@@ -71,6 +71,7 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\SqlD
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\SqlDependency.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\AssiduityServiceBus.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\AzureFrameWork.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Connector.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Constants.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.dynamicConfiguration.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.ErsNet.dll
@@ -97,7 +98,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Rest
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Microsoft.Azure.Relay.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Azure.Storage.Blobs.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Azure.Core.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Connector.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Azure.Storage.Common.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\System.Memory.dll
@@ -119,6 +119,7 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lave
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\LaveryInboundOutboundStream.exe.config
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Listeners.Wcf.Services.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Wcg.Api.Client.E3.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Connector.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Constants.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\ListenerTableEvents.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Tools.pdb
@@ -141,7 +142,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Rest
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Microsoft.Azure.Relay.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Azure.Storage.Blobs.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Azure.Core.xml
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Connector.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Azure.Storage.Common.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\System.Memory.xml

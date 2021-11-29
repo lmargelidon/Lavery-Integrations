@@ -11,6 +11,7 @@ namespace Lavery.dynamicConfiguration
 {
     public class ListenerConfig : ConfigurationSection
     {
+        public static Object oSynchronizeConfig = new object();
         // Create a property that lets us access the collection
         // of SageCRMInstanceElements
 
@@ -26,7 +27,15 @@ namespace Lavery.dynamicConfiguration
                 return (ListenerSectionCollection)this["instances"];
             }
         }
-        public int getRegistrtedAssemblies()
+        public static ListenerConfig getDynamicConfig()
+        {
+            lock (ListenerConfig.oSynchronizeConfig)
+            {
+                System.Configuration.ConfigurationManager.RefreshSection("Listeners");
+            }
+            return (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");
+        }
+        public int getRegistredAssemblies()
         {
             int iRet = 0;
             foreach (ListenerSectionElement instance in ListenerConfigInstances)           
@@ -34,65 +43,84 @@ namespace Lavery.dynamicConfiguration
                     iRet++;
             return iRet;
         }
-        public int getRegistrtedListeners()
+        public int getRegistredListeners()
         {
             int iRet = 0;
+            
             foreach (ListenerSectionElement instance in ListenerConfigInstances)
                 if (instance.Active.Equals("True", StringComparison.InvariantCultureIgnoreCase))
                 {
                     String[] aString = instance.ClassName.Split(';');
                     iRet += aString.Length;
                 }
+            
             return iRet;
         }
         public void setActiveInstance(String sInstanceName, Boolean bActivity)
         {
-            System.Xml.XmlDocument xml = new System.Xml.XmlDocument();
-            xml.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-            // System.Xml.XmlNode node;
-            // node = xml.SelectSingleNode("configuration/Listeners/instances[name='']");
-            XmlNodeList dataNodes = xml.SelectNodes("configuration/Listeners/instances");
-            foreach (XmlNode node in dataNodes)
+            lock (ListenerConfig.oSynchronizeConfig)
             {
-                foreach (XmlNode syxn in node.ChildNodes)
+                System.Xml.XmlDocument xml = new System.Xml.XmlDocument();
+                xml.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                // System.Xml.XmlNode node;
+                // node = xml.SelectSingleNode("configuration/Listeners/instances[name='']");
+                XmlNodeList dataNodes = xml.SelectNodes("configuration/Listeners/instances");
+                Boolean bBreak = false;
+                foreach (XmlNode node in dataNodes)
                 {
-                    if (syxn.NodeType == XmlNodeType.Element)
+                    if (bBreak)
+                        break;
+                    foreach (XmlNode syxn in node.ChildNodes)
                     {
-                        if (syxn.Attributes["name"].InnerText.Equals(sInstanceName, StringComparison.CurrentCultureIgnoreCase ))
-                        {                           
-                            syxn.Attributes["active"].InnerText = bActivity ? "True" : "False";
-                            return;
+                        if (bBreak)
+                            break;
+                        if (syxn.NodeType == XmlNodeType.Element)
+                        {
+                            if (syxn.Attributes["name"].InnerText.Equals(sInstanceName, StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                syxn.Attributes["active"].InnerText = bActivity ? "True" : "False";
+                                bBreak = true;
+                            }
+
                         }
-                        
                     }
                 }
+                xml.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                System.Configuration.ConfigurationManager.RefreshSection("Listeners");
             }
-            xml.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-
         }
         public void setActiveInstance(int iLequel, Boolean bActivity)
-        {          
-            System.Xml.XmlDocument xml = new System.Xml.XmlDocument();
-            xml.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-            // System.Xml.XmlNode node;
-            // node = xml.SelectSingleNode("configuration/Listeners/instances[name='']");
-            XmlNodeList dataNodes = xml.SelectNodes("configuration/Listeners/instances");
-            foreach(XmlNode node in dataNodes)
+        {
+            lock (ListenerConfig.oSynchronizeConfig)
             {
-                foreach (XmlNode syxn in node.ChildNodes)
+                System.Xml.XmlDocument xml = new System.Xml.XmlDocument();
+                xml.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                // System.Xml.XmlNode node;
+                // node = xml.SelectSingleNode("configuration/Listeners/instances[name='']");
+                XmlNodeList dataNodes = xml.SelectNodes("configuration/Listeners/instances");
+                Boolean bBreak = false;
+                foreach (XmlNode node in dataNodes)
                 {
-                    if (syxn.NodeType == XmlNodeType.Element)
+                    if (bBreak)
+                        break;
+                    foreach (XmlNode syxn in node.ChildNodes)
                     {
-                        if (iLequel == 0)
-                        {                            
-                            syxn.Attributes["active"].InnerText = bActivity ? "True" : "False";
-                            return;
+                        if (bBreak)
+                            break;
+                        if (syxn.NodeType == XmlNodeType.Element)
+                        {
+                            if (iLequel == 0)
+                            {
+                                syxn.Attributes["active"].InnerText = bActivity ? "True" : "False";
+                                bBreak = true;
+                            }
+                            iLequel--;
                         }
-                        iLequel--;
                     }
                 }
-            }               
-            xml.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                xml.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                System.Configuration.ConfigurationManager.RefreshSection("Listeners");
+            }
         }
     }
 }

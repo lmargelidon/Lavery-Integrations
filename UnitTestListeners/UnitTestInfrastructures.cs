@@ -13,7 +13,7 @@ namespace UnitTestAssemblies
     public class UnitTestInfrastructures
     {
         [TestMethod]
-        public void TestStartAssemblies()
+        public void Test_1_StartAll()
         {
             int iValRegistered = 0;
             int iValLoaded = -1;
@@ -21,12 +21,9 @@ namespace UnitTestAssemblies
             {
                 System.Configuration.ConfigurationManager.RefreshSection("Assemblies");
                 ListenerConfig myConfig = (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");
-                Helpers.Start(true, "S1");
-                iValRegistered = myConfig.getRegistrtedAssemblies();
-
-                iValLoaded = 0;
-                foreach (assemblyLoaderHelper oApp in Helpers.LAssemblyLoader)
-                    iValLoaded = ReflectionAssembly.isAssemblyFullyLoaded(oApp.Assembly.GetName().Name)  ? 1 : 0;
+                Helpers.Start(true, "Unit-Tests");
+                iValRegistered = myConfig.getRegistredAssemblies();
+                iValLoaded = Helpers.getLoadedAssemblyActif();
             }
             catch (Exception ex)
             {
@@ -37,42 +34,82 @@ namespace UnitTestAssemblies
         }
         
         [TestMethod]
-        public void TestUnloadOneAssembly()
+        public void Test_2_UnloadOneAssembly()
         {
             int iValRegistered = 0;
-            int iValLoaded = -1;
+            int iValLoaded = 0;
             try
             {
                 System.Configuration.ConfigurationManager.RefreshSection("Assemblies");
-                ListenerConfig myConfig = (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");                
-                iValRegistered = myConfig.getRegistrtedAssemblies();
-                iValLoaded = Helpers.LAssemblyLoader.Count;
+                ListenerConfig myConfig = (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");
+
                 myConfig.setActiveInstance("AssiduityServiceBus", false);
-                while (ReflectionAssembly.isAssemblyFullyLoaded("AssiduityServiceBus"))
-                {
-                    Thread.Sleep(50);
-                }
-                iValLoaded += !ReflectionAssembly.isAssemblyFullyLoaded("AssiduityServiceBus") ? -1 : 0; ;
+                assemblyLoaderHelper oAss;
+                int iLoop = 200; 
+                while ((oAss = Helpers.getAssembly("AssiduityServiceBus")) != default(assemblyLoaderHelper))
+                    {
+                        Thread.Sleep(50);
+                    if (iLoop-- <= 0)
+                        break;
+                    }
+
+                iValLoaded = Helpers.getLoadedAssemblyActif(); 
+
+                myConfig = ListenerConfig.getDynamicConfig();
+                iValRegistered = myConfig.getRegistredAssemblies();
             }
             catch (Exception ex)
             {
                 iValLoaded = -1;
             }
-            Assert.AreEqual(iValRegistered - 1, iValLoaded );
+            Assert.AreEqual(iValRegistered , iValLoaded );
 
         }
-        /*
         [TestMethod]
-        public void TestStopAssemblies()
+        public void Test_3_loadOneAssembly()
+        {
+            int iValRegistered = 0;
+            int iValLoaded = 0;
+            try
+            {
+                System.Configuration.ConfigurationManager.RefreshSection("Assemblies");
+                ListenerConfig myConfig = (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");
+
+                
+
+                myConfig.setActiveInstance("AssiduityServiceBus", true);
+                assemblyLoaderHelper oAss;
+                int iLoop = 200;
+                while ((oAss = Helpers.getAssembly("AssiduityServiceBus")) == default(assemblyLoaderHelper))
+                {
+                    Thread.Sleep(50);
+                    if (iLoop-- <= 0)
+                        break;
+                }
+                iValLoaded = Helpers.getLoadedAssemblyActif();
+
+                myConfig = ListenerConfig.getDynamicConfig();
+                iValRegistered = myConfig.getRegistredAssemblies();
+            }
+            catch (Exception ex)
+            {
+                iValLoaded = -1;
+            }
+            Assert.AreEqual(iValRegistered, iValLoaded);
+
+        }
+       
+        [TestMethod]
+        public void Test_4_StopAll()
         {   
-            int iValLoaded = -1;
+            int iValLoaded = 0;
             try
             {
                 System.Configuration.ConfigurationManager.RefreshSection("Assemblies");
                 ListenerConfig myConfig = (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");                
                 Helpers.Stop(true);
-                iValLoaded = Helpers.LAssemblyLoader.Count;
-
+                iValLoaded = Helpers.getLoadedAssemblyActif();
+                               
             }
             catch (Exception ex)
             {
@@ -81,6 +118,27 @@ namespace UnitTestAssemblies
             Assert.AreEqual(iValLoaded, 0);
 
         }
-        */
+        [TestMethod]
+        public void Test_5_StartAll()
+        {
+            int iValRegistered = 0;
+            int iValLoaded = -1;
+            try
+            {
+                System.Configuration.ConfigurationManager.RefreshSection("Assemblies");
+                ListenerConfig myConfig = (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");
+                Helpers.Start(true, "Unit-Tests");
+                iValRegistered = myConfig.getRegistredAssemblies();
+
+                iValLoaded = Helpers.getLoadedAssemblyActif();
+            }
+            catch (Exception ex)
+            {
+                iValLoaded = -1;
+            }
+            Assert.AreEqual(iValRegistered, iValLoaded);
+
+        }
+
     }
 }
