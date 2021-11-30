@@ -20,3 +20,4 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Wcg.Api.Client.E3\obj
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Wcg.Api.Client.E3\obj\Debug\Lavery.Wcf.Api.Client.E3.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Wcg.Api.Client.E3\obj\Debug\Lavery.Wcg.Api.Client.E3.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Wcg.Api.Client.E3\obj\Debug\Lavery.Wcg.Api.Client.E3.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Wcg.Api.Client.E3\obj\Debug\Lavery.Wcf.Api.Client.E3.csproj.AssemblyReference.cache

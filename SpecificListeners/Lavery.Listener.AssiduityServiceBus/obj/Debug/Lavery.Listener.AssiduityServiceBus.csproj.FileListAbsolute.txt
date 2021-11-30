@@ -74,7 +74,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Lis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\System.Buffers.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\System.ValueTuple.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\System.Numerics.Vectors.xml
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\Lavery.Listener.AssiduityServiceBus.csproj.AssemblyReference.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\Lavery.Listener.AssiduityServiceBus.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\Lavery.Listener.AssiduityServiceBus.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\AssiduityServiceBus.dll

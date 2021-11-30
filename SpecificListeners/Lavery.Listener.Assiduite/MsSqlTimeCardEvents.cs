@@ -29,6 +29,7 @@ namespace Lavery.Listeners
         SqlTableDependency<TimeCard> dep;       
         jsonSerializer<TimeCard> oSerializer = new jsonSerializer<TimeCard>();
         MsMq<TimeCard> oMq;
+        String[] aNoBillabeJobTypes;
         
 
         public MsSqlTimeCardEvents(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory) 
@@ -42,6 +43,8 @@ namespace Lavery.Listeners
                 this.SPrefixeName = SPrefixeName;
                 this.mapper = new ModelToTableMapper<TimeCard>();
                 this.mapper.AddMapping(c => c.TimecardID, "TimeCardID");
+                aNoBillabeJobTypes = OConnectionFactory.getKeyValueString("AssiduiteNoBillableJobTypes").Split(';');
+                
                 if (oGuid != default(Guid))
                     OGuidContext = oGuid;
                 else

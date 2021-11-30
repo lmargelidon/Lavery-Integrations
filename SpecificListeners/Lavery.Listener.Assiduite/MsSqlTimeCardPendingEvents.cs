@@ -30,20 +30,20 @@ namespace Lavery.Listeners
         ModelToTableMapper<TimeCardPending> mapper;
         String sMutextHost;
         SqlTableDependency<TimeCardPending> dep;       
-        jsonSerializer<TimeCardPending> oSerializer = new jsonSerializer<TimeCardPending>();       
-       
+        jsonSerializer<TimeCardPending> oSerializer = new jsonSerializer<TimeCardPending>();
+        String[] aNoBillabeJobTypes;
 
         public MsSqlTimeCardPendingEvents(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory) 
         {
             try
-            {
-                
+            {                
                 this.oSerializer = new jsonSerializer<TimeCardPending>();                
                 this.sMutextHost = OConnectionFactory.getKeyValueString("MutexHost");
                 this.IWaitOnMutex = OConnectionFactory.getKeyValueInt("MutexTimeOut");
                 this.SPrefixeName = SPrefixeName;
                 this.mapper = new ModelToTableMapper<TimeCardPending>();
                 this.mapper.AddMapping(c => c.TimeCardPendingID, "TimeCardPendingID");
+                aNoBillabeJobTypes = OConnectionFactory.getKeyValueString("AssiduiteNoBillableJobTypes").Split(';');
                 if (oGuid != default(Guid))
                     OGuidContext = oGuid;
                 else

@@ -14,3 +14,4 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Constan
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Constants\obj\Debug\Lavery.Constants.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Constants\obj\Debug\Lavery.Constants.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Constants\obj\Debug\Lavery.Constants.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Constants\obj\Debug\Lavery.Constants.csproj.AssemblyReference.cache
