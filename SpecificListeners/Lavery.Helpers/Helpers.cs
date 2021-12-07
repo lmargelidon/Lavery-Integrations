@@ -189,7 +189,7 @@ namespace Lavery.specific.Listeners
                                 {
 
                                     Object[] oParam = { oCF, sServicePrefix, oGuid };
-                                    loader.ExecuteConstructor( sClasse, oParam);
+                                    loader.ExecuteConstructor( sClasse.Trim(), oParam);
                                     Object[] oParam1 = { bWait };
                                     loader.ExecuteMethod( sClasse.Trim(), "start", oParam1);
                                     persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerHelpper.ToString(),

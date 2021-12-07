@@ -725,15 +725,15 @@ namespace AssiduityProcess
                     __svc__.TraceRequestPort.Close(this, null);
                     __svc__.TraceRequestPort = null;
                 }
-                if (__svc__.SendAssiduityPort != null)
-                {
-                    __svc__.SendAssiduityPort.Close(this, null);
-                    __svc__.SendAssiduityPort = null;
-                }
                 if (__svc__.TraceAssiduityPort != null)
                 {
                     __svc__.TraceAssiduityPort.Close(this, null);
                     __svc__.TraceAssiduityPort = null;
+                }
+                if (__svc__.SendAssiduityPort != null)
+                {
+                    __svc__.SendAssiduityPort.Close(this, null);
+                    __svc__.SendAssiduityPort = null;
                 }
                 base.Finally();
             }
@@ -956,8 +956,8 @@ namespace AssiduityProcess
         {
             Microsoft.XLANGs.Core.Segment __seg__ = _segments[0];
             Microsoft.XLANGs.Core.Context __ctx__ = (Microsoft.XLANGs.Core.Context)_stateMgrs[0];
-            __AssiduityOrchestration_1 __ctx1__ = (__AssiduityOrchestration_1)_stateMgrs[1];
             __AssiduityOrchestration_root_0 __ctx0__ = (__AssiduityOrchestration_root_0)_stateMgrs[0];
+            __AssiduityOrchestration_1 __ctx1__ = (__AssiduityOrchestration_1)_stateMgrs[1];
 
             switch (__seg__.Progress)
             {
@@ -1004,8 +1004,8 @@ namespace AssiduityProcess
             Microsoft.XLANGs.Core.Envelope __msgEnv__ = null;
             Microsoft.XLANGs.Core.Segment __seg__ = _segments[1];
             Microsoft.XLANGs.Core.Context __ctx__ = (Microsoft.XLANGs.Core.Context)_stateMgrs[1];
-            __AssiduityOrchestration_1 __ctx1__ = (__AssiduityOrchestration_1)_stateMgrs[1];
             __AssiduityOrchestration_root_0 __ctx0__ = (__AssiduityOrchestration_root_0)_stateMgrs[0];
+            __AssiduityOrchestration_1 __ctx1__ = (__AssiduityOrchestration_1)_stateMgrs[1];
 
             switch (__seg__.Progress)
             {

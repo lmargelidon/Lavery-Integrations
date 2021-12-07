@@ -89,6 +89,7 @@ namespace Lavery.Listeners
             Boolean bRet = true;
             try
             {
+                /*
                 using (new SynchronizeGlobalInstance(IWaitOnMutex, OConnectionFactory.getKeyValueString("AssiduiteMutexGlobalValue")))
                 {
                     DateTime oLastDT = ODataReferentialManagement.getLastRegisteredDate("TimeCardPending");
@@ -121,7 +122,7 @@ namespace Lavery.Listeners
                         Console.WriteLine("\t\t\tNo notifications to be retrieved ...");
                     
                 }
-
+                */
                 dep = new SqlTableDependency<TimeCardPending>(OConnectionFactory.ConnectionString("ConnectionSource"), "TimeCardPending", mapper: mapper, includeOldValues: true);
                
                 dep.OnChanged += Changed;

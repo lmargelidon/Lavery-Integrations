@@ -125,9 +125,10 @@ namespace Lavery.Tools
                 lock (ReintranceLock)
                 {
                     using (var cmd = new SqlCommand(String.Format("SELECT * FROM [dbo].[{0}] WHERE TimeStamp > @TimeStamp FOR JSON PATH, Root('TimeCards')", sListenerName), oConnectionSource))
+                    //using (var cmd = new SqlCommand(String.Format("SELECT * FROM [dbo].[{0}] WHERE TimeStamp > @TimeStamp", sListenerName), oConnectionSource))
                     {                        
                         cmd.Parameters.Add("@TimeStamp", SqlDbType.DateTime).Value = dtFrom;
-                        sRet = (String)cmd.ExecuteScalar();
+                        sRet = (String)cmd.ExecuteScalar();                       
                     }
                 }
             }
