@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Messaging;
 using Lavery.Tools.Configuration.Management;
+using Lavery.Tools;
 
 
 namespace Lavery.Connector
@@ -15,7 +16,9 @@ namespace Lavery.Connector
         MessageQueue rmQ = default(MessageQueue);
         private bool _disposedValue;
         private Boolean isTransactionnal;
-        private bodyFormater ebodyFormater = bodyFormater.None;
+        private bodyFormater ebodyFormater = bodyFormater.BYnary;
+        jsonSerializer<T> oSerializer = new jsonSerializer<T>();
+
         public MsMq(connectionFactory oConnectionFactory, String CinfigurationNameOfQueue, Boolean isTransactionnal = true) :base(oConnectionFactory)
         {
             try
@@ -48,7 +51,7 @@ namespace Lavery.Connector
 
         public T receive(delegateFonction oDelegateAction)
         {
-           Object oRet = default(T);
+           T oRet = default(T);
             try 
             {
                 if (rmQ == default(MessageQueue))
@@ -65,18 +68,15 @@ namespace Lavery.Connector
                                                 OConnectionFactory.getKeyValueInt("AssiduiteQueueTimeOutSecondes"));
                
                 if (ebodyFormater == bodyFormater.Xml)
-                    oRet = ((T)rmQ.Receive(oTS).Body);
+                    oRet = ((T)rmQ.Receive(oTS).Body);                
                 else
                 {
                     Message oMsg = rmQ.Receive(oTS);
-                    byte[] oByte = new byte[oMsg.BodyStream.Length];
-                    oMsg.BodyStream.Read(oByte, 0, (int)oMsg.BodyStream.Length);
-                    oRet = BitConverter.ToString(oByte);
-
+                    oRet = oSerializer.deserialize((string)oMsg.Body);
                 }
 
 
-                oRet = oDelegateAction((Object)oRet, default(String));
+                oDelegateAction(oRet, default(String));
 
 
             }
@@ -85,11 +85,11 @@ namespace Lavery.Connector
                 throw(ex);
             }
 
-            return (T)oRet;
+            return oRet;
         }
         public T receiveInTransaction(delegateFonction oDelegateAction)
         {
-            Object oRet = default(Object);
+            T oRet = default(T);
             try
             {
                 if (rmQ == default(MessageQueue))
@@ -115,12 +115,12 @@ namespace Lavery.Connector
                     if (ebodyFormater == bodyFormater.Xml)
                         oRet = ((T)rmQ.Receive(oTS, transaction).Body);
                     else {
-                                Message oMsg = rmQ.Receive(oTS, transaction);
-                                oRet = (string)oMsg.Body;
+                                Message oMsg = rmQ.Receive(oTS, transaction);                           
+                                oRet = oSerializer.deserialize((string)oMsg.Body);
                         }
 
 
-                    oRet =  oDelegateAction((Object)oRet, default(String));
+                    oDelegateAction(oRet, default(String));
                     transaction.Commit();
                 }
                 catch (MessageQueueException e)
@@ -149,7 +149,7 @@ namespace Lavery.Connector
             {
             }
 
-            return (T)oRet;
+            return oRet;
 
         }
         public void send(delegateFonction oDelegateAction, String sMessage, T oObjectMessage)

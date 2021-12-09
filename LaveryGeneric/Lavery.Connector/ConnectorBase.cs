@@ -18,8 +18,8 @@ namespace Lavery.Connector
 
         public connectionFactory OConnectionFactory { get => oConnectionFactory; }
 
-        public delegate Object delegateFonction(Object oObjectMessage, String sJson);
-        public delegate Boolean delegateFonctionBoolean(Object oObjectMessage, String sJson);
+        public delegate Boolean delegateFonction(Object oObjectMessage, String sJson);
+        
         
 
         public void Dispose()

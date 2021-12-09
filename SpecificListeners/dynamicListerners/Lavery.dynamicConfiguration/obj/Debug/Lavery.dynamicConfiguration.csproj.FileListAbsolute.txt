@@ -9,3 +9,4 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\dynamicLis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\dynamicListerners\Lavery.dynamicConfiguration\obj\Debug\Lavery.dynamicConfiguration.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\dynamicListerners\Lavery.dynamicConfiguration\obj\Debug\Lavery.dynamicConfiguration.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\dynamicListerners\Lavery.dynamicConfiguration\obj\Debug\Lavery.dynamicConfiguration.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\dynamicListerners\Lavery.dynamicConfiguration\bin\Debug\Newtonsoft.Json.xml

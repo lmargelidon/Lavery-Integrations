@@ -94,3 +94,4 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connect
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\obj\Debug\Lavery.Connectors.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\obj\Debug\Lavery.Connector.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\obj\Debug\Lavery.Connector.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\Newtonsoft.Json.xml

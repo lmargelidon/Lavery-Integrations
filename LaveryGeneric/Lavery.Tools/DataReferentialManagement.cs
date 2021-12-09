@@ -356,16 +356,19 @@ namespace Lavery.Tools
         }
 
 
-        public int registerLink(int idSource, int idTarget, Guid oGuid)
+        public int registerLink(Guid idSource, int idTarget, Guid oGuid)
         {
             int iRet = default(int);
             try
             {
                 lock (ReintranceLock)
                 {
-                    using (var cmd1 = new SqlCommand("insert into dbo.AssiduityLink ([refCorrelation], [idSource], [idTarget]) values(@refCorrelation, @idSource,@idTarget)", oConnectionReferential))
+                    using (var cmd1 = new SqlCommand(@"update dbo.AssiduityMasterDataLink 
+                                                       set  [refCorrelation] = @refCorrelation,
+                                                            [idTarget] = @idTarget
+                                                       where [idSource] = @idSource", oConnectionReferential))
                     {
-                        cmd1.Parameters.Add("@idSource", SqlDbType.Int).Value = idSource;
+                        cmd1.Parameters.Add("@idSource", SqlDbType.NVarChar).Value = idSource.ToString();
                         cmd1.Parameters.Add("@idTarget", SqlDbType.Int).Value = idTarget;
                         cmd1.Parameters.Add("@refCorrelation", SqlDbType.UniqueIdentifier).Value = oGuid;
 

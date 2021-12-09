@@ -16,8 +16,8 @@ namespace Lavery.Connector
         System.IO.FileSystemWatcher oWatcher;
         Guid oGuid;
         String sPrefixeName;
-        delegateFonctionBoolean oDelegateOncreate;
-        delegateFonctionBoolean oDelegateOnChanged;
+        delegateFonction oDelegateOncreate;
+        delegateFonction oDelegateOnChanged;
 
         public FileSystemWatcher(connectionFactory oConnectionFactory, String sConfigSourceDirectory, Guid oGuid, String sPrefixeName) : base(oConnectionFactory)
         {
@@ -37,7 +37,7 @@ namespace Lavery.Connector
                                                    oGuid.ToString(), sPrefixeName);
             }
         }
-        public void NotifyFilter(delegateFonctionBoolean oDelegateOncreate, delegateFonctionBoolean oDelegateOnChanged)
+        public void NotifyFilter(delegateFonction oDelegateOncreate, delegateFonction oDelegateOnChanged)
         {
             oWatcher.NotifyFilter = NotifyFilters.Attributes
                                  | NotifyFilters.CreationTime

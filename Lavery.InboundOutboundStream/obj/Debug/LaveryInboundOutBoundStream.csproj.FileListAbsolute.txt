@@ -158,7 +158,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\bin\Debug\Lavery.dynamicConfiguration.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\bin\Debug\RestSharp.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutBoundStream.csproj.AssemblyReference.cache
-C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutboundStream.exe.config
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutboundStream.LaveryInboundOutboundService.resources
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundStream.ProjectInstaller.resources
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutBoundStream.csproj.GenerateResource.cache

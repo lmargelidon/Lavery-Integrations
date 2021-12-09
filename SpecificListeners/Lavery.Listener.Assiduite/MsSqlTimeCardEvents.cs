@@ -74,9 +74,9 @@ namespace Lavery.Listeners
                 Disposed = true;
             }
         }
-        public Object performTransaction(Object oObjectMessage, String sJson)
+        public Boolean performTransaction(Object oObjectMessage, String sJson)
         {
-            Object oRet = default(Object);
+            Boolean bRet = true;
             try
             {
                 ODataReferentialManagement.registerLink(((TimeCard)oObjectMessage).TimecardID, ((TimeCard)oObjectMessage).TimeStamp, -1, ((TimeCard)oObjectMessage).refGuid, "TimeCard", sJson);
@@ -87,7 +87,7 @@ namespace Lavery.Listeners
             {
                 throw (ex);
             }
-            return oRet;
+            return bRet;
         }
         public override Boolean doInitialize()
         {

@@ -39,39 +39,14 @@ namespace Lavery.Listeners
 
             }
         }
-        public TimeCard performTransaction(String oObjectMessage)
+      
+        public Boolean performTransaction(Object oObjectMessage, String sJcon)
         {
-            TimeCard oRet = default(TimeCard);
+            Boolean bRet = true;
             try
             {
-                /*
-                String[] aVal = oObjectMessage.Split('-');
-                String sOut = "";
-                foreach (string hex in aVal)
-                {
-                    int value = Convert.ToInt32(hex, 16);
-                    string stringValue = Char.ConvertFromUtf32(value);
-                    char charValue = (char)value;
-                    sOut += charValue;
-                }
-                */
-                oRet = oSerializer.deserialize(oObjectMessage);                
 
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-            return oRet;
-        }
-        public Object performTransaction(Object oObjectMessage, String sJcon)
-        {
-            TimeCard oRet = default(TimeCard);
-            try
-            {
-                if (oObjectMessage.GetType() == typeof(String))
-                    oObjectMessage = performTransaction((String)oObjectMessage);
-                oRet = (TimeCard)oObjectMessage;
+                TimeCard oRet = (TimeCard)oObjectMessage;
                 switch (((TimeCard)oObjectMessage).etypeEnvelopp)
                 {
                     case typeEnvelopp.Insert:
@@ -84,6 +59,7 @@ namespace Lavery.Listeners
                         deleteAssiduity((TimeCard)oObjectMessage);
                         break;
                     default:
+                        bRet = false;
                         break;
                 }
 
@@ -92,7 +68,7 @@ namespace Lavery.Listeners
             {
                 throw (ex);
             }
-            return oRet;
+            return bRet;
         }
 
         protected override void Dispose(bool disposing)
@@ -192,7 +168,7 @@ namespace Lavery.Listeners
             try
             {
 
-                using (var command = new SqlCommand("[dbo].[absence__insert]", OConnectionTarget))
+                using (var command = new SqlCommand("[dbo].[absence__insert_bis]", OConnectionTarget))
                 {
                     
                     var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
@@ -202,7 +178,7 @@ namespace Lavery.Listeners
 
                     var result = returnParameter.Value;
 
-                    int iVal = ODataReferentialManagement.registerLink(Convert.ToInt32(oTimeCard.TimecardID), (int)result, oTimeCard.refGuid);
+                    int iVal = ODataReferentialManagement.registerLink(oTimeCard.TimecardID, (int)result, oTimeCard.refGuid);
 
                     persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
                                                   LaveryBusinessFunctions.eBusinessFunction.InsertAbsenceRequest.ToString(),
@@ -276,19 +252,26 @@ namespace Lavery.Listeners
                     command.Parameters.Add(new SqlParameter("@date_from", oTimeCard.WorkDate));
                     command.Parameters.Add(new SqlParameter("@date_to", oTimeCard.WorkDate));
                 }
-                if(oTimeCard.TimeType.Equals("Hourly", StringComparison.CurrentCultureIgnoreCase))
+                //??????????????????????????????
+                if (oTimeCard.TimeType.Equals("Hourly", StringComparison.CurrentCultureIgnoreCase))
+                {
                     command.Parameters.Add(new SqlParameter("@nb_hours", oTimeCard.WorkHrs));
-                /*
+                    command.Parameters.Add(new SqlParameter("@nb_days", (int)Math.Ceiling((double)oTimeCard.WorkHrs / (double)8) ));
+                }
                 else
-                    command.Parameters.Add(new SqlParameter("@nb_days", oTimeCard.WorkHrs));
-                */
+                {
+                    command.Parameters.Add(new SqlParameter("@nb_hours", oTimeCard.WorkHrs));
+                    command.Parameters.Add(new SqlParameter("@nb_days",  (int)Math.Ceiling((double)oTimeCard.WorkHrs / (double)8)));
+                }
+                //??????????????????????????????
                 command.Parameters.Add(new SqlParameter("@is_approved", true));
+                command.Parameters.Add(new SqlParameter("@is_adjustment", false)); //???????????????
                 command.Parameters.Add(new SqlParameter("@absence_ref", 500)); //?????????????????
                 command.Parameters.Add(new SqlParameter("@group_id", oTimeCard.refGuid));
                 command.Parameters.Add(new SqlParameter("@schedule_bitmask", 1));  //?????????????????
                 command.Parameters.Add(new SqlParameter("@comment", oTimeCard.Narrative_UnformattedText));
                 command.Parameters.Add(new SqlParameter("@comment2", oTimeCard.InternalComments != default(String) ? oTimeCard.InternalComments : ""));
-                command.Parameters.Add(new SqlParameter("@is_adjustment", false)); //???????????????
+                
 
 
                 if (is_forUpdate)
@@ -305,6 +288,7 @@ namespace Lavery.Listeners
                     command.Parameters.Add(new SqlParameter("@date_from", oTimeCard.WorkDate));
                     command.Parameters.Add(new SqlParameter("@date_to", oTimeCard.WorkDate));
                 }
+                /*
                 command.Parameters.Add(new SqlParameter("@is_denied", false)); //???????????
 
                 command.Parameters.Add(new SqlParameter("@is_pending_cancel", false)); //???????????
@@ -313,10 +297,10 @@ namespace Lavery.Listeners
                 command.Parameters.Add(new SqlParameter("@denied_reason", false));
 
                 command.Parameters.Add(new SqlParameter("@is_deleted", false));
-             
+                */
 
                 iRet = command.ExecuteNonQuery();
-               
+
             }
             catch (Exception ex)
             {
