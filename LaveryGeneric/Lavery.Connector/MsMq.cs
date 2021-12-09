@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 using System.Messaging;
 using Lavery.Tools.Configuration.Management;
 
+
 namespace Lavery.Connector
 {
+    enum bodyFormater { None, Xml, BYnary}
     public class MsMq <T>: ConnectorBase, IDisposable
     {
         MessageQueue rmQ = default(MessageQueue);
         private bool _disposedValue;
         private Boolean isTransactionnal;
+        private bodyFormater ebodyFormater = bodyFormater.None;
         public MsMq(connectionFactory oConnectionFactory, String CinfigurationNameOfQueue, Boolean isTransactionnal = true) :base(oConnectionFactory)
         {
             try
@@ -45,7 +48,7 @@ namespace Lavery.Connector
 
         public T receive(delegateFonction oDelegateAction)
         {
-            T oRet = default(T);
+           Object oRet = default(T);
             try 
             {
                 if (rmQ == default(MessageQueue))
@@ -55,13 +58,26 @@ namespace Lavery.Connector
                 System.Type[] arrTypes = new System.Type[2];
                 arrTypes[0] = typeof(T);
                 arrTypes[1] = o.GetType();
-                rmQ.Formatter = new XmlMessageFormatter(arrTypes);
+                if(ebodyFormater == bodyFormater.Xml)
+                    rmQ.Formatter = new XmlMessageFormatter(arrTypes);
                 TimeSpan oTS = new TimeSpan(    OConnectionFactory.getKeyValueInt("AssiduiteQueueTimeOutHours"),
                                                 OConnectionFactory.getKeyValueInt("AssiduiteQueueTimeOutMinutess"),
                                                 OConnectionFactory.getKeyValueInt("AssiduiteQueueTimeOutSecondes"));
-                oRet = ((T)rmQ.Receive(oTS).Body);
-                oDelegateAction(oRet, default(String));
-                    
+               
+                if (ebodyFormater == bodyFormater.Xml)
+                    oRet = ((T)rmQ.Receive(oTS).Body);
+                else
+                {
+                    Message oMsg = rmQ.Receive(oTS);
+                    byte[] oByte = new byte[oMsg.BodyStream.Length];
+                    oMsg.BodyStream.Read(oByte, 0, (int)oMsg.BodyStream.Length);
+                    oRet = BitConverter.ToString(oByte);
+
+                }
+
+
+                oRet = oDelegateAction((Object)oRet, default(String));
+
 
             }
             catch (Exception ex)
@@ -69,31 +85,42 @@ namespace Lavery.Connector
                 throw(ex);
             }
 
-            return oRet;
+            return (T)oRet;
         }
         public T receiveInTransaction(delegateFonction oDelegateAction)
         {
-            T oRet = default(T);
+            Object oRet = default(Object);
             try
             {
                 if (rmQ == default(MessageQueue))
                     throw (new Exception("MSMQ not Accessible"));
 
-                Object o = new Object();
-                System.Type[] arrTypes = new System.Type[2];
-                arrTypes[0] = typeof(T);
-                arrTypes[1] = o.GetType();
-                rmQ.Formatter = new XmlMessageFormatter(arrTypes);
+                if (ebodyFormater == bodyFormater.Xml)
+                {
+                    Object o = new Object();
+                    System.Type[] arrTypes = new System.Type[2];
+                    arrTypes[0] = typeof(T);
+                    arrTypes[1] = o.GetType();
+                    rmQ.Formatter = new XmlMessageFormatter(arrTypes);
+                }
+                else
+                    rmQ.Formatter = new BinaryMessageFormatter();
+
                 TimeSpan oTS = TimeSpan.FromSeconds(OConnectionFactory.getKeyValueInt("AssiduiteQueueTimeOutSecondes"));
                 
                 MessageQueueTransaction transaction = new MessageQueueTransaction();
                 try
                 {
                     transaction.Begin();
+                    if (ebodyFormater == bodyFormater.Xml)
+                        oRet = ((T)rmQ.Receive(oTS, transaction).Body);
+                    else {
+                                Message oMsg = rmQ.Receive(oTS, transaction);
+                                oRet = (string)oMsg.Body;
+                        }
 
-                    oRet = ((T)rmQ.Receive(oTS, transaction).Body);
 
-                    oDelegateAction(oRet, default(String));
+                    oRet =  oDelegateAction((Object)oRet, default(String));
                     transaction.Commit();
                 }
                 catch (MessageQueueException e)
@@ -122,7 +149,7 @@ namespace Lavery.Connector
             {
             }
 
-            return oRet;
+            return (T)oRet;
 
         }
         public void send(delegateFonction oDelegateAction, String sMessage, T oObjectMessage)
@@ -141,6 +168,16 @@ namespace Lavery.Connector
                         // Begin the transaction.
                         transaction.Begin();
                         oDelegateAction(oObjectMessage, sMessage);
+                        if (ebodyFormater == bodyFormater.Xml)
+                        {
+                            Object o = new Object();
+                            System.Type[] arrTypes = new System.Type[2];
+                            arrTypes[0] = typeof(T);
+                            arrTypes[1] = o.GetType();
+                            rmQ.Formatter = new XmlMessageFormatter(arrTypes);
+                        }
+                        else
+                            rmQ.Formatter = new BinaryMessageFormatter();
                         // Send the message.
                         rmQ.Send(sMessage, transaction);
 

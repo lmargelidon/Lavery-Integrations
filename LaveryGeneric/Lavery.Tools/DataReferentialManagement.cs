@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Newtonsoft.Json;
 
 
 namespace Lavery.Tools
@@ -116,6 +117,34 @@ namespace Lavery.Tools
             { }
             return oRet;
         }
+        public IEnumerable<Dictionary<string, object>> Serialize(SqlDataReader reader)
+        {
+            var results = new List<Dictionary<string, object>>();
+            var cols = new List<string>();
+            for (var i = 0; i < reader.FieldCount; i++)
+                cols.Add(reader.GetName(i));
+
+            while (reader.Read())
+                results.Add(SerializeRow(cols, reader));
+
+            return results;
+        }
+        private Dictionary<string, object> SerializeRow(IEnumerable<string> cols,
+                                                        SqlDataReader reader)
+        {
+            var result = new Dictionary<string, object>();
+            foreach (var col in cols)
+                result.Add(col, reader[col]);
+            return result;
+        }
+        private String sqlDatoToJson(SqlDataReader dataReader)
+        {
+            var dataTable = new DataTable();
+            dataTable.Load(dataReader);
+            string JSONString = string.Empty;
+            JSONString = JsonConvert.SerializeObject(dataTable);
+            return JSONString;
+        }
         public String getAllEntries(DateTime dtFrom, String sListenerName, SqlConnection oConnectionSource)
         {
             String sRet = default(String);
@@ -124,13 +153,22 @@ namespace Lavery.Tools
                 int iFound = default(int);
                 lock (ReintranceLock)
                 {
-                    using (var cmd = new SqlCommand(String.Format("SELECT * FROM [dbo].[{0}] WHERE TimeStamp > @TimeStamp FOR JSON PATH, Root('TimeCards')", sListenerName), oConnectionSource))
-                    //using (var cmd = new SqlCommand(String.Format("SELECT * FROM [dbo].[{0}] WHERE TimeStamp > @TimeStamp", sListenerName), oConnectionSource))
-                    {                        
+                    //using (var cmd = new SqlCommand(String.Format("SELECT * FROM [dbo].[{0}] WHERE TimeStamp > @TimeStamp FOR JSON PATH, Root('TimeCards')", sListenerName), oConnectionSource))
+                    using (var cmd = new SqlCommand(String.Format("SELECT * FROM [dbo].[{0}] WHERE TimeStamp > @TimeStamp", sListenerName), oConnectionSource))
+                    {                     
                         cmd.Parameters.Add("@TimeStamp", SqlDbType.DateTime).Value = dtFrom;
-                        sRet = (String)cmd.ExecuteScalar();                       
+                        //sRet = (String)cmd.ExecuteScalar();                       
+                        string json;
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            var r = Serialize(reader);
+                            json = JsonConvert.SerializeObject(r, Formatting.Indented);
+                        }
+                        //json = json.Substring(1).Substring(0,json.Length - 1);
+                        sRet = String.Format("{{TimeCards :{0}}}", json);
                     }
-                }
+                    
+                }                
             }
             catch (Exception ex)
             { }
@@ -155,6 +193,15 @@ namespace Lavery.Tools
 
                             iRet = cmd1.ExecuteNonQuery();
                         }
+                    else
+                        using (var cmd1 = new SqlCommand("update dbo.AssiduityMasterDataLink set [TimeStamp] =  @TimeStamp where [idSource] = @idSource", oConnectionReferential))
+                        {
+                            cmd1.Parameters.Add("@idSource", SqlDbType.NVarChar).Value = idSource.ToString();
+                            cmd1.Parameters.Add("@TimeStamp", SqlDbType.DateTime).Value = tsValue;                           
+
+                            iRet = cmd1.ExecuteNonQuery();
+                        }
+
                     if (sDetail != default(String))
                     {
                         int iPKMaster = getLinkPrimaryKeyValue(idSource);

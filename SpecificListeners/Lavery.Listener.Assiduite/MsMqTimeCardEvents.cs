@@ -10,6 +10,7 @@ using Lavery.Tools;
 using Lavery.Events.Listeners;
 using Lavery.Tools.Configuration.Management;
 using Lavery.Constants;
+using Newtonsoft.Json.Linq;
 
 namespace Lavery.Listeners
 {
@@ -38,19 +39,46 @@ namespace Lavery.Listeners
 
             }
         }
-
-        public Boolean performTransaction(Object oObjectMessage, String sJcon)
+        public TimeCard performTransaction(String oObjectMessage)
         {
-            Boolean bRet = true;
+            TimeCard oRet = default(TimeCard);
             try
             {
+                /*
+                String[] aVal = oObjectMessage.Split('-');
+                String sOut = "";
+                foreach (string hex in aVal)
+                {
+                    int value = Convert.ToInt32(hex, 16);
+                    string stringValue = Char.ConvertFromUtf32(value);
+                    char charValue = (char)value;
+                    sOut += charValue;
+                }
+                */
+                oRet = oSerializer.deserialize(oObjectMessage);                
+
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            return oRet;
+        }
+        public Object performTransaction(Object oObjectMessage, String sJcon)
+        {
+            TimeCard oRet = default(TimeCard);
+            try
+            {
+                if (oObjectMessage.GetType() == typeof(String))
+                    oObjectMessage = performTransaction((String)oObjectMessage);
+                oRet = (TimeCard)oObjectMessage;
                 switch (((TimeCard)oObjectMessage).etypeEnvelopp)
                 {
                     case typeEnvelopp.Insert:
-                        insertAssiduity((TimeCard)oObjectMessage);
+                        insertAssiduity(oRet);
                         break;
                     case typeEnvelopp.Update:
-                        updatetAssiduity((TimeCard)oObjectMessage);
+                        updatetAssiduity(oRet);
                         break;
                     case typeEnvelopp.Delete:
                         deleteAssiduity((TimeCard)oObjectMessage);
@@ -64,7 +92,7 @@ namespace Lavery.Listeners
             {
                 throw (ex);
             }
-            return bRet;
+            return oRet;
         }
 
         protected override void Dispose(bool disposing)
@@ -85,6 +113,7 @@ namespace Lavery.Listeners
             Boolean bRet = true;
             try
             {
+
 
                 oMq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateQueue");
 
@@ -163,7 +192,7 @@ namespace Lavery.Listeners
             try
             {
 
-                using (var command = new SqlCommand("[dbo].[absence__insert_bis]", OConnectionTarget))
+                using (var command = new SqlCommand("[dbo].[absence__insert]", OConnectionTarget))
                 {
                     
                     var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
@@ -237,49 +266,57 @@ namespace Lavery.Listeners
         {
             int iRet = -1;
             try
-            {/*
+            {
+                
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@user_id", oTimeCard.user_id));
-                command.Parameters.Add(new SqlParameter("@absence_type_id", oTimeCard.absence_type_id));
-                //command.Parameters.Add(new SqlParameter("@absence_type_id", 2));
-                if (oTimeCard.date_from.Year > 2020)
-                    command.Parameters.Add(new SqlParameter("@date_from", oTimeCard.date_from));
-                if (oTimeCard.date_to.Year > 2020)
-                    command.Parameters.Add(new SqlParameter("@date_to", oTimeCard.date_to));
-                command.Parameters.Add(new SqlParameter("@nb_hours", oTimeCard.nb_hours));
-                command.Parameters.Add(new SqlParameter("@nb_days", oTimeCard.nb_days));
-                command.Parameters.Add(new SqlParameter("@is_approved", oTimeCard.is_approved));
-                command.Parameters.Add(new SqlParameter("@absence_ref", oTimeCard.absence_ref));
-                command.Parameters.Add(new SqlParameter("@group_id", oTimeCard.group_id));
-                command.Parameters.Add(new SqlParameter("@schedule_bitmask", oTimeCard.schedule_Bitmask));
-                command.Parameters.Add(new SqlParameter("@comment", oTimeCard.comment));
-                command.Parameters.Add(new SqlParameter("@comment2", oTimeCard.comment2 != default(String) ? oTimeCard.comment2 : ""));
-                command.Parameters.Add(new SqlParameter("@is_adjustment", oTimeCard.is_adjustment));
+                command.Parameters.Add(new SqlParameter("@user_id", oTimeCard.Timekeeper));
+                command.Parameters.Add(new SqlParameter("@absence_type_id", 2)); //???????????????                
+                if (oTimeCard.WorkDate.Year > 2020)
+                {
+                    command.Parameters.Add(new SqlParameter("@date_from", oTimeCard.WorkDate));
+                    command.Parameters.Add(new SqlParameter("@date_to", oTimeCard.WorkDate));
+                }
+                if(oTimeCard.TimeType.Equals("Hourly", StringComparison.CurrentCultureIgnoreCase))
+                    command.Parameters.Add(new SqlParameter("@nb_hours", oTimeCard.WorkHrs));
+                /*
+                else
+                    command.Parameters.Add(new SqlParameter("@nb_days", oTimeCard.WorkHrs));
+                */
+                command.Parameters.Add(new SqlParameter("@is_approved", true));
+                command.Parameters.Add(new SqlParameter("@absence_ref", 500)); //?????????????????
+                command.Parameters.Add(new SqlParameter("@group_id", oTimeCard.refGuid));
+                command.Parameters.Add(new SqlParameter("@schedule_bitmask", 1));  //?????????????????
+                command.Parameters.Add(new SqlParameter("@comment", oTimeCard.Narrative_UnformattedText));
+                command.Parameters.Add(new SqlParameter("@comment2", oTimeCard.InternalComments != default(String) ? oTimeCard.InternalComments : ""));
+                command.Parameters.Add(new SqlParameter("@is_adjustment", false)); //???????????????
 
 
                 if (is_forUpdate)
                 {
-                    if (oTimeCard.date_received.Year > 2020)
-                        command.Parameters.Add(new SqlParameter("@date_received", oTimeCard.date_received));
-                    if (oTimeCard.date_approved.Year > 2020)
-                        command.Parameters.Add(new SqlParameter("@date_approved", oTimeCard.date_approved));
+                    if (oTimeCard.WorkDate.Year > 2020)
+                    {
+                        command.Parameters.Add(new SqlParameter("@date_from", oTimeCard.WorkDate));
+                        command.Parameters.Add(new SqlParameter("@date_to", oTimeCard.WorkDate));
+                    }
 
-                    command.Parameters.Add(new SqlParameter("@is_exception", oTimeCard.is_exception));
-                    command.Parameters.Add(new SqlParameter("@is_invisible", oTimeCard.is_invisible));
-                    command.Parameters.Add(new SqlParameter("@is_cancel", oTimeCard.is_cancel));
-                    command.Parameters.Add(new SqlParameter("@is_denied", oTimeCard.is_denied));
-
-                    command.Parameters.Add(new SqlParameter("@is_pending_cancel", oTimeCard.is_pending_cancel));
-                    command.Parameters.Add(new SqlParameter("@is_supervisor_approved", oTimeCard.is_supervisor_approved));
-                    if (oTimeCard.date_cancellation.Year > 2020)
-                        command.Parameters.Add(new SqlParameter("@date_cancellation", oTimeCard.date_cancellation));
-                    command.Parameters.Add(new SqlParameter("@denied_reason", oTimeCard.denied_reason));
-
-                    command.Parameters.Add(new SqlParameter("@is_deleted", oTimeCard.is_deleted));
+                    command.Parameters.Add(new SqlParameter("@is_exception", false));   //???????????
+                    command.Parameters.Add(new SqlParameter("@is_invisible", false)); //???????????
+                    command.Parameters.Add(new SqlParameter("@is_cancel", false));  //???????????
+                    command.Parameters.Add(new SqlParameter("@date_from", oTimeCard.WorkDate));
+                    command.Parameters.Add(new SqlParameter("@date_to", oTimeCard.WorkDate));
                 }
+                command.Parameters.Add(new SqlParameter("@is_denied", false)); //???????????
+
+                command.Parameters.Add(new SqlParameter("@is_pending_cancel", false)); //???????????
+                command.Parameters.Add(new SqlParameter("@is_supervisor_approved", true));
+                    
+                command.Parameters.Add(new SqlParameter("@denied_reason", false));
+
+                command.Parameters.Add(new SqlParameter("@is_deleted", false));
+             
 
                 iRet = command.ExecuteNonQuery();
-                */
+               
             }
             catch (Exception ex)
             {
@@ -297,25 +334,25 @@ namespace Lavery.Listeners
             int iRet = default(int);
             try
             {
-                /*
-                int iUpdateKey = ODataReferentialManagement.getLinkAssiduityId(Convert.ToInt32(oTimeCard.id_origine));
+                
+                int iUpdateKey = ODataReferentialManagement.getLinkAssiduityId(Convert.ToInt32(oTimeCard.TimecardID));
                 if (iUpdateKey > 0)
                     using (var command = new SqlCommand("[dbo].[absence__delete]", OConnectionTarget))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.Add(new SqlParameter("@TimeCard_ID", iUpdateKey));
                         iRet = command.ExecuteNonQuery();
-                        ODataReferentialManagement.deleteLink(Convert.ToInt32(oTimeCard.id_origine));
+                        ODataReferentialManagement.deleteLink(Convert.ToInt32(oTimeCard));
                         persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
                                                        LaveryBusinessFunctions.eBusinessFunction.DeleteAbsenceRequest.ToString(),
                                                        OConnectionFactory.getKeyValueString("Environment"),
-                                                       String.Format("{0}", oSerializer.Serialize(oTimeCard)),
-                                                       oTimeCard.group_id.ToString(), SPrefixeName);
+                                                       String.Format("{0}", oSerializer.serialize(oTimeCard)),
+                                                       oTimeCard.refGuid.ToString(), SPrefixeName);
 
                     }
                 else
-                    throw (new Exception(String.Format("Delete failure no corresponding id <{0}> found in the referential link", oTimeCard.id_origine)));
-                */
+                    throw (new Exception(String.Format("Delete failure no corresponding id <{0}> found in the referential link", oTimeCard.TimecardID)));
+               
 
             }
             catch (Exception ex)

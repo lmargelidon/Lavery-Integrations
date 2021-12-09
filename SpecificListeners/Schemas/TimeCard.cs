@@ -8,7 +8,7 @@ namespace Lavery.Schemas.E3
 {
     public class TimeCard
 	{
-		public typeEnvelopp etypeEnvelopp { get; set; }
+		public typeEnvelopp etypeEnvelopp { get; set; }				
 		public Guid refGuid { get; set; }
 		public Guid TimecardID { get; set; } 
 		public int TimeIndex { get; set; }
@@ -36,6 +36,7 @@ namespace Lavery.Schemas.E3
 		public int Language { get; set; }
 		public String Narrative { get; set; }
 		public String Narrative_UnformattedText { get; set; }
+		public String InternalComments { get; set; }
 		public String TimeType { get; set; }
 		public String TransactionType { get; set; }
 		public String WorkType { get; set; }
@@ -56,13 +57,13 @@ namespace Lavery.Schemas.E3
 		public int SpvTimekeeper { get; set; }
 		public int IsFlatFeeComplete { get; set; }
 		public int IsTaxAdvice { get; set; }
-		public int PrevProfMaster { get; set; }
-		public int IsTimer { get; set; }
+		public int? PrevProfMaster { get; set; }
+		public int? IsTimer { get; set; }
 		public String ArchetypeCode { get; set; }
-		public Guid LastProcItemID { get; set; }
-		public Guid OrigProcItemID { get; set; }
-		public int HasAttachments { get; set; }
+		public Guid? LastProcItemID { get; set; }
+		public Guid? OrigProcItemID { get; set; }
+		public int? HasAttachments { get; set; }
 		public DateTime TimeStamp { get; set; }
-		public int LxLabel { get; set; }
+		public int? LxLabel { get; set; }
 	}
 }

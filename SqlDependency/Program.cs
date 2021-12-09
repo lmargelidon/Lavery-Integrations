@@ -264,6 +264,7 @@ namespace SqlDependency
                 ReflectionAssembly.isAssemblyFullyLoaded("AssiduityServiceBus", newDomain);
             }
             */
+            //int x = (int)Math.Ceiling((double)12 / (double)8);
             persistEventManager.init();
             Guid oGuid = Guid.NewGuid();
             LaveryReflection.getHashCode(@"C:\Integrations\services\OutboundErsNet\Assisuity{9D0EEF19-646C-4690-A828-ABC85E8C2899}.xml");

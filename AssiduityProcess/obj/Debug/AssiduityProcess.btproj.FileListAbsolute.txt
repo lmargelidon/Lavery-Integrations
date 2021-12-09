@@ -5,6 +5,7 @@ C:\Users\LMargelidon\source\repos\SqlDependency\AssiduityProcess\obj\Debug\Assid
 C:\Users\LMargelidon\source\repos\SqlDependency\AssiduityProcess\obj\Debug\AssiduityProcess.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AssiduityProcess\bin\Debug\AssiduityProcess.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AssiduityProcess\bin\Debug\AssiduityProcess.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\AssiduityProcess\obj\Debug\AssiduityProcess.btproj.AssemblyReference.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AssiduityProcess\obj\Debug\AssiduityProcess.btproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AssiduityProcess\obj\Debug\AssiduityProcess.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AssiduityProcess\obj\Debug\AssiduityProcess.pdb

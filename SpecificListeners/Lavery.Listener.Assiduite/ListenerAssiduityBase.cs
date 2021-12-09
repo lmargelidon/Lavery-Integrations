@@ -7,16 +7,18 @@ using Lavery.Tools.Configuration.Management;
 using Lavery.Tools.DBLibrary;
 using Lavery.Tools.Connections;
 using Lavery.Tools.Interfaces;
+using Lavery.Tools;
+using Newtonsoft.Json.Linq;
 
 
 namespace Lavery.Listeners
 {
     public class ListenerAssiduityBase : ListenerBase
-    {             
+    {
         Boolean Disposed1;
         CDBDataBase oDb;
-
-        public ListenerAssiduityBase( connectionFactory oConnectionFactory) : base(oConnectionFactory)
+        
+        public ListenerAssiduityBase(connectionFactory oConnectionFactory) : base(oConnectionFactory)
         {
             oDb = new CDBDataBase(Tools.Interfaces.ConnType.eConnType.SQLSERVER, OConnectionFactory.getKeyValueString("EliteDatabase"));
             oDb.SConnectString = OConnectionFactory.ConnectionString("ConnectionSourceAdminMode");
@@ -33,7 +35,7 @@ namespace Lavery.Listeners
                 // and unmanaged resources.
                 if (disposing)
                 {
-                    
+
                 }
 
                 Disposed = true;
@@ -42,18 +44,19 @@ namespace Lavery.Listeners
 
         public override Boolean doInitialize()
         {
-            
+
             return false;
         }
 
         public override Boolean doJob()
-        {           
+        {
             return false;
         }
         public override Boolean doTerminate()
         {
-            
+
             return false;
         }
+      
     }
 }

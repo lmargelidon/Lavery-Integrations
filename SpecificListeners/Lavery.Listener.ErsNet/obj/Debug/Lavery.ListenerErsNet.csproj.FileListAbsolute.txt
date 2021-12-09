@@ -100,8 +100,8 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Lis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\obj\Debug\Lavery.ListenerErsNet.csproj.AssemblyReference.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\obj\Debug\Lavery.ListenerErsNet.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\obj\Debug\Lavery.ListenerErsNet.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\obj\Debug\Lavery.ErsNet.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\obj\Debug\Lavery.ErsNet.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\obj\Debug\Lavery.ListenerErsNet.csproj.AssemblyReference.cache

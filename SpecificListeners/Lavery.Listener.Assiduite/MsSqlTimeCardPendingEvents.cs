@@ -70,9 +70,9 @@ namespace Lavery.Listeners
                 Disposed = true;
             }
         }
-        public Boolean performTransaction(Object oObjectMessage, String sJson)
+        public Object performTransaction(Object oObjectMessage, String sJson)
         {
-            Boolean bRet = true;
+            Object oRet = default(Object);
             try
             {
                 ODataReferentialManagement.registerLink(((TimeCardPending)oObjectMessage).TimeCardPendingID, ((TimeCardPending)oObjectMessage).TimeStamp, - 1, ((TimeCardPending)oObjectMessage).refGuid, "TimeCardPending", sJson);
@@ -82,47 +82,44 @@ namespace Lavery.Listeners
             {
                 throw (ex);
             }
-            return bRet;
+            return oRet;
         }
         public override Boolean doInitialize()
         {
             Boolean bRet = true;
             try
             {
-                /*
+                
                 using (new SynchronizeGlobalInstance(IWaitOnMutex, OConnectionFactory.getKeyValueString("AssiduiteMutexGlobalValue")))
                 {
                     DateTime oLastDT = ODataReferentialManagement.getLastRegisteredDate("TimeCardPending");
 
-                    if (oLastDT < DateTime.MaxValue)
+                    if (oLastDT == DateTime.MaxValue)
+                        oLastDT = new DateTime(2021, 1, 1);
+                    Console.WriteLine("\t\t\tretrieve some notifications from {0} ...", oLastDT);
+                    String sJson = ODataReferentialManagement.getAllEntries(oLastDT, "TimeCardPending", OConnectionSource);
+                    JObject data = JObject.Parse(sJson);
+                    JArray jArray = (JArray)data.First.First;
+                    foreach (JObject item in jArray) 
                     {
-                        Console.WriteLine("\t\t\tretrieve some notifications from {0} ...", oLastDT);
-                        String sJson = ODataReferentialManagement.getAllEntries(oLastDT, "TimeCardPending", OConnectionSource);
-                        JObject data = JObject.Parse(sJson);
-                        JArray jArray = (JArray)data.First.First;
-                        foreach (JObject item in jArray) 
+                        String sVal = item.ToString();                            
+                        TimeCardPending oPending = oSerializer.deserialize(sVal, "dd/MM/yyyy");
+                        Guid oGuid = this.ODataReferentialManagement.getLinkCorrelationId(oPending.TimeCardPendingID);
+                        if (oGuid != default(Guid))
                         {
-                            String sVal = item.ToString();                            
-                            TimeCardPending oPending = oSerializer.deserialize(sVal, "dd/MM/yyyy");
-                            Guid oGuid = this.ODataReferentialManagement.getLinkCorrelationId(oPending.TimeCardPendingID);
-                            if (oGuid != default(Guid))
-                            {
-                                oPending.etypeEnvelopp = typeEnvelopp.Update;
-                                oPending.refGuid = oGuid;
-                            }
-                            else
-                            {
-                                oPending.etypeEnvelopp = typeEnvelopp.Insert;
-                                oPending.refGuid = Guid.NewGuid();
-                            }
-                            OStackEnvelopp.push(oPending);
+                            oPending.etypeEnvelopp = typeEnvelopp.Update;
+                            oPending.refGuid = oGuid;
                         }
+                        else
+                        {
+                            oPending.etypeEnvelopp = typeEnvelopp.Insert;
+                            oPending.refGuid = Guid.NewGuid();
+                        }
+                        OStackEnvelopp.push(oPending);
                     }
-                    else
-                        Console.WriteLine("\t\t\tNo notifications to be retrieved ...");
                     
                 }
-                */
+               
                 dep = new SqlTableDependency<TimeCardPending>(OConnectionFactory.ConnectionString("ConnectionSource"), "TimeCardPending", mapper: mapper, includeOldValues: true);
                
                 dep.OnChanged += Changed;

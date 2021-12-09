@@ -15,6 +15,8 @@ using Lavery.Tools.Configuration.Management;
 using Lavery.Events.Listeners;
 using Lavery.Constants;
 using Lavery.Connector;
+using Newtonsoft.Json.Linq;
+
 
 
 
@@ -72,9 +74,9 @@ namespace Lavery.Listeners
                 Disposed = true;
             }
         }
-        public Boolean performTransaction(Object oObjectMessage, String sJson)
+        public Object performTransaction(Object oObjectMessage, String sJson)
         {
-            Boolean bRet = true;
+            Object oRet = default(Object);
             try
             {
                 ODataReferentialManagement.registerLink(((TimeCard)oObjectMessage).TimecardID, ((TimeCard)oObjectMessage).TimeStamp, -1, ((TimeCard)oObjectMessage).refGuid, "TimeCard", sJson);
@@ -85,14 +87,43 @@ namespace Lavery.Listeners
             {
                 throw (ex);
             }
-            return bRet;
+            return oRet;
         }
         public override Boolean doInitialize()
         {
             Boolean bRet = true;
             try
             {
+                
+                using (new SynchronizeGlobalInstance(IWaitOnMutex, OConnectionFactory.getKeyValueString("AssiduiteMutexGlobalValue")))
+                {
+                    DateTime oLastDT = ODataReferentialManagement.getLastRegisteredDate("TimeCard");
+                    if (oLastDT == DateTime.MaxValue)
+                        oLastDT = new DateTime(2021, 1, 1);
+                    Console.WriteLine("\t\t\tretrieve some notifications from {0} ...", oLastDT);
+                    String sJson = ODataReferentialManagement.getAllEntries(oLastDT, "TimeCard", OConnectionSource);
+                    JObject data = JObject.Parse(sJson);
+                    JArray jArray = (JArray)data.First.First;
+                    foreach (JObject item in jArray)
+                    {
+                        String sVal = item.ToString();
+                        TimeCard oPending = oSerializer.deserialize(sVal, "dd/MM/yyyy");
+                        Guid oGuid = this.ODataReferentialManagement.getLinkCorrelationId(oPending.TimecardID);
+                        if (oGuid != default(Guid))
+                        {
+                            oPending.etypeEnvelopp = typeEnvelopp.Update;
+                            oPending.refGuid = oGuid;
+                        }
+                        else
+                        {
+                            oPending.etypeEnvelopp = typeEnvelopp.Insert;
+                            oPending.refGuid = Guid.NewGuid();
+                        }
+                        OStackEnvelopp.push(oPending);
+                    }                    
 
+                }
+                
                 oMq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateQueue");
 
                 dep = new SqlTableDependency<TimeCard>(OConnectionFactory.ConnectionString("ConnectionSource"), "TimeCard", mapper: mapper, includeOldValues: true);
@@ -131,26 +162,43 @@ namespace Lavery.Listeners
             {
                 //Envelopp<TimeSheet> oEnv = default(Envelopp<TimeSheet>);
                 TimeCard oTS = default(TimeCard);
-                if ((oTS = (TimeCard)OStackEnvelopp.pop()) != default(TimeCard) && oTS.IsNB == 1)
+                if ((oTS = (TimeCard)OStackEnvelopp.pop()) != default(TimeCard) )
                 {
                     try
                     {
                         using (new SynchronizeGlobalInstance(IWaitOnMutex, OConnectionFactory.getKeyValueString("AssiduiteMutexGlobalValue")))
                         {
+                            
 
                             if (ODataReferentialManagement.canProcessRequest(true, "TableTimeSheetEvents", oTS.TimecardID))
                             {
+                                Guid oGuid1;
+                                /*
+                                 * *********************************************************************************************
+                                 * if TimeCard was Non Billable and the new transaction is billable change to delete old time 
+                                 * in assiduity system
+                                 * *********************************************************************************************
+                                 */
+                                if (oTS.IsNB == 0 && (oGuid1 = ODataReferentialManagement.getLinkCorrelationId(oTS.TimecardID)) != default(Guid))
+                                {
+                                    
+                                    oTS.IsNB = 1;
+                                    oTS.etypeEnvelopp = typeEnvelopp.Delete;
+                                    oTS.refGuid = oGuid1;
+                                }
+                                if (oTS.IsNB == 1)
+                                {
+                                    Guid oGuid = Guid.NewGuid();
+                                    String sMessageOut = oSerializer.serialize(oTS);
 
-                                Guid oGuid = Guid.NewGuid();
-                                String sMessageOut = oSerializer.serialize(oTS);
+                                    oMq.send(performTransaction, sMessageOut, oTS);
 
-                                oMq.send(performTransaction, sMessageOut, oTS);
-
-                                persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduitySqlNotification.ToString(),
-                                                      LaveryBusinessFunctions.eBusinessFunction.CatchNotification.ToString(),
-                                                      OConnectionFactory.getKeyValueString("Environment"),
-                                                      sMessageOut,
-                                                      oTS.refGuid.ToString(), SPrefixeName);
+                                    persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduitySqlNotification.ToString(),
+                                                            LaveryBusinessFunctions.eBusinessFunction.CatchNotification.ToString(),
+                                                            OConnectionFactory.getKeyValueString("Environment"),
+                                                            sMessageOut,
+                                                            oTS.refGuid.ToString(), SPrefixeName);
+                                }
                             }
                         }
                     }
