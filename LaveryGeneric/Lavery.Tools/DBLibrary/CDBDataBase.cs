@@ -552,7 +552,8 @@ namespace Lavery.Tools.DBLibrary
                     pStatement = new CStatementForSqlServer(oPool, SConnectString);
 
                     pStatement.PrepareText(String.Format("SELECT is_broker_enabled FROM sys.databases WHERE name = '{0}';", sDatabase));
-                    if (!pStatement.Execute())
+                    Object oTest = pStatement.ExecuteAndReturnValue(typeof(int));
+                    if (oTest != null && !(Boolean)oTest ) 
                     {
                         pStatement.PrepareText(String.Format("ALTER DATABASE {0} SET ENABLE_BROKER WITH ROLLBACK IMMEDIATE;", sDatabase));
                         pStatement.Execute();

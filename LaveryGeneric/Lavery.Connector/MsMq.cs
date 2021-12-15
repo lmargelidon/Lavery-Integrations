@@ -14,17 +14,21 @@ namespace Lavery.Connector
     public class MsMq <T>: ConnectorBase, IDisposable
     {
         MessageQueue rmQ = default(MessageQueue);
+        
         private bool _disposedValue;
         private Boolean isTransactionnal;
+        private Boolean enlistInTransactionScope; 
         private bodyFormater ebodyFormater = bodyFormater.BYnary;
         jsonSerializer<T> oSerializer = new jsonSerializer<T>();
 
-        public MsMq(connectionFactory oConnectionFactory, String CinfigurationNameOfQueue, Boolean isTransactionnal = true) :base(oConnectionFactory)
+        public MsMq(connectionFactory oConnectionFactory, String ConfigurationNameOfQueue, Boolean isTransactionnal = true, Boolean enlistInTransactionScope = false) :base(oConnectionFactory)
         {
             try
             {
                 this.isTransactionnal = isTransactionnal;
-                CreateQueue(OConnectionFactory.getKeyValueString(CinfigurationNameOfQueue));                
+                this.enlistInTransactionScope = enlistInTransactionScope;
+                
+                CreateQueue(OConnectionFactory.getKeyValueString(ConfigurationNameOfQueue));                
             }
             catch (Exception ex)
             { 
@@ -39,14 +43,15 @@ namespace Lavery.Connector
                 // and unmanaged resources.
                 if (disposing)
                 {
-                    rmQ.Dispose();
+                    if (!enlistInTransactionScope && rmQ != default(MessageQueue))
+                        rmQ.Dispose();
                 }
 
                 _disposedValue = true;
             }
         }
 
-        public String getQueueName() { return rmQ.QueueName;}
+        public String getQueueName() { return rmQ.QueueName ;}
         public Boolean isTransactional() { return rmQ.Transactional; }
 
         public T receive(delegateFonction oDelegateAction)
@@ -92,96 +97,38 @@ namespace Lavery.Connector
             T oRet = default(T);
             try
             {
-                if (rmQ == default(MessageQueue))
-                    throw (new Exception("MSMQ not Accessible"));
-
-                if (ebodyFormater == bodyFormater.Xml)
+                if (!enlistInTransactionScope)
                 {
-                    Object o = new Object();
-                    System.Type[] arrTypes = new System.Type[2];
-                    arrTypes[0] = typeof(T);
-                    arrTypes[1] = o.GetType();
-                    rmQ.Formatter = new XmlMessageFormatter(arrTypes);
-                }
-                else
-                    rmQ.Formatter = new BinaryMessageFormatter();
+                    if (rmQ == default(MessageQueue))
+                        throw (new Exception("MSMQ not Accessible"));
 
-                TimeSpan oTS = TimeSpan.FromSeconds(OConnectionFactory.getKeyValueInt("AssiduiteQueueTimeOutSecondes"));
-                
-                MessageQueueTransaction transaction = new MessageQueueTransaction();
-                try
-                {
-                    transaction.Begin();
                     if (ebodyFormater == bodyFormater.Xml)
-                        oRet = ((T)rmQ.Receive(oTS, transaction).Body);
-                    else {
-                                Message oMsg = rmQ.Receive(oTS, transaction);                           
-                                oRet = oSerializer.deserialize((string)oMsg.Body);
-                        }
+                    {
+                        Object o = new Object();
+                        System.Type[] arrTypes = new System.Type[2];
+                        arrTypes[0] = typeof(T);
+                        arrTypes[1] = o.GetType();
+                        rmQ.Formatter = new XmlMessageFormatter(arrTypes);
+                    }
+                    else
+                        rmQ.Formatter = new BinaryMessageFormatter();
 
+                    TimeSpan oTS = TimeSpan.FromSeconds(OConnectionFactory.getKeyValueInt("AssiduiteQueueTimeOutSecondes"));
 
-                    oDelegateAction(oRet, default(String));
-                    transaction.Commit();
-                }
-                catch (MessageQueueException e)
-                {
-                    transaction.Abort();
-                    
-                    throw e;
-                    // Handle other sources of MessageQueueException.
-                }
-                catch (System.Exception e)
-                {
-                    // Cancel the transaction.
-                    transaction.Abort();
-
-                    // Propagate the exception.
-                    throw e;
-                }
-                finally
-                {
-                    // Dispose of the transaction object.
-                    transaction.Dispose();
-                }
-
-            }
-            catch (Exception ex)
-            {
-            }
-
-            return oRet;
-
-        }
-        public void send(delegateFonction oDelegateAction, String sMessage, T oObjectMessage)
-        {
-            
-            try
-            {
-                if (rmQ == default(MessageQueue))
-                    throw (new Exception("MSMQ not Accessible"));
-
-                if (rmQ.Transactional == true)
-                {
-                    MessageQueueTransaction transaction = new  MessageQueueTransaction();
+                    MessageQueueTransaction transaction = new MessageQueueTransaction();
                     try
                     {
-                        // Begin the transaction.
                         transaction.Begin();
-                        oDelegateAction(oObjectMessage, sMessage);
                         if (ebodyFormater == bodyFormater.Xml)
-                        {
-                            Object o = new Object();
-                            System.Type[] arrTypes = new System.Type[2];
-                            arrTypes[0] = typeof(T);
-                            arrTypes[1] = o.GetType();
-                            rmQ.Formatter = new XmlMessageFormatter(arrTypes);
-                        }
+                            oRet = ((T)rmQ.Receive(oTS, transaction).Body);
                         else
-                            rmQ.Formatter = new BinaryMessageFormatter();
-                        // Send the message.
-                        rmQ.Send(sMessage, transaction);
+                        {
+                            Message oMsg = rmQ.Receive(oTS, transaction);
+                            oRet = oSerializer.deserialize((string)oMsg.Body);
+                        }
 
-                        // Commit the transaction.
+
+                        oDelegateAction(oRet, default(String));
                         transaction.Commit();
                     }
                     catch (MessageQueueException e)
@@ -205,10 +152,113 @@ namespace Lavery.Connector
                         transaction.Dispose();
                     }
                 }
-                else
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return oRet;
+
+        }
+        public T receiveInTransaction()
+        {
+            T oRet = default(T);
+            try
+            {
+                if (enlistInTransactionScope && rmQ.Transactional == true)
                 {
-                    oDelegateAction(oObjectMessage, sMessage);
-                    rmQ.Send(sMessage);
+
+                    if (ebodyFormater == bodyFormater.Xml)
+                    {
+                        Object o = new Object();
+                        System.Type[] arrTypes = new System.Type[2];
+                        arrTypes[0] = typeof(T);
+                        arrTypes[1] = o.GetType();
+                        rmQ.Formatter = new XmlMessageFormatter(arrTypes);
+                    }
+                    else
+                        rmQ.Formatter = new BinaryMessageFormatter();
+
+                    TimeSpan oTS = TimeSpan.FromSeconds(OConnectionFactory.getKeyValueInt("AssiduiteQueueTimeOutSecondes"));
+
+                    
+                    if (ebodyFormater == bodyFormater.Xml)
+                        oRet = ((T)rmQ.Receive(oTS, MessageQueueTransactionType.Automatic).Body );
+                    else
+                    {
+                        Message oMsg = rmQ.Receive(oTS, MessageQueueTransactionType.Automatic);
+                        oRet = oSerializer.deserialize((string)oMsg.Body);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return oRet;
+
+        }
+        public void send(delegateFonction oDelegateAction, String sMessage, T oObjectMessage)
+        {
+            
+            try
+            {
+                if (!enlistInTransactionScope)
+                {
+                    if (rmQ == default(MessageQueue))
+                        throw (new Exception("MSMQ not Accessible"));
+
+                    if (rmQ.Transactional == true)
+                    {
+                        MessageQueueTransaction transaction = new MessageQueueTransaction();
+                        try
+                        {
+                            // Begin the transaction.
+                            transaction.Begin();
+                            oDelegateAction(oObjectMessage, sMessage);
+                            if (ebodyFormater == bodyFormater.Xml)
+                            {
+                                Object o = new Object();
+                                System.Type[] arrTypes = new System.Type[2];
+                                arrTypes[0] = typeof(T);
+                                arrTypes[1] = o.GetType();
+                                rmQ.Formatter = new XmlMessageFormatter(arrTypes);
+                            }
+                            else
+                                rmQ.Formatter = new BinaryMessageFormatter();
+                            // Send the message.
+                            rmQ.Send(sMessage, transaction);
+
+                            // Commit the transaction.
+                            transaction.Commit();
+                        }
+                        catch (MessageQueueException e)
+                        {
+                            transaction.Abort();
+
+                            throw e;
+                            // Handle other sources of MessageQueueException.
+                        }
+                        catch (System.Exception e)
+                        {
+                            // Cancel the transaction.
+                            transaction.Abort();
+
+                            // Propagate the exception.
+                            throw e;
+                        }
+                        finally
+                        {
+                            // Dispose of the transaction object.
+                            transaction.Dispose();
+                        }
+                    }
+                    else
+                    {
+                        oDelegateAction(oObjectMessage, sMessage);
+                        rmQ.Send(sMessage);
+                    }
                 }
             }
             catch (System.Exception e)
@@ -216,6 +266,33 @@ namespace Lavery.Connector
                 throw e;
             }
 
+
+        }
+        public void send(String sMessage, T oObjectMessage)
+        {
+            try
+            {
+                if (enlistInTransactionScope && rmQ.Transactional)
+                {
+                    if (ebodyFormater == bodyFormater.Xml)
+                    {
+                        Object o = new Object();
+                        System.Type[] arrTypes = new System.Type[2];
+                        arrTypes[0] = typeof(T);
+                        arrTypes[1] = o.GetType();
+                        rmQ.Formatter = new XmlMessageFormatter(arrTypes);
+                    }
+                    else
+                        rmQ.Formatter = new BinaryMessageFormatter();
+
+                    rmQ.Send(sMessage, MessageQueueTransactionType.Automatic);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
 
         }
         public void CreateLocalePublicQueues(String sWithMessageQueue)

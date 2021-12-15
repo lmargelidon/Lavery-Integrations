@@ -39,6 +39,7 @@ namespace Lavery.Listeners
                 this.IWaitOnMutex = OConnectionFactory.getKeyValueInt("MutexTimeOut");
                 this.oSerializer = new XMLSerializer<Ers_Files_entry>();
                 this.SPrefixeName = SPrefixeName;
+                ODataReferentialManagement.EListenerType = ListenerType.ErsNet;
 
                 oBlobContainer = new ClientStorageBlobsContainer(OConnectionFactory, "connectionRemoteStorageAccount");
                 oBlobContainer.Open(OConnectionFactory.getKeyValueString("Ers-Net-BlobContainer"));
@@ -194,10 +195,10 @@ namespace Lavery.Listeners
 
                             if (File.Exists(oTS.FilePath))
                             {
-                                if (ODataReferentialManagement.canProcessRequest(true, "Ers-Net-Files", iHashCode))
+                                if (ODataReferentialManagement.canProcessRequest(true,  iHashCode))
                                 {
                                     Guid oGuid = Guid.NewGuid();
-                                    ODataReferentialManagement.registerRequestProcessed(false, "Ers-Net-Files", iHashCode);
+                                    ODataReferentialManagement.registerRequestProcessed(false,  iHashCode);
                                     bProcess = true;
                                 }
                                 persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerErsFileSystemWatcher.ToString(),

@@ -70,7 +70,7 @@ namespace Lavery.Events
                 oEventBase.Add("Module", new EventEntryBase.objectToBeSerialized(sModule, typeof(String), default(Object), false, "", "", ""));
                 oEventBase.Add("ClassName", new EventEntryBase.objectToBeSerialized(sClassName, typeof(String), default(Object), false, "", "", ""));
                 oEventBase.Add("MethodName", new EventEntryBase.objectToBeSerialized(sMethodName, typeof(String), default(Object), false, "", "", ""));
-                oEventBase.Add("Environment", new EventEntryBase.objectToBeSerialized(sEnvironment, typeof(String), default(Object), false, "", "", ""));
+                oEventBase.Add("fk_Environment", new EventEntryBase.objectToBeSerialized(sEnvironment, typeof(int), default(Object), true, "dbo", "Environment", String.Format("Code='{0}'", sEnvironment)));
                 
                 oEventBase.Add("CategoryType", new EventEntryBase.objectToBeSerialized(eCategoryType, typeof(String), default(Object), false, "", "", ""));
                

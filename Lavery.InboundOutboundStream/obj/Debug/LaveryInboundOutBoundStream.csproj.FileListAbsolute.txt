@@ -116,6 +116,11 @@ C:\Users\LMargelidon\source\repos\SqlDependency\LaveryInboundOutboundStream\bin\
 C:\Users\LMargelidon\source\repos\SqlDependency\LaveryInboundOutboundStream\obj\Debug\LaveryInboundOutBoundStream.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\SqlDependency\LaveryInboundOutboundStream\obj\Debug\LaveryInboundOutboundStream.exe
 C:\Users\LMargelidon\source\repos\SqlDependency\LaveryInboundOutboundStream\obj\Debug\LaveryInboundOutboundStream.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutBoundStream.csproj.AssemblyReference.cache
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutboundStream.LaveryInboundOutboundService.resources
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundStream.ProjectInstaller.resources
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutBoundStream.csproj.GenerateResource.cache
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutBoundStream.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\bin\Debug\LaveryInboundOutboundStream.exe.config
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\bin\Debug\LaveryInboundOutboundStream.exe
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\bin\Debug\LaveryInboundOutboundStream.pdb
@@ -157,11 +162,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\bin\Debug\reflectionDynamicLoader.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\bin\Debug\Lavery.dynamicConfiguration.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\bin\Debug\RestSharp.xml
-C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutBoundStream.csproj.AssemblyReference.cache
-C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutboundStream.LaveryInboundOutboundService.resources
-C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundStream.ProjectInstaller.resources
-C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutBoundStream.csproj.GenerateResource.cache
-C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutBoundStream.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutBoundStream.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutboundStream.exe
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.InboundOutboundStream\obj\Debug\LaveryInboundOutboundStream.pdb

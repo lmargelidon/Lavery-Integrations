@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Configuration;
+using System.Globalization;
 using Lavery.Listeners;
 using System.Collections.Generic;
 using TableDependency.SqlClient;
@@ -44,6 +45,7 @@ namespace Lavery.Listeners
                 this.mapper = new ModelToTableMapper<TimeCardPending>();
                 this.mapper.AddMapping(c => c.TimeCardPendingID, "TimeCardPendingID");
                 aNoBillabeJobTypes = OConnectionFactory.getKeyValueString("AssiduiteNoBillableJobTypes").Split(';');
+                ODataReferentialManagement.EListenerType = ListenerType.TimeCardPending;
                 if (oGuid != default(Guid))
                     OGuidContext = oGuid;
                 else
@@ -75,8 +77,9 @@ namespace Lavery.Listeners
             Object oRet = default(Object);
             try
             {
-                ODataReferentialManagement.registerLink(((TimeCardPending)oObjectMessage).TimeCardPendingID, ((TimeCardPending)oObjectMessage).TimeStamp, - 1, ((TimeCardPending)oObjectMessage).refGuid, "TimeCardPending", sJson);
-                ODataReferentialManagement.registerRequestProcessed(true, "Table-TimeCardPending", ((TimeCardPending)oObjectMessage).TimeCardPendingID);
+                TimeCardPending oObje = (TimeCardPending)oObjectMessage;
+                ODataReferentialManagement.registerLink(oObje.TimeCardPendingID, oObje.TimeStamp, - 1, oObje.refGuid, sJson, oObje.etypeEnvelopp == typeEnvelopp.Delete);
+                ODataReferentialManagement.registerRequestProcessed(true,  oObje.TimeCardPendingID);
             }
             catch (Exception ex)
             {
@@ -92,12 +95,15 @@ namespace Lavery.Listeners
                 
                 using (new SynchronizeGlobalInstance(IWaitOnMutex, OConnectionFactory.getKeyValueString("AssiduiteMutexGlobalValue")))
                 {
-                    DateTime oLastDT = ODataReferentialManagement.getLastRegisteredDate("TimeCardPending");
+                    DateTime oLastDT = ODataReferentialManagement.getLastRegisteredDate();
 
                     if (oLastDT == DateTime.MaxValue)
-                        oLastDT = new DateTime(2021, 1, 1);
+                    {
+                        CultureInfo provider = CultureInfo.InvariantCulture;
+                        oLastDT = DateTime.ParseExact(OConnectionFactory.getKeyValueString("AssiduiteTimeCardPendingBaseDate"), "mm/dd/yyyy", provider);
+                    }
                     Console.WriteLine("\t\t\tretrieve some notifications from {0} ...", oLastDT);
-                    String sJson = ODataReferentialManagement.getAllEntries(oLastDT, "TimeCardPending", OConnectionSource);
+                    String sJson = ODataReferentialManagement.getAllEntries(oLastDT,  OConnectionSource);
                     JObject data = JObject.Parse(sJson);
                     JArray jArray = (JArray)data.First.First;
                     foreach (JObject item in jArray) 
@@ -160,22 +166,31 @@ namespace Lavery.Listeners
                 {
                     try
                     {
-                        using (new SynchronizeGlobalInstance(IWaitOnMutex, OConnectionFactory.getKeyValueString("AssiduiteMutexGlobalValue")))
+                        using (new SynchronizeGlobalInstance(IWaitOnMutex, oTS.TimeCardPendingID.ToString()))//OConnectionFactory.getKeyValueString("AssiduiteMutexGlobalValue")))
                         {
 
-                            if (ODataReferentialManagement.canProcessRequest(true, "TimeCardPending", oTS.TimeCardPendingID))
+                            if (ODataReferentialManagement.canProcessRequest(true, oTS.TimeCardPendingID))
                             {
+                                Console.WriteLine("\t\tTry to Perfom:{0}", oTS.TimeCardPendingID);
 
-                                Guid oGuid = Guid.NewGuid();
-                                String sMessageOut = oSerializer.serialize(oTS);
+                                int iTimeType = getNonBillableTimeType(oTS);
 
-                                performTransaction(oTS, sMessageOut);                                
 
-                                persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduitySqlNotification.ToString(),
-                                                      LaveryBusinessFunctions.eBusinessFunction.CatchNotification.ToString(),
-                                                      OConnectionFactory.getKeyValueString("Environment"),
-                                                      sMessageOut,
-                                                      oTS.refGuid.ToString(), SPrefixeName);
+                                if (iTimeType != -1)
+                                {
+                                    String sMessageOut = oSerializer.serialize(oTS);
+
+                                    performTransaction(oTS, sMessageOut);
+
+                                    Console.WriteLine("\t\tPerfomed:{0}", oTS.TimeCardPendingID);
+
+                                    persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduitySqlNotification.ToString(),
+                                                          LaveryBusinessFunctions.eBusinessFunction.CatchNotification.ToString(),
+                                                          OConnectionFactory.getKeyValueString("Environment"),
+                                                          sMessageOut,
+                                                          oTS.refGuid.ToString(), SPrefixeName);
+                                }
+                                
                             }
                         }
                     }
@@ -246,6 +261,7 @@ namespace Lavery.Listeners
                 changedEntity.etypeEnvelopp = typeEnvelopp.Insert;
                 changedEntity.refGuid = Guid.NewGuid();
                 OStackEnvelopp.push(changedEntity);
+                Console.WriteLine("\t\tInserted:{0}", changedEntity.TimeCardPendingID);
             }
             else
             {
@@ -261,6 +277,7 @@ namespace Lavery.Listeners
                     changedEntity.etypeEnvelopp = typeEnvelopp.Update;
                     changedEntity.refGuid = oGuid;
                     OStackEnvelopp.push(changedEntity);
+                    Console.WriteLine("\t\tUpdatedted:{0}", changedEntity.TimeCardPendingID);
                 }
                 else
                 if (e.ChangeType == ChangeType.Delete)
@@ -268,6 +285,7 @@ namespace Lavery.Listeners
                     changedEntity.etypeEnvelopp = typeEnvelopp.Delete;
                     changedEntity.refGuid = oGuid;
                     OStackEnvelopp.push(changedEntity);
+                    Console.WriteLine("\t\tDeleted:{0}", changedEntity.TimeCardPendingID);
                 }             
             }
         }

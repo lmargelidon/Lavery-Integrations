@@ -27,6 +27,7 @@ namespace Lavery.Listeners
                 this.IWaitOnMutex = OConnectionFactory.getKeyValueInt("MutexTimeOut");
                 OGuidContext = Guid.NewGuid();                
                 this.SPrefixeName = SPrefixeName;
+                ODataReferentialManagement.EListenerType = ListenerType.Wcf;
                 if (oGuid != default(Guid))
                     OGuidContext = oGuid;
                 else

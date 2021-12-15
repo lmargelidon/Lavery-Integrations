@@ -249,12 +249,14 @@ namespace Lavery.Tools.DBLibrary
                 
                 
                 returnParameter.Direction = ParameterDirection.ReturnValue;
+                using (SqlDataReader reader = oSqlCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                            oRet = reader[0];
+                    }
+                }
 
-                oSqlCommand.Prepare();
-                oSqlCommand.ExecuteNonQuery();
-
-                oRet = returnParameter.Value;
-    
             }
             catch (SqlException ex)
             {

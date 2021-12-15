@@ -27,8 +27,6 @@ namespace Lavery.Events.Listeners
 
         private static object syncLock = new object();
         static List<IDynamicEvents> lOfLog = new List<IDynamicEvents>();
-        
-
 
 
         [STAThread]

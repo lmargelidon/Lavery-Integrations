@@ -18,7 +18,8 @@ namespace Lavery.Listeners
         ServiceRelayServer oRelayServer;
         XMLSerializer<absence_request> oSerializer;
         public ListenerAssiduityServiceBus() : base(default(connectionFactory))
-        { 
+        {
+            ODataReferentialManagement.EListenerType = ListenerType.TimeCard;
         }
         public ListenerAssiduityServiceBus(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory)
         {
@@ -28,6 +29,8 @@ namespace Lavery.Listeners
                 OGuidContext = Guid.NewGuid();
                 this.oSerializer = new XMLSerializer<absence_request>();
                 this.SPrefixeName = SPrefixeName;
+                ODataReferentialManagement.EListenerType = ListenerType.TimeCard;
+
                 if (oGuid != default(Guid))
                     OGuidContext = oGuid;
                 else

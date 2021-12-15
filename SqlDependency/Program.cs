@@ -268,12 +268,14 @@ namespace SqlDependency
             persistEventManager.init();
             Guid oGuid = Guid.NewGuid();
             LaveryReflection.getHashCode(@"C:\Integrations\services\OutboundErsNet\Assisuity{9D0EEF19-646C-4690-A828-ABC85E8C2899}.xml");
-           
 
+            connectionFactory oCF = new connectionFactory();
             Helpers.Start(true, "S1");
 
 
-            persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerConsoleService.ToString(), LaveryBusinessFunctions.eBusinessFunction.None.ToString(), "DEV", "Icite s'tie", oGuid.ToString());
+            persistEventManager.logInformation( LaveryBusinessFunctions.eCategory.ListenerConsoleService.ToString(),                 
+                                                LaveryBusinessFunctions.eBusinessFunction.None.ToString(), oCF.getKeyValueString("Environment"), 
+                                                "Icite s'tie", oGuid.ToString());
             Boolean bLoop = true;
             while(bLoop)
             {

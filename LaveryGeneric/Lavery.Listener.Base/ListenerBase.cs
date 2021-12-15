@@ -33,6 +33,7 @@ namespace Lavery.Listeners
         Boolean disposing;
         Boolean disposed;
 
+        
         ~ListenerBase() => Dispose(false);
 
         public void Dispose()
@@ -63,17 +64,22 @@ namespace Lavery.Listeners
         {
             try
             {
+
                 this.oConnectionFactory = oConnectionFactory;
                 
                 oConnectionReferential = new SqlConnection(oConnectionFactory.ConnectionString("ConnectionReferential"));
                 oConnectionReferential.Open();
-
                 oDataReferentialManagement = new DataReferentialManagement(oConnectionReferential);
+
+                oDataReferentialManagement.getEnvironment(OConnectionFactory.getKeyValueString("Environment"));
+
+                
                 
                 oConnectionTarget = new SqlConnection(oConnectionFactory.ConnectionString("ConnectionTarget"));
                 oConnectionTarget.Open();
+               
                 oConnectionSource = new SqlConnection(oConnectionFactory.ConnectionString("ConnectionSource"));
-                oConnectionSource.Open();
+                oConnectionSource.Open();               
 
                 this.iTimeOutThread = oConnectionFactory.getKeyValueInt("ThreadTimeOut");
                 this.bCancelOnJobEchec = oConnectionFactory.getKeyValueInt("CancelOnJobEchec") == 1;

@@ -102,6 +102,8 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Helpers\bin\Debug\Lav
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Helpers\bin\Debug\Microsoft.Azure.Relay.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Helpers\bin\Debug\AssiduityServiceBus.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Helpers\bin\Debug\AssiduityServiceBus.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\obj\Debug\Lavery.Helpers.csproj.AssemblyReference.cache
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\obj\Debug\Lavery.Helpers.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Lavery.Helpers.dll.config
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Lavery.Helpers.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\Lavery.Helpers.pdb
@@ -160,8 +162,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Hel
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\System.Buffers.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\System.ValueTuple.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\bin\Debug\System.Numerics.Vectors.xml
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\obj\Debug\Lavery.Helpers.csproj.AssemblyReference.cache
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\obj\Debug\Lavery.Helpers.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\obj\Debug\Lavery.Helpers.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\obj\Debug\Lavery.Helpers.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Helpers\obj\Debug\Lavery.Helpers.pdb

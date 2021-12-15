@@ -1,3 +1,5 @@
+C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\obj\Debug\UnitTestListeners.csproj.AssemblyReference.cache
+C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\obj\Debug\UnitTestListeners.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
@@ -85,8 +87,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\bin\Debug\
 C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\bin\Debug\System.Text.Encodings.Web.xml
-C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\obj\Debug\UnitTestListeners.csproj.AssemblyReference.cache
-C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\obj\Debug\UnitTestListeners.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\obj\Debug\UnitTestListeners.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\obj\Debug\UnitTestListeners.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\obj\Debug\UnitTestListeners.pdb

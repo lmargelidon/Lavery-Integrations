@@ -8,7 +8,7 @@ namespace Lavery.Schemas.E3
 {
     public class TimeCard
 	{
-		public typeEnvelopp etypeEnvelopp { get; set; }				
+		public typeEnvelopp etypeEnvelopp { get; set; }		
 		public Guid refGuid { get; set; }
 		public Guid TimecardID { get; set; } 
 		public int TimeIndex { get; set; }
@@ -54,8 +54,8 @@ namespace Lavery.Schemas.E3
 		public String LoadGroup { get; set; }
 		public String RateCalcList { get; set; }
 		public DateTime GLDate { get; set; }
-		public int SpvTimekeeper { get; set; }
-		public int IsFlatFeeComplete { get; set; }
+		public int? SpvTimekeeper { get; set; }
+		public int? IsFlatFeeComplete { get; set; }
 		public int IsTaxAdvice { get; set; }
 		public int? PrevProfMaster { get; set; }
 		public int? IsTimer { get; set; }
