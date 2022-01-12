@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Org.OpenAPITools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Lavery.Client.E3\bin\Debug\Org.OpenAPITools.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -48,7 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IE3MatterApi.cs" />
     <Compile Include="IE3Api.cs" />
+    <Compile Include="IWcfClientMattersApi.cs" />
     <Compile Include="IWcfClientBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,6 +66,10 @@
     <ProjectReference Include="..\..\..\Lavery.Client.E3\Lavery.Client.E3.csproj">
       <Project>{cb1e2ac9-670a-4e85-9e21-72bd4dadad34}</Project>
       <Name>Lavery.Client.E3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Laverfy.Wcf.Schemas\Lavery.Wcf.Schemas.csproj">
+      <Project>{98a12c03-e47c-4cc2-adc7-396f35527c60}</Project>
+      <Name>Lavery.Wcf.Schemas</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

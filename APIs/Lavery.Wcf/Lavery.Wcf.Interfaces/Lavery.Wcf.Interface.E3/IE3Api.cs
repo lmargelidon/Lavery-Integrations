@@ -6,6 +6,8 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Runtime.Serialization;
 using Lavery.Client.E3;
+using Laverfy.Wcf.Schemas;
+using Laverfy.Wcf.Schemas.Matters;
 
 
 namespace Lavery.Wcf.Api.E3
@@ -41,21 +43,16 @@ namespace Lavery.Wcf.Api.E3
            Method = "POST")]        
         String postExistClient(ClientGetClientsRequest data);
 
-       
+
+
         [OperationContract]
         [WebInvoke(Method = "POST",
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "echo")]
-        String postEcho();
+        String postEcho();     
 
+        
 
-        /*
-        [OperationContract]
-        [WebInvoke(Method = "POST",
-            BodyStyle = WebMessageBodyStyle.Bare,
-            UriTemplate = "PingService")]
-        Stream postPingService(Stream sWithRequest);
-         * */
     }
 
     [DataContract]

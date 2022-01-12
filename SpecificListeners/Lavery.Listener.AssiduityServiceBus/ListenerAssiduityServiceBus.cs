@@ -82,7 +82,7 @@ namespace Lavery.Listeners
                 oRelayServer = new ServiceRelayServer(OConnectionFactory, performTransaction);
                 oRelayServer.Open("ConnectionServiceRelay");
                 oRelayServer.HybridConnectionName = "AssiduiteServiceRelayHip";
-                
+                isInitialized = true;
                 Console.WriteLine("\t\tInitializing listener on Relais : (" + oRelayServer.HybridConnectionName + ")...");
                 persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
                                                    LaveryBusinessFunctions.eBusinessFunction.Initialize.ToString(),

@@ -152,9 +152,9 @@ namespace Lavery.Listeners
                 oWatcher = new Lavery.Connector.FileSystemWatcher(OConnectionFactory, "Ers-Net-SourceDirectory", OGuidContext, SPrefixeName);
                 oWatcher.NotifyFilter(OnCreated, OnChanged);
 
-                
+                isInitialized = true;
 
-                
+
                 Console.WriteLine("\t\t\tWaiting for receiving Files to process (File full Path: " + OConnectionFactory.getKeyValueString("Ers-Net-SourceDirectory") + ")...");
                 persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerErsFileSystemWatcher.ToString(),
                                                    LaveryBusinessFunctions.eBusinessFunction.Initialize.ToString(),

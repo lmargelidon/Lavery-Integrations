@@ -12,11 +12,11 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Tools\obj\Debug\Laver
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\bin\Debug\Lavery.Tools.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\bin\Debug\Lavery.Tools.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\bin\Debug\Newtonsoft.Json.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\bin\Debug\reflectionDynamicLoader.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\bin\Debug\reflectionDynamicLoader.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\obj\Debug\Lavery.Tools.csproj.AssemblyReference.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\obj\Debug\Lavery.Tools.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\obj\Debug\Lavery.Tools.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\obj\Debug\Lavery.Tools.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\obj\Debug\Lavery.Tools.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\obj\Debug\Lavery.Tools.csproj.AssemblyReference.cache
+C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\bin\Debug\Lavery.Constants.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\bin\Debug\Lavery.Constants.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Tools\bin\Debug\Newtonsoft.Json.xml

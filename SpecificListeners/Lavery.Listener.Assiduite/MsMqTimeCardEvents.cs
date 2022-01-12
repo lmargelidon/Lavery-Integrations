@@ -103,7 +103,7 @@ namespace Lavery.Listeners
 
 
                 oMq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateQueue");
-
+                isInitialized = true;
 
                 Console.WriteLine("\t\t\tInitializing listener on MsMq : (" + oMq.getQueueName() + ")...");
                 persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
@@ -128,6 +128,7 @@ namespace Lavery.Listeners
         public override Boolean doJob()
         {
             Boolean bRet = true;
+            Boolean bInsideTrx = false;
             try
             {                
                 TimeCard oTS = default(TimeCard);
@@ -147,6 +148,7 @@ namespace Lavery.Listeners
                         oTS = oMsMq.receiveInTransaction();
                         if (oTS != null)
                         {
+                            bInsideTrx = true;
                             oConnectionReferentialTrx.Open();
                             oConnectionTargetTrx.Open();
                             switch (oTS.etypeEnvelopp)
@@ -162,19 +164,57 @@ namespace Lavery.Listeners
                                     break;
                                 default:
                                     bRet = false;
-                                    break;
+                                    break;                               
                             }
+                            /*
+                            if (BAleatoirExceptionGeneration)
+                                if(ORandomException.Next(10) > 5)
+                                    throw (new Exception("Aleatoire exception generated..."));
+                         */
+
                         }
                         else
                             Thread.Sleep(5000);
                     }
                     scope.Complete();
                 }
-
-
             }
             catch (Exception ex)
             {
+                TimeCard oTS = default(TimeCard);
+                if (bInsideTrx)
+                {
+                   
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        using (MsMq<TimeCard> oMsMqDlq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateDLQRead", true, true))
+                        using (MsMq<TimeCard> oMsMq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateQueue", true, true))
+                        {
+
+                            oTS = oMsMq.receiveInTransaction();
+                            if (oTS != default(TimeCard))
+                            {
+                                String sMessageOut = oSerializer.serialize(oTS);
+                                oMsMqDlq.send(sMessageOut, oTS);
+                            }
+
+                        }
+                        scope.Complete();
+                    }
+                }
+                if(oTS != default(TimeCard))
+                    persistEventManager.logError(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
+                        LaveryBusinessFunctions.eBusinessFunction.DeleteAbsenceRequest.ToString(),
+                        OConnectionFactory.getKeyValueString("Environment"),
+                        String.Format("Operation Falied : {0}\n{1}", oSerializer.serialize(oTS), ex.Message),
+                        oTS.refGuid.ToString(), SPrefixeName);
+                else
+                    persistEventManager.logError(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
+                       LaveryBusinessFunctions.eBusinessFunction.DeleteAbsenceRequest.ToString(),
+                       OConnectionFactory.getKeyValueString("Environment"),
+                       String.Format("Operation Failed : {0}", ex.Message),
+                       OGuidContext.ToString(), SPrefixeName);
+
                 bRet = false;
             }
             return bRet;

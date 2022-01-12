@@ -53,7 +53,7 @@ namespace Lavery.Events.Listeners
         {
             try
             {
-                TracePending.Trace(String.Format("DbmsWriterTraceListener App Setting: ", sWithAppSetingEntry));
+               //TracePending.Trace(String.Format("DbmsWriterTraceListener App Setting: ", sWithAppSetingEntry));
                 oDbSerializer  =  new EventDBSerializer(sWithAppSetingEntry);
                 Open();
             }

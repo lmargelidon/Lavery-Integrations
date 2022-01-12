@@ -36,7 +36,7 @@ namespace Lavery.Tools.Runtime
                             try
                             {
                                 String sFilePath = System.Configuration.ConfigurationManager.AppSettings["TraceUrl"];
-                                oFileStream = new FileStreamSynchronized(false, sFilePath);
+                                oFileStream = new FileStreamSynchronized(true, sFilePath);
                                 oFileStream.Open(FileMode.Append, FileAccess.Write, FileShare.ReadWrite, 4000, FileOptions.Asynchronous);
                             }
                             catch
@@ -99,7 +99,7 @@ namespace Lavery.Tools.Runtime
                             try
                             {
                                 String sFilePath = System.Configuration.ConfigurationManager.AppSettings["TraceUrl"];
-                                oFileStream = new FileStreamSynchronized(false, sFilePath);
+                                oFileStream = new FileStreamSynchronized(true, sFilePath);
                                 oFileStream.Open(FileMode.Append, FileAccess.Write, FileShare.ReadWrite, 4000, FileOptions.Asynchronous);
                             }
                             catch

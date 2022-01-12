@@ -19,7 +19,7 @@ namespace Lavery.Client.E3
           [DataMember]
             public List<Guid> matterId { get; set; }
           [DataMember]
-            public Int32 mattIndex { get; set; }
+            public Int32? mattIndex { get; set; }
           [DataMember]
             public String number { get; set; }
           [DataMember]
@@ -31,7 +31,7 @@ namespace Lavery.Client.E3
           [DataMember]
             public List<E3EAPIQuerySJQLSJPredicate> advancedFilterFilterPredicates { get; set; }
           [DataMember]
-            public E3EAPIQuerySJQLSJLogicalOperator advancedFilterFilterOperator { get; set; }
+            public E3EAPIQuerySJQLSJLogicalOperator? advancedFilterFilterOperator { get; set; }
           [DataMember]
             public List<E3EAPIQuerySJQLSJPredicateGroup> advancedFilterFilterGroups { get; set; }
           [DataMember]

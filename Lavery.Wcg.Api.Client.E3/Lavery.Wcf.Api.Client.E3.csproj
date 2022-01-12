@@ -35,8 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Org.OpenAPITools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\APIs\Lavery.Client.E3\bin\Debug\Org.OpenAPITools.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Channels" />
+    <Reference Include="System.ServiceModel.Discovery" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,9 +61,17 @@
       <Project>{cb1e2ac9-670a-4e85-9e21-72bd4dadad34}</Project>
       <Name>Lavery.Client.E3</Name>
     </ProjectReference>
+    <ProjectReference Include="..\APIs\Lavery.Wcf\Laverfy.Wcf.Schemas\Lavery.Wcf.Schemas.csproj">
+      <Project>{98a12c03-e47c-4cc2-adc7-396f35527c60}</Project>
+      <Name>Lavery.Wcf.Schemas</Name>
+    </ProjectReference>
     <ProjectReference Include="..\APIs\Lavery.Wcf\Lavery.Wcf.Base\Lavery.Wcf.Base.E3\Lavery.Wcf.Base.E3.csproj">
       <Project>{a7bdb42a-b35b-41fd-8606-0b91b52a57c1}</Project>
       <Name>Lavery.Wcf.Base.E3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\APIs\Lavery.Wcf\Lavery.Wcf.Interfaces\Lavery.Wcf.Interface.E3\Lavery.Wcf.Interface.E3.csproj">
+      <Project>{217eea4d-bf3b-41c6-b3a9-570c3bf05ee6}</Project>
+      <Name>Lavery.Wcf.Interface.E3</Name>
     </ProjectReference>
     <ProjectReference Include="..\LaveryGeneric\Lavery.Tools\Lavery.Tools.csproj">
       <Project>{aff8dbe0-e162-44bd-8fcd-9f8da78e1457}</Project>

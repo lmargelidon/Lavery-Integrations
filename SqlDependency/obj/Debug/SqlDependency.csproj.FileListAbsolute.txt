@@ -66,7 +66,6 @@ C:\Users\LMargelidon\source\repos\SqlDependency\SqlDependency\obj\Debug\SqlDepen
 C:\Users\LMargelidon\source\repos\SqlDependency\SqlDependency\obj\Debug\SqlDependency.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\SqlDependency\SqlDependency\obj\Debug\SqlDependency.exe
 C:\Users\LMargelidon\source\repos\SqlDependency\SqlDependency\obj\Debug\SqlDependency.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\obj\Debug\SqlDependency.csproj.AssemblyReference.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\obj\Debug\SqlDependency.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\SqlDependency.exe.config
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\SqlDependency.exe
@@ -89,7 +88,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\List
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\ListenerTableEvents.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Newtonsoft.Json.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Org.OpenAPITools.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\reflectionDynamicLoader.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Schemas.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\swaggerBase.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\System.ComponentModel.Annotations.dll
@@ -125,7 +123,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lave
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Constants.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\ListenerTableEvents.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Tools.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\reflectionDynamicLoader.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.dynamicConfiguration.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Helpers.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.Helpers.dll.config
@@ -155,6 +152,11 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Syst
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\System.ValueTuple.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\obj\Debug\SqlDependency.csproj.AssemblyReference.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\obj\Debug\SqlDependency.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\obj\Debug\SqlDependency.exe
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\obj\Debug\SqlDependency.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Laverfy.Wcf.Schemas.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Laverfy.Wcf.Schemas.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.ClassResponse.Generator.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SqlDependency\bin\Debug\Lavery.ClassResponse.Generator.pdb

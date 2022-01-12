@@ -145,7 +145,7 @@ namespace Lavery.Listeners
 
                 dep.Start();
 
-                
+                isInitialized = true;
                 Console.WriteLine("\t\t\tWaiting for receiving notifications (db objects naming: " + dep.DataBaseObjectsNamingConvention + ")...");
                 persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduitySqlNotification.ToString(),
                                                    LaveryBusinessFunctions.eBusinessFunction.Initialize.ToString(), 
@@ -195,23 +195,57 @@ namespace Lavery.Listeners
                                     if (iId == default(int) && oTS.etypeEnvelopp == typeEnvelopp.Insert || 
                                         iId != default(int) && oTS.etypeEnvelopp != typeEnvelopp.Insert)
                                     {
-                                        using (TransactionScope scope = new TransactionScope())
+                                        try
                                         {
-                                            using (SqlConnection oConnectionReferentialTrx = new SqlConnection(OConnectionFactory.ConnectionString("ConnectionReferential")))
-                                            using (MsMq<TimeCard> oMsMq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateQueue", true, true))
+                                            using (TransactionScope scope = new TransactionScope())
                                             {
-                                                oConnectionReferentialTrx.Open();
-                                                oMsMq.send(sMessageOut, oTS);
-                                                ODataReferentialManagement.registerLink(oTS.TimecardID, oTS.TimeStamp, -1, oTS.refGuid, sMessageOut, oTS.etypeEnvelopp == typeEnvelopp.Delete, oConnectionReferentialTrx);
-                                                ODataReferentialManagement.registerRequestProcessed(true, oTS.TimecardID, oConnectionReferentialTrx);
+                                                using (SqlConnection oConnectionReferentialTrx = new SqlConnection(OConnectionFactory.ConnectionString("ConnectionReferential")))
+                                                using (MsMq<TimeCard> oMsMq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateQueue", true, true))
+                                                {
+                                                    oConnectionReferentialTrx.Open();
+                                                    oMsMq.send(sMessageOut, oTS);
+                                                    ODataReferentialManagement.registerLink(oTS.TimecardID, oTS.TimeStamp, -1, oTS.refGuid, sMessageOut, oTS.etypeEnvelopp == typeEnvelopp.Delete, oConnectionReferentialTrx);
+                                                    ODataReferentialManagement.registerRequestProcessed(true, oTS.TimecardID, oConnectionReferentialTrx);
+                                                    /*
+                                                        if (BAleatoirExceptionGeneration)
+                                                            if(ORandomException.Next(10) > 5)
+                                                                throw (new Exception("Aleatoire exception generated..."));
+                                                    */
+                                                }
+                                                scope.Complete();
                                             }
-                                            scope.Complete();
+                                            persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduitySqlNotification.ToString(),
+                                                                        LaveryBusinessFunctions.eBusinessFunction.CatchNotification.ToString(),
+                                                                        OConnectionFactory.getKeyValueString("Environment"),
+                                                                        sMessageOut,
+                                                                        oTS.refGuid.ToString(), SPrefixeName);
                                         }
-                                        persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduitySqlNotification.ToString(),
-                                                                    LaveryBusinessFunctions.eBusinessFunction.CatchNotification.ToString(),
-                                                                    OConnectionFactory.getKeyValueString("Environment"),
-                                                                    sMessageOut,
-                                                                    oTS.refGuid.ToString(), SPrefixeName);
+                                        catch (Exception ex)
+                                        {
+                                            using (TransactionScope scope = new TransactionScope())
+                                            {
+                                                using (SqlConnection oConnectionReferentialTrx = new SqlConnection(OConnectionFactory.ConnectionString("ConnectionReferential")))
+                                                using (MsMq<TimeCard> oMsMqDlq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateDLQWrite", true, true))
+                                                {
+                                                    /*
+                                                     * Enrtegistreer5 dans une DLQ pour traitement ulterieur
+                                                     * ne pas oublier d'enregistrer 
+                                                     */
+                                                    oConnectionReferentialTrx.Open();
+                                                    ODataReferentialManagement.registerRequestProcessed(true, oTS.TimecardID, oConnectionReferentialTrx);
+                                                    oMsMqDlq.send(sMessageOut, oTS);                                                   
+
+                                                }
+                                                scope.Complete();
+                                            }
+                                            persistEventManager.logError(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
+                                                LaveryBusinessFunctions.eBusinessFunction.DeleteAbsenceRequest.ToString(),
+                                                OConnectionFactory.getKeyValueString("Environment"),
+                                                String.Format("Operation Falied : {0}\n{1}", oSerializer.serialize(oTS), ex.Message),
+                                                oTS.refGuid.ToString(), SPrefixeName);
+                                            bRet = false;
+                                        }
+
                                     }
 
                                 }

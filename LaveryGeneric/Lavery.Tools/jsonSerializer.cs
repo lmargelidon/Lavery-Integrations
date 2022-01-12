@@ -33,18 +33,24 @@ namespace Lavery.Tools
         
         public String serialize(Object inputObj)
         {
-            
-            DataContractJsonSerializer js = new DataContractJsonSerializer(inputObj.GetType());
-            MemoryStream msObj = new MemoryStream();
-            js.WriteObject(msObj, inputObj);
-            msObj.Position = 0;
-            StreamReader sr = new StreamReader(msObj);
+            string json = "";
+            try
+            {
+                DataContractJsonSerializer js = new DataContractJsonSerializer(inputObj.GetType());
+                MemoryStream msObj = new MemoryStream();
+                js.WriteObject(msObj, inputObj);
+                msObj.Position = 0;
+                StreamReader sr = new StreamReader(msObj);
 
-            // "{\"Description\":\"Share Knowledge\",\"Name\":\"C-sharpcorner\"}"
-            string json = sr.ReadToEnd();
+                // "{\"Description\":\"Share Knowledge\",\"Name\":\"C-sharpcorner\"}"
+                json = sr.ReadToEnd();
 
-            sr.Close();
-            msObj.Close();
+                sr.Close();
+                msObj.Close();
+            }
+            catch (Exception ex)
+            { 
+            }
             return json;
         }
 

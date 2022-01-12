@@ -131,7 +131,7 @@ namespace Lavery.Events.Listeners
             // appTraceSource.TraceEvent(TraceEventType.Information, 1, sOutMessage, new Object[]{"titi","tata"});
             try
             {
-               TracePending.Trace(String.Format("TraceEvent {0} listener pour la source", appTraceSource.Listeners.Count.ToString()));
+               // TracePending.Trace(String.Format("TraceEvent {0} listener pour la source", appTraceSource.Listeners.Count.ToString()));
                 foreach (TraceListener oList in appTraceSource.Listeners)
                 {
                     oList.Write(oOutMessage);

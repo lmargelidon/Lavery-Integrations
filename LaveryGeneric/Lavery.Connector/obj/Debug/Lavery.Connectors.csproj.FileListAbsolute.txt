@@ -65,7 +65,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connect
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\Microsoft.Azure.Relay.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\Azure.Storage.Blobs.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\Azure.Core.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\reflectionDynamicLoader.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\Newtonsoft.Json.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\Azure.Storage.Common.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\System.Threading.Tasks.Extensions.dll
@@ -82,7 +81,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connect
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\Microsoft.Azure.Relay.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\Azure.Storage.Blobs.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\Azure.Core.xml
-C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\reflectionDynamicLoader.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\Azure.Storage.Common.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\System.Memory.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Connector\bin\Debug\System.Memory.Data.xml

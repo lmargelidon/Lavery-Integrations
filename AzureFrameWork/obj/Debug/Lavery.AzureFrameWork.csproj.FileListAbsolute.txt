@@ -63,7 +63,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\Sys
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\System.Text.Json.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\System.ValueTuple.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\reflectionDynamicLoader.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\Lavery.Tools.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\Azure.Core.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\Azure.Storage.Blobs.xml
@@ -81,9 +80,8 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\Sys
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\System.Text.Json.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\System.ValueTuple.xml
-C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\bin\Debug\reflectionDynamicLoader.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\obj\Debug\Lavery.AzureFrameWork.csproj.AssemblyReference.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\obj\Debug\Lavery.AzureFrameWork.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\obj\Debug\Lavery.AzureFrameWork.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\obj\Debug\AzureFrameWork.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\obj\Debug\AzureFrameWork.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\AzureFrameWork\obj\Debug\Lavery.AzureFrameWork.csproj.AssemblyReference.cache

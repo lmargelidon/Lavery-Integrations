@@ -15,13 +15,15 @@ namespace UnitTestAssemblies
         [TestMethod]
         public void Test_1_StartAll()
         {
+            
             int iValRegistered = 0;
             int iValLoaded = -1;
             try
             {
                 System.Configuration.ConfigurationManager.RefreshSection("Assemblies");
                 ListenerConfig myConfig = (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");
-                Helpers.Start(true, "Unit-Tests");
+                // VERY IMPORTANT to load dynamivally dlls in the current project rather than the directoiry of Microsoft tests
+                Helpers.Start(true, "Unit-Tests", default(Guid), @"C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\bin\Debug");
                 iValRegistered = myConfig.getRegistredAssemblies();
                 iValLoaded = Helpers.getLoadedAssemblyActif();
             }
@@ -30,9 +32,9 @@ namespace UnitTestAssemblies
                 iValLoaded = -1;
             }            
             Assert.AreEqual(iValRegistered, iValLoaded);
-
+            
         }
-        
+     /*
         [TestMethod]
         public void Test_2_UnloadOneAssembly()
         {
@@ -127,7 +129,7 @@ namespace UnitTestAssemblies
             {
                 System.Configuration.ConfigurationManager.RefreshSection("Assemblies");
                 ListenerConfig myConfig = (ListenerConfig)Lavery.Tools.Configuration.Management.ConfigurationManager.GetSection<ListenerConfig>("Listeners");
-                Helpers.Start(true, "Unit-Tests");
+                Helpers.Start(true, "Unit-Tests", default(Guid), @"C:\Users\LMargelidon\source\repos\LaveryIntegration\UnitTestListeners\bin\Debug");
                 iValRegistered = myConfig.getRegistredAssemblies();
 
                 iValLoaded = Helpers.getLoadedAssemblyActif();
@@ -139,6 +141,6 @@ namespace UnitTestAssemblies
             Assert.AreEqual(iValRegistered, iValLoaded);
 
         }
-
+      */
     }
 }

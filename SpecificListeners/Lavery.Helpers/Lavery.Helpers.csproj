@@ -38,6 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,10 +62,6 @@
     <ProjectReference Include="..\..\LaveryGeneric\Lavery.Tools\Lavery.Tools.csproj">
       <Project>{aff8dbe0-e162-44bd-8fcd-9f8da78e1457}</Project>
       <Name>Lavery.Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\reflectionDynamicLoader\Lavery.Generic.Helpers.csproj">
-      <Project>{6461d0f2-d27a-439e-9fb7-cf23dd0f454e}</Project>
-      <Name>Lavery.Generic.Helpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\dynamicListerners\Lavery.dynamicConfiguration\Lavery.dynamicConfiguration.csproj">
       <Project>{211598fe-49e4-42d6-bfda-b6837eeed0a1}</Project>

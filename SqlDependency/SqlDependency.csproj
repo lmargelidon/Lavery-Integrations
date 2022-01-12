@@ -109,6 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MattersManagement.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +122,10 @@
     <ProjectReference Include="..\APIs\Lavery.Client.E3\Lavery.Client.E3.csproj">
       <Project>{cb1e2ac9-670a-4e85-9e21-72bd4dadad34}</Project>
       <Name>Lavery.Client.E3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\APIs\Lavery.Wcf\Laverfy.Wcf.Schemas\Lavery.Wcf.Schemas.csproj">
+      <Project>{98a12c03-e47c-4cc2-adc7-396f35527c60}</Project>
+      <Name>Lavery.Wcf.Schemas</Name>
     </ProjectReference>
     <ProjectReference Include="..\APIs\Lavery.Wcf\Lavery.Wcf.Base\Lavery.Wcf.Base.E3\Lavery.Wcf.Base.E3.csproj">
       <Project>{a7bdb42a-b35b-41fd-8606-0b91b52a57c1}</Project>
@@ -137,6 +142,10 @@
     <ProjectReference Include="..\AzureFrameWork\Lavery.AzureFrameWork.csproj">
       <Project>{0f6d2a48-5dfb-4200-b8d1-9bf12a93d1aa}</Project>
       <Name>Lavery.AzureFrameWork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lavery.ClassResponse.Generator\Lavery.Helper.WcfClassResponseGenerator.csproj">
+      <Project>{97ec58dd-d714-48b9-bb0b-f632ff031adf}</Project>
+      <Name>Lavery.Helper.WcfClassResponseGenerator</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lavery.InboundOutboundStream\LaveryInboundOutBoundStream.csproj">
       <Project>{2dd743fb-cb3d-4e6d-a4d1-227c27767c16}</Project>
@@ -165,10 +174,6 @@
     <ProjectReference Include="..\LaveryGeneric\Lavery.Tools\Lavery.Tools.csproj">
       <Project>{aff8dbe0-e162-44bd-8fcd-9f8da78e1457}</Project>
       <Name>Lavery.Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\reflectionDynamicLoader\Lavery.Generic.Helpers.csproj">
-      <Project>{6461d0f2-d27a-439e-9fb7-cf23dd0f454e}</Project>
-      <Name>Lavery.Generic.Helpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpecificListeners\dynamicListerners\Lavery.dynamicConfiguration\Lavery.dynamicConfiguration.csproj">
       <Project>{211598fe-49e4-42d6-bfda-b6837eeed0a1}</Project>

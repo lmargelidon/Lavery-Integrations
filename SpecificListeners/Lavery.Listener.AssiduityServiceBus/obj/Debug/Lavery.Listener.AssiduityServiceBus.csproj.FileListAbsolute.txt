@@ -49,7 +49,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Lis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\Azure.Storage.Blobs.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\Azure.Core.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\Newtonsoft.Json.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\reflectionDynamicLoader.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\Azure.Storage.Common.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\System.Memory.dll
@@ -67,7 +66,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Lis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\Microsoft.Azure.Relay.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\Azure.Storage.Blobs.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\Azure.Core.xml
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\reflectionDynamicLoader.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\Azure.Storage.Common.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\System.Memory.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\bin\Debug\System.Memory.Data.xml
@@ -78,4 +76,3 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Lis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\Lavery.Listener.AssiduityServiceBus.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\AssiduityServiceBus.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\AssiduityServiceBus.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\Lavery.Listener.AssiduityServiceBus.csproj.AssemblyReference.cache

@@ -30,10 +30,14 @@ namespace Lavery.Listeners
         Guid oGuidContext;
         String sPrefixeName;
 
+        Boolean bAleatoirExceptionGeneration;
+        Random oRandomException;
+
         Boolean disposing;
         Boolean disposed;
+        protected Boolean isInitialized;
 
-        
+
         ~ListenerBase() => Dispose(false);
 
         public void Dispose()
@@ -66,20 +70,23 @@ namespace Lavery.Listeners
             {
 
                 this.oConnectionFactory = oConnectionFactory;
-                
+                this.bAleatoirExceptionGeneration = false;
+                this.isInitialized = false;
+                oRandomException = new Random();
+
                 oConnectionReferential = new SqlConnection(oConnectionFactory.ConnectionString("ConnectionReferential"));
                 oConnectionReferential.Open();
                 oDataReferentialManagement = new DataReferentialManagement(oConnectionReferential);
 
                 oDataReferentialManagement.getEnvironment(OConnectionFactory.getKeyValueString("Environment"));
 
-                
-                
+
+
                 oConnectionTarget = new SqlConnection(oConnectionFactory.ConnectionString("ConnectionTarget"));
                 oConnectionTarget.Open();
-               
+
                 oConnectionSource = new SqlConnection(oConnectionFactory.ConnectionString("ConnectionSource"));
-                oConnectionSource.Open();               
+                oConnectionSource.Open();
 
                 this.iTimeOutThread = oConnectionFactory.getKeyValueInt("ThreadTimeOut");
                 this.bCancelOnJobEchec = oConnectionFactory.getKeyValueInt("CancelOnJobEchec") == 1;
@@ -90,8 +97,10 @@ namespace Lavery.Listeners
             {
 
             }
+
+            this.BAleatoirExceptionGeneration = bAleatoirExceptionGeneration;
         }
-        
+
         private void ThreadFunction()
         {
             if (doInitialize())
@@ -118,10 +127,10 @@ namespace Lavery.Listeners
 
         public Boolean IsAlive()
         {
-            Boolean bRet = true;
+            Boolean bRet = false;
             try
             {
-                bRet = workerThread.IsAlive;
+                bRet = workerThread.IsAlive && isInitialized;
                     
             }
             catch (Exception ex)
@@ -189,5 +198,8 @@ namespace Lavery.Listeners
         public int IWaitOnMutex { get => iWaitOnMutex; set => iWaitOnMutex = value; }
         public Guid OGuidContext { get => oGuidContext; set => oGuidContext = value; }
         public string SPrefixeName { get => sPrefixeName; set => sPrefixeName = value; }
+        public bool BAleatoirExceptionGeneration { get => bAleatoirExceptionGeneration; set => bAleatoirExceptionGeneration = value; }
+        public Random ORandomException { get => oRandomException; }
+       
     }
 }

@@ -1,0 +1,5 @@
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\Lavery.Wcf\Laverfy.Wcf.Schemas\bin\Debug\Laverfy.Wcf.Schemas.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\Lavery.Wcf\Laverfy.Wcf.Schemas\bin\Debug\Laverfy.Wcf.Schemas.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\Lavery.Wcf\Laverfy.Wcf.Schemas\obj\Debug\Lavery.Wcf.Schemas.csproj.CoreCompileInputs.cache
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\Lavery.Wcf\Laverfy.Wcf.Schemas\obj\Debug\Laverfy.Wcf.Schemas.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\APIs\Lavery.Wcf\Laverfy.Wcf.Schemas\obj\Debug\Laverfy.Wcf.Schemas.pdb

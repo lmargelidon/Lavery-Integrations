@@ -24,7 +24,7 @@ namespace Lavery.Events.Listeners
         {
             try 
             {
-                TracePending.Trace(String.Format("EventDBSerializer connection string: ", sWithAppSetingEntry));
+                //TracePending.Trace(String.Format("EventDBSerializer connection string: ", sWithAppSetingEntry));
                 sConnectString = OConnectionFactory.ConnectionString(sWithAppSetingEntry);               
                 
             }
@@ -179,7 +179,7 @@ namespace Lavery.Events.Listeners
                     {
                         
                         oGenericConnection.execute(sStatementString, null);
-                        TracePending.Trace("recordEvent Executed Successfully...");
+                        //TracePending.Trace("recordEvent Executed Successfully...");
                     }
                     catch (Exception ex)
                     {

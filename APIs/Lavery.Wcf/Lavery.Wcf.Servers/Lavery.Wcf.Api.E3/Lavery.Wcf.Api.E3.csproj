@@ -35,8 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Org.OpenAPITools">
-      <HintPath>..\..\..\Lavery.E3\src\Org.OpenAPITools\bin\Debug\Org.OpenAPITools.dll</HintPath>
+    <Reference Include="Org.OpenAPITools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Lavery.Client.E3\bin\Debug\Org.OpenAPITools.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,6 +65,10 @@
     <ProjectReference Include="..\..\..\Lavery.Client.E3\Lavery.Client.E3.csproj">
       <Project>{cb1e2ac9-670a-4e85-9e21-72bd4dadad34}</Project>
       <Name>Lavery.Client.E3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Laverfy.Wcf.Schemas\Lavery.Wcf.Schemas.csproj">
+      <Project>{98a12c03-e47c-4cc2-adc7-396f35527c60}</Project>
+      <Name>Lavery.Wcf.Schemas</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Lavery.Wcf.Base\Lavery.Wcf.Base.E3\Lavery.Wcf.Base.E3.csproj">
       <Project>{a7bdb42a-b35b-41fd-8606-0b91b52a57c1}</Project>

@@ -133,8 +133,9 @@ namespace Lavery.Listeners
                 //dep.OnStatusChanged += OnStatusChanged;
 
                 dep.Start();
+                isInitialized = true;
 
-                
+
                 Console.WriteLine("\t\t\tWaiting for receiving notifications (db objects naming: " + dep.DataBaseObjectsNamingConvention + ")...");
                 persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduitySqlNotification.ToString(),
                                                    LaveryBusinessFunctions.eBusinessFunction.Initialize.ToString(), 
@@ -241,12 +242,12 @@ namespace Lavery.Listeners
 
         private void OnError(object sender, ErrorEventArgs e)
         {
-            Console.WriteLine(Environment.NewLine);
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(e.Message);
-            Console.WriteLine(e.Error?.Message);
-            Console.ResetColor();
+          
+            persistEventManager.logError(LaveryBusinessFunctions.eCategory.ListenerAssiduitySqlNotification.ToString(),
+                                                   LaveryBusinessFunctions.eBusinessFunction.Terminate.ToString(),
+                                                   OConnectionFactory.getKeyValueString("Environment"),
+                                                   String.Format("Excetion catched : {0}\n{1}", "Terminate for receiving notifications (db objects naming: " + dep.DataBaseObjectsNamingConvention + ")...", e.Message),
+                                                   OGuidContext.ToString(), SPrefixeName);
         }
 
 

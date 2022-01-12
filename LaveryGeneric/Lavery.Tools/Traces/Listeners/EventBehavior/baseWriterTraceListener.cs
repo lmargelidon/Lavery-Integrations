@@ -85,7 +85,7 @@ namespace Lavery.Events.Listeners
     {
         try
         {
-            TracePending.Trace("Base Event Log Generic TraceEvent no method overriden...");
+            //TracePending.Trace("Base Event Log Generic TraceEvent no method overriden...");
 
         }
         catch (Exception ex)
@@ -100,7 +100,7 @@ namespace Lavery.Events.Listeners
             try
             {
                 EventEntry oEntry = (EventEntry) oWithObject;
-                TracePending.Trace("Base Event Log Write...");
+                //TracePending.Trace("Base Event Log Write...");
                 if (oEntry.GetType() == typeof(LogEventEntry))
                     TraceEvent((LogEventEntry)oEntry);
                 if (oEntry.GetType() == typeof(AuditEventEntry))

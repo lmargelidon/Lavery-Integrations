@@ -115,10 +115,12 @@
     <Compile Include="LaveryConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LaveryReflection.cs" />
+    <Compile Include="Refection\loaderHelper.cs" />
     <Compile Include="Refection\ReflectionAssembly.cs" />
     <Compile Include="Refection\ReflectionDataStructures.cs" />
     <Compile Include="Refection\ReflectionGeneration.cs" />
     <Compile Include="Refection\ReflectionGenerationTemplates.cs" />
+    <Compile Include="Refection\ReflectionTools.cs" />
     <Compile Include="Runtime\RunTime.cs" />
     <Compile Include="Runtime\TracePending.cs" />
     <Compile Include="Stack.cs" />
@@ -152,9 +154,9 @@
     <Folder Include="JSon\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\reflectionDynamicLoader\Lavery.Generic.Helpers.csproj">
-      <Project>{6461d0f2-d27a-439e-9fb7-cf23dd0f454e}</Project>
-      <Name>Lavery.Generic.Helpers</Name>
+    <ProjectReference Include="..\Lavery.Constants\Lavery.Constants.csproj">
+      <Project>{955f3353-a900-47d4-9e6a-0e593c3cba02}</Project>
+      <Name>Lavery.Constants</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,11 +1,15 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Reflection;
+
 using Lavery.Listeners;
 using Lavery.Tools;
+using Lavery.Tools.Runtime;
 using Lavery.Tools.Configuration.Management;
 using Lavery.dynamicConfiguration;
 using Lavery.Events.Listeners;
@@ -53,7 +57,7 @@ namespace Lavery.specific.Listeners
             }
             return iRet;
         }
-    public static void Start(Boolean bWait, String sServicePrefix, Guid oGuid = default(Guid))
+    public static void Start(Boolean bWait, String sServicePrefix, Guid oGuid = default(Guid), String sDir = default(String))
         {
             try
             {
@@ -61,8 +65,19 @@ namespace Lavery.specific.Listeners
                 bStop = false;
                 Helpers.oGuid = oGuid;
                 Helpers.sPrefix = sServicePrefix;
+                if (sDir == default(string))
+                {
+                    String sfile = System.Windows.Forms.Application.ExecutablePath;
+                    int ipos = sfile.LastIndexOf('\\');
+                    sDir = sfile.Substring(0, ipos);
+                }
+                Directory.SetCurrentDirectory(sDir);
+
+                TracePending.Trace("Start Listeners...");
                 buildListeners(sServicePrefix, oGuid, bWait);
+
                 
+
                 persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerHelpper.ToString(),
                                                    LaveryBusinessFunctions.eBusinessFunction.Start.ToString(),
                                                    oCF.getKeyValueString("Environment"),
@@ -87,15 +102,20 @@ namespace Lavery.specific.Listeners
                                 foreach (String sClasse in aString)
                                 {
                                     while (loader.OClassInstance == default(Object))
+                                        Thread.Sleep(10);                                   
+                                    while (true)
+                                    {
+                                        Object oRet = loader.ExecuteMethodAndReturnObject("IsAlive", default(Object[]));
+                                        if (oRet != default(Object) && (Boolean)oRet)
+                                            break;
                                         Thread.Sleep(10);
-                                    while (!loader.ExecuteMethod(sClasse.Trim(), "IsAlive", null))
-                                        Thread.Sleep(10);
+                                    }
                                 }
                             }
                         }
                     }
                 }
-
+                TracePending.Trace("All Listener started...");
 
             }
             catch (Exception ex)
@@ -115,6 +135,8 @@ namespace Lavery.specific.Listeners
             bStop = true;
             while (!bStoped)
                 Thread.Sleep(50);
+            TracePending.Trace("stop Listeners...");
+            
             foreach (ListenerSectionElement instance in myConfig.ListenerConfigInstances)
             {
                 try
@@ -126,7 +148,7 @@ namespace Lavery.specific.Listeners
                         {
                             String[] aString = instance.ClassName.Split(';');
                             foreach (String sClasse in aString)
-                            {
+                            {                                
                                 if (loader.ExecuteMethod(sClasse.Trim(), "IsAlive", null))
                                 {
                                     Object[] oParam1 = { bWait };
@@ -142,6 +164,7 @@ namespace Lavery.specific.Listeners
                                                     oCF.getKeyValueString("Environment"),
                                                     "All Listener stopped...",
                                                     oGuid.ToString(), sPrefix);
+                    TracePending.Trace("All Listener stopped...");
                 }
                 catch (Exception ex)
                 {
@@ -175,18 +198,28 @@ namespace Lavery.specific.Listeners
                             if (    loader == default(assemblyLoaderHelper) &&
                                     instance.Active.Equals("True", StringComparison.InvariantCultureIgnoreCase))
                             {
+                                TracePending.Trace(String.Format("Load Assembly {0} ", instance.Assembly));
+
                                 AppDomainSetup setup = AppDomain.CurrentDomain.SetupInformation;
                                 AppDomain newDomain = AppDomain.CreateDomain(instance.Assembly + "-Domain", AppDomain.CurrentDomain.Evidence, setup); //Create an instance of loader class in new appdomain  
                                 System.Runtime.Remoting.ObjectHandle obj = newDomain.CreateInstance(typeof(assemblyLoaderHelper).Assembly.FullName, typeof(assemblyLoaderHelper).FullName);
+                                
+                                
 
                                 loader = (assemblyLoaderHelper)obj.Unwrap();//As the object we are creating is from another appdomain hence we will get that object in wrapped format and hence in the next step we have unwrapped it  
                                 loader.ODomain = newDomain;
+                                
                                 loader.loadAssembly(instance.Path + instance.Assembly + ".dll", instance.Assembly);
+
+                                
+
                                 LAssemblyLoader.Add(loader);
 
                                 String[] aString = instance.ClassName.Split(';');
                                 foreach (String sClasse in aString)
                                 {
+
+                                    TracePending.Trace(String.Format("Load Assembly-5 {0} ", instance.Assembly));
 
                                     Object[] oParam = { oCF, sServicePrefix, oGuid };
                                     loader.ExecuteConstructor( sClasse.Trim(), oParam);
@@ -200,6 +233,7 @@ namespace Lavery.specific.Listeners
 
                                     System.Console.WriteLine(String.Format("\tStart Listener<{0}>", sClasse));
                                 }
+                                TracePending.Trace(String.Format("Assembly {0} loadded successfully", instance.Assembly));
                             }
                             else
                                 if (loader != default(assemblyLoaderHelper) &&
@@ -218,7 +252,7 @@ namespace Lavery.specific.Listeners
                                 }
 
                                 LAssemblyLoader.RemoveAll(m => m.isMe(instance.Assembly));
-
+                                TracePending.Trace(String.Format("Assembly {0} unloadded successfully", instance.Assembly));
                                 AppDomain.Unload(loader.ODomain);
                             }
                             Thread.Sleep(100);
@@ -303,6 +337,37 @@ namespace Lavery.specific.Listeners
             return bRet;
 
         }
-       
+       static  private Assembly ResolveEventHandler(object sender, ResolveEventArgs args)
+        {
+            Assembly MyAssembly = default(Assembly), objExecutingAssemblies = default(Assembly);
+            TracePending.Trace(String.Format("Resolve Load Assembly {0} ", args.Name.Substring(0, args.Name.IndexOf(","))));
+            //This handler is called only when the common language runtime tries to bind to the assembly and fails.
+            /*
+            //Retrieve the list of referenced assemblies in an array of AssemblyName.
+           
+            string strTempAssmbPath = "";
+
+            objExecutingAssemblies = Assembly.GetExecutingAssembly();
+            AssemblyName[] arrReferencedAssmbNames = objExecutingAssemblies.GetReferencedAssemblies();
+
+            //Loop through the array of referenced assembly names.
+            foreach (AssemblyName strAssmbName in arrReferencedAssmbNames)
+            {
+                //Check for the assembly names that have raised the "AssemblyResolve" event.
+                if (strAssmbName.FullName.Substring(0, strAssmbName.FullName.IndexOf(",")) == args.Name.Substring(0, args.Name.IndexOf(",")))
+                {
+                    //Build the path of the assembly from where it has to be loaded.				
+                    strTempAssmbPath = "C:\\Myassemblies\\" + args.Name.Substring(0, args.Name.IndexOf(",")) + ".dll";
+                    break;
+                }
+
+            }
+            //Load the assembly from the specified path. 					
+            MyAssembly = Assembly.LoadFrom(strTempAssmbPath);
+
+            //Return the loaded assembly.
+            */
+            return MyAssembly;
+        }
     }
 }

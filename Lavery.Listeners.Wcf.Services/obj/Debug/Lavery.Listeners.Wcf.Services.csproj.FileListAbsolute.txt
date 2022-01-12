@@ -10,7 +10,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Service
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\swaggerBase.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\Org.OpenAPITools.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\Newtonsoft.Json.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\reflectionDynamicLoader.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\RestSharp.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\Lavery.Wcf.Base.E3.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\Lavery.Wcf.Interface.E3.pdb
@@ -23,9 +22,11 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Service
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\Org.OpenAPITools.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\Org.OpenAPITools.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\Org.OpenAPITools.dll.config
-C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\reflectionDynamicLoader.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\RestSharp.xml
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.csproj.AssemblyReference.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.csproj.CoreCompileInputs.cache
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\obj\Debug\Lavery.Listeners.Wcf.Services.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\Laverfy.Wcf.Schemas.dll
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.Listeners.Wcf.Services\bin\Debug\Laverfy.Wcf.Schemas.pdb

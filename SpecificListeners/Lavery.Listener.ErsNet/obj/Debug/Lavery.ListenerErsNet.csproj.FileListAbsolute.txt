@@ -64,7 +64,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Lis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\Azure.Storage.Blobs.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\Azure.Core.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\Newtonsoft.Json.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\reflectionDynamicLoader.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\Azure.Storage.Common.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\System.Memory.dll
@@ -87,7 +86,6 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Lis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\Microsoft.Azure.Relay.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\Azure.Storage.Blobs.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\Azure.Core.xml
-C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\reflectionDynamicLoader.pdb
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\Azure.Storage.Common.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.ErsNet\bin\Debug\System.Memory.xml

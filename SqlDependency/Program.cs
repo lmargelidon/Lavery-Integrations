@@ -10,6 +10,7 @@ using Lavery.Events.Listeners;
 using Lavery.Events;
 using Lavery.Constants;
 using Lavery.Tools;
+
 using Lavery.Client.E3;
 using Lavery.Schemas.E3;
 using System.Reflection;
@@ -17,6 +18,10 @@ using Lavery.Tools.Configuration.Management;
 using Org.OpenAPITools.Model;
 using Newtonsoft.Json;
 using System.Messaging;
+using Laverfy.Wcf.Schemas;
+using Laverfy.Wcf.Schemas.Matters;
+using Lavery.ClassResponse.Generator;
+using Lavery.Wcf.Core;
 
 
 
@@ -265,33 +270,46 @@ namespace SqlDependency
             }
             */
             //int x = (int)Math.Ceiling((double)12 / (double)8);
+           
             persistEventManager.init();
             Guid oGuid = Guid.NewGuid();
             LaveryReflection.getHashCode(@"C:\Integrations\services\OutboundErsNet\Assisuity{9D0EEF19-646C-4690-A828-ABC85E8C2899}.xml");
 
             connectionFactory oCF = new connectionFactory();
+            
             Helpers.Start(true, "S1");
-
-
+            
+            MattersManagement oMatter = new MattersManagement();
+            /*
             persistEventManager.logInformation( LaveryBusinessFunctions.eCategory.ListenerConsoleService.ToString(),                 
                                                 LaveryBusinessFunctions.eBusinessFunction.None.ToString(), oCF.getKeyValueString("Environment"), 
                                                 "Icite s'tie", oGuid.ToString());
+           */
             Boolean bLoop = true;
-            while(bLoop)
-            {
-                ConsoleKeyInfo key = Console.ReadKey();
-                switch (key.Key)
-                {
-                    case ConsoleKey.Escape:
-                        Console.WriteLine("You pressed Esc to leave!");
-                        Helpers.Stop(true);
-                        bLoop = false;
-                        break;
-                    default:
-                        break;
+            int i = 10;
+            
+            
+           /* genereAllResponsesClasses oGEneration = new genereAllResponsesClasses(oCF, "WcfResApiResponseGenerationPath");
+            oGEneration.doJob("ConnectionSource", "Lavery.Wcf.Core");
+           */
+            
+            while (bLoop)
+                    {
+                    //MattterGetResponse oRep = oMatter.getMatters(i++);
+                    ConsoleKeyInfo key = Console.ReadKey();
+                
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.Escape:
+                            Console.WriteLine("You pressed Esc to leave!");
+                            Helpers.Stop(true);
+                            bLoop = false;
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-
+            
           /*  
             var connectionString = string.Empty;
             ConsoleKeyInfo consoleKeyInfo;

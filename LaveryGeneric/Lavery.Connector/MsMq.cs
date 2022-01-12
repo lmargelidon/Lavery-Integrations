@@ -26,9 +26,9 @@ namespace Lavery.Connector
             try
             {
                 this.isTransactionnal = isTransactionnal;
-                this.enlistInTransactionScope = enlistInTransactionScope;
-                
+                this.enlistInTransactionScope = enlistInTransactionScope;                
                 CreateQueue(OConnectionFactory.getKeyValueString(ConfigurationNameOfQueue));                
+
             }
             catch (Exception ex)
             { 

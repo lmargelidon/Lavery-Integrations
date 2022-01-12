@@ -34,7 +34,7 @@ namespace Lavery.Events.Listeners
         {
             try
             {
-                TracePending.Trace("Initialize persistEventManager " + lOfLog.Count.ToString());
+                //TracePending.Trace("Initialize persistEventManager " + lOfLog.Count.ToString());
                 
                 if (lOfLog.Count == 0)
                 {
@@ -48,7 +48,7 @@ namespace Lavery.Events.Listeners
                                 {
                                     try
                                     {
-                                        TracePending.Trace(String.Format("Add Logger {0}", sEventName));    
+                                        //TracePending.Trace(String.Format("Add Logger {0}", sEventName));    
                                         lOfLog.Add(FactoryBuilder.createDynamicEvents(sEventName, true, false));
                                     }
                                     catch (Exception ex)
@@ -143,8 +143,10 @@ namespace Lavery.Events.Listeners
 
                     }
                 }
+                /*
                 else
                     TracePending.Trace("isTraceLevelActivate Logger null...");
+                */
 
             }
             catch (Exception ex)
@@ -204,7 +206,7 @@ namespace Lavery.Events.Listeners
                 RunTimeClass.getRuntimeInformation(ref sAssemblyName, ref sClassName, ref sMethodName);
                 var taskA = new Task(() => 
                                {
-                                   TracePending.Trace("Trace Runing..");
+                                   //TracePending.Trace("Trace Runing..");
                                    IDynamicEvents oLog = getLogger(eEventOrigin.AuditServices);
                                   
                                    if (isTraceLevelActivate(oLog, SourceLevels.ActivityTracing))
@@ -240,7 +242,7 @@ namespace Lavery.Events.Listeners
                                    }
                                    });
                     taskA.Start();
-                    TracePending.Trace("Trace Started");
+                    //TracePending.Trace("Trace Started");
 
                 }
                 catch (Exception ex)
@@ -272,12 +274,12 @@ namespace Lavery.Events.Listeners
                 RunTimeClass.getRuntimeInformation(ref sAssemblyName, ref sClassName, ref sMethodName);
                 var taskA = new Task(() =>
                 {
-                    TracePending.Trace("Get Logger...");
+                    //TracePending.Trace("Get Logger...");
                     IDynamicEvents oLog = getLogger(eEventOrigin.StatisticServices);
 
                     if (isTraceLevelActivate(oLog, SourceLevels.ActivityTracing))
                     {
-                        TracePending.Trace("Logger Found ...");
+                        //TracePending.Trace("Logger Found ...");
                         StatisticEventEntry oEntry = new StatisticEventEntry();
                         oEntry.Correlation = new Guid(oCorrelation);
                         oEntry.dtEvent = DateTime.Now;
@@ -300,8 +302,10 @@ namespace Lavery.Events.Listeners
                             oLog.TraceEvent(oEntry);
                         }
                     }
+                    /*
                     else
                         TracePending.Trace("No listener available...");
+                    */
 
                 });
                 taskA.Start();
@@ -340,8 +344,10 @@ namespace Lavery.Events.Listeners
                                             oLog.TraceEvent(oEntry);
                                         }
                                     }
+                                    /*
                                     else
                                         TracePending.Trace("logInformation not activated...");
+                                    */
                                 });
                 taskA.Start();
 

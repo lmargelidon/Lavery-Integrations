@@ -89,7 +89,7 @@ namespace Lavery.Listeners
                                                    OConnectionFactory.getKeyValueString("Environment"),
                                                    "Listen on the Wcf to E3 ...",
                                                    OGuidContext.ToString(), SPrefixeName);
-
+                isInitialized = true;
             }
             catch (Exception ex)
             {               

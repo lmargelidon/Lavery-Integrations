@@ -715,25 +715,25 @@ namespace AssiduityProcess
                 AssiduityOrchestration __svc__ = (AssiduityOrchestration)_service;
                 __AssiduityOrchestration_root_0 __ctx0__ = (__AssiduityOrchestration_root_0)(__svc__._stateMgrs[0]);
 
+                if (__svc__.SendAssiduityPort != null)
+                {
+                    __svc__.SendAssiduityPort.Close(this, null);
+                    __svc__.SendAssiduityPort = null;
+                }
                 if (__svc__.TraceRequestPort != null)
                 {
                     __svc__.TraceRequestPort.Close(this, null);
                     __svc__.TraceRequestPort = null;
-                }
-                if (__svc__.TraceAssiduityPort != null)
-                {
-                    __svc__.TraceAssiduityPort.Close(this, null);
-                    __svc__.TraceAssiduityPort = null;
                 }
                 if (__svc__.ReceiveRequestAssiduity != null)
                 {
                     __svc__.ReceiveRequestAssiduity.Close(this, null);
                     __svc__.ReceiveRequestAssiduity = null;
                 }
-                if (__svc__.SendAssiduityPort != null)
+                if (__svc__.TraceAssiduityPort != null)
                 {
-                    __svc__.SendAssiduityPort.Close(this, null);
-                    __svc__.SendAssiduityPort = null;
+                    __svc__.TraceAssiduityPort.Close(this, null);
+                    __svc__.TraceAssiduityPort = null;
                 }
                 base.Finally();
             }
