@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace Lavery.Wcf.Core
 {
      [DataContract]
-    public class MattterGetResponse : Object
+    public class MatterGetResponse : genericResponse
     {
 
             [DataMember]

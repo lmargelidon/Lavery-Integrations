@@ -14,10 +14,10 @@ namespace SqlDependency
     public class MattersManagement
     {
 
-        public MattterGetResponse getMatters(int iIndex)
+        public MatterGetResponse getMatters(int iIndex)
         {
             MattersGet oRequest = new MattersGet();
-            MattterGetResponse response = default(MattterGetResponse);
+            MatterGetResponse response = default(MatterGetResponse);
             WcfApiClientToFacade oApi = new WcfApiClientToFacade("postListOfMatter");
             // TODO uncomment below to test the method and replace null with proper value
             //List<Guid> matterId = null;

@@ -76,3 +76,4 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Lis
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\Lavery.Listener.AssiduityServiceBus.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\AssiduityServiceBus.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\AssiduityServiceBus.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\SpecificListeners\Lavery.Listener.AssiduityServiceBus\obj\Debug\Lavery.Listener.AssiduityServiceBus.csproj.AssemblyReference.cache

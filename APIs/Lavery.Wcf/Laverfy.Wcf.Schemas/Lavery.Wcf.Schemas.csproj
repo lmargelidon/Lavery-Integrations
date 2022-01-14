@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="genericResponse.cs" />
     <Compile Include="Matters\MattersGet.cs" />
-    <Compile Include="Matters\MattterGetResponse.cs" />
+    <Compile Include="Matters\MatterGetResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

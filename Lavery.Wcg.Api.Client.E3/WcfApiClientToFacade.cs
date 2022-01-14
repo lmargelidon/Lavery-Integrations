@@ -27,13 +27,13 @@ namespace Lavery.Wcf.Api.Client.E3
     public class WcfApiClientToFacade : WcfBaseClient
     {
         //ConnectionPool<IGenericConnection, genericWCFConnection<IWcfClientMattersApi>> oPool = new ConnectionPool<IGenericConnection, genericWCFConnection<IWcfClientMattersApi>>();
-        IWcfClientMattersApi proxy = default(IWcfClientMattersApi);
+        IE3MatterApi proxy = default(IE3MatterApi);
         public WcfApiClientToFacade(String sWithWCFEndPointName)
             : base(sWithWCFEndPointName)
         {
             try
             {
-                var factory = new ChannelFactory<IWcfClientMattersApi>(new WebHttpBinding(), "HTTP://Localhost:8100");
+                var factory = new ChannelFactory<IE3MatterApi>(new WebHttpBinding(), "HTTP://Localhost:8100");
                 factory.Endpoint.Behaviors.Add(new WebHttpBehavior());
                 proxy = factory.CreateChannel();
             }
@@ -44,9 +44,9 @@ namespace Lavery.Wcf.Api.Client.E3
 
         }
 
-        public MattterGetResponse postListOfMatter(MattersGet data)
+        public MatterGetResponse postListOfMatter(MattersGet data)
         {
-            MattterGetResponse oRet = default(MattterGetResponse);
+            MatterGetResponse oRet = default(MatterGetResponse);
              
             try
             {

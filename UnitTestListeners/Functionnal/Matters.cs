@@ -18,7 +18,7 @@ namespace UnitTestListeners.Functionnal
         {
 
             MattersGet oRequest = new MattersGet();
-            MattterGetResponse response =  default(MattterGetResponse);
+            MatterGetResponse response =  default(MatterGetResponse);
             WcfApiClientToFacade oApi = new WcfApiClientToFacade("postListOfMatter");
             // TODO uncomment below to test the method and replace null with proper value
             //List<Guid> matterId = null;
@@ -30,7 +30,7 @@ namespace UnitTestListeners.Functionnal
             
             response = oApi.postListOfMatter(oRequest);
             
-            Assert.IsInstanceOfType(response, typeof(MattterGetResponse), "response is genericResponse");
+            Assert.IsInstanceOfType(response, typeof(MatterGetResponse), "response is genericResponse");
         }
     }
 }

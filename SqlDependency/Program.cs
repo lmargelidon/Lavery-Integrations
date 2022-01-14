@@ -295,7 +295,7 @@ namespace SqlDependency
             
             while (bLoop)
                     {
-                    //MattterGetResponse oRep = oMatter.getMatters(i++);
+                    //MatterGetResponse oRep = oMatter.getMatters(i++);
                     ConsoleKeyInfo key = Console.ReadKey();
                 
                     switch (key.Key)

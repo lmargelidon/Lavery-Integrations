@@ -10,14 +10,15 @@ using Laverfy.Wcf.Schemas;
 using Laverfy.Wcf.Schemas.Matters;
 using Lavery.Wcf.Core;
 
-
+/*
 namespace Lavery.Wcf.Api.E3
 {
     [ServiceContract]
     public interface IWcfClientMattersApi : IWcfClientBase
     {
         [OperationContract]
-        MattterGetResponse postListOfMatter(MattersGet oRequest);
+        MatterGetResponse postListOfMatter(MattersGet oRequest);
     }
 }
 
+*/

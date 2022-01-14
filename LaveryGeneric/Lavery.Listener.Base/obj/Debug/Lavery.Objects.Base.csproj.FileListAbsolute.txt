@@ -32,3 +32,4 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Listene
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Listener.Base\obj\Debug\Lavery.Objects.Base.csproj.CopyComplete
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Listener.Base\obj\Debug\ListenerTableEvents.dll
 C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Listener.Base\obj\Debug\ListenerTableEvents.pdb
+C:\Users\LMargelidon\source\repos\LaveryIntegration\LaveryGeneric\Lavery.Listener.Base\obj\Debug\Lavery.Objects.Base.csproj.AssemblyReference.cache

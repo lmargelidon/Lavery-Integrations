@@ -5,17 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace Laverfy.Wcf.Schemas
+namespace Lavery.Wcf.Core
 { 
 
     [DataContract]
     public class genericResponse : Object
     {
         [DataMemberAttribute(Name = "response", EmitDefaultValue = true)]
-        public String Response  { get; set; }
-
-        [DataMemberAttribute(Name = "attributes", EmitDefaultValue = true)]
-        public Dictionary <String, KeyValuePair<String, Type>> Attributes { get; set; }
+        public String Response  { get; set; }       
         //
         // Summary:
         //     Gets or Sets Success

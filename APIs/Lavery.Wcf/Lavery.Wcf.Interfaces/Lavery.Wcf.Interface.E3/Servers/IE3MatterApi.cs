@@ -15,7 +15,7 @@ namespace Lavery.Wcf.Api.E3
 {
 
     [ServiceContract]
-    public interface IE3MatterApi : IWcfClientBase
+    public interface IE3MatterApi //: IWcfBase
     {
 
         [OperationContract]
@@ -24,7 +24,7 @@ namespace Lavery.Wcf.Api.E3
                     ResponseFormat = WebMessageFormat.Json,
                     BodyStyle = WebMessageBodyStyle.Bare,
                     Method = "POST")]
-        MattterGetResponse postListOfMatter(MattersGet data);
+        MatterGetResponse postListOfMatter(MattersGet data);
 
        
     }
