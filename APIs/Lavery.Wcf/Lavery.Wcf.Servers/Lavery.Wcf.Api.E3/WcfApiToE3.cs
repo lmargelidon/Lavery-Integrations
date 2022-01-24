@@ -11,8 +11,8 @@ using Lavery.Tools;
 using Lavery.Tools.Runtime;
 using Lavery.Client.E3;
 using Org.OpenAPITools.Model;
-using Laverfy.Wcf.Schemas;
-using Laverfy.Wcf.Schemas.Matters;
+
+
 using Lavery.Wcf.Core;
 
 
@@ -151,13 +151,13 @@ namespace Lavery.Wcf.Api.E3
          * Matters
          * ********************************************************************************
          */
-        public MatterGetResponse postListOfMatter(MattersGet data)
+        public MattersGetResponse postListOfMatter(MatterGetMattersRequest data)
         {
-            MatterGetResponse oRet;
+            MattersGetResponse oRet;
             WcfApiMattersToE3 oApi = (WcfApiMattersToE3)getApi(typeof(WcfApiMattersToE3));
             if (oApi == default(WcfApiMattersToE3))
             { 
-                oRet = new MatterGetResponse();
+                oRet = new MattersGetResponse();
             }
             else
                 oRet = oApi.postListOfMatter(data);

@@ -5,8 +5,7 @@ using Lavery.Constants;
 using Lavery.Tools;
 using Lavery.Tools.Runtime;
 using Org.OpenAPITools.Model;
-using Laverfy.Wcf.Schemas;
-using Laverfy.Wcf.Schemas.Matters;
+
 using Lavery.Client.E3;
 
 namespace Lavery.ClassResponse.Generator

@@ -203,6 +203,7 @@ namespace Lavery.Listeners
                                                 using (MsMq<TimeCard> oMsMq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateQueue", true, true))
                                                 {
                                                     oConnectionReferentialTrx.Open();
+
                                                     oMsMq.send(sMessageOut, oTS);
                                                     ODataReferentialManagement.registerLink(oTS.TimecardID, oTS.TimeStamp, -1, oTS.refGuid, sMessageOut, oTS.etypeEnvelopp == typeEnvelopp.Delete, oConnectionReferentialTrx);
                                                     ODataReferentialManagement.registerRequestProcessed(true, oTS.TimecardID, oConnectionReferentialTrx);

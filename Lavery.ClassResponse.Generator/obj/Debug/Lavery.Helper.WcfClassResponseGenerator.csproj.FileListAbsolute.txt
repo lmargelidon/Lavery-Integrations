@@ -22,3 +22,4 @@ C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.ClassResponse.Generat
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.ClassResponse.Generator\bin\Debug\Org.OpenAPITools.xml
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.ClassResponse.Generator\bin\Debug\Org.OpenAPITools.dll.config
 C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.ClassResponse.Generator\bin\Debug\RestSharp.xml
+C:\Users\LMargelidon\source\repos\LaveryIntegration\Lavery.ClassResponse.Generator\obj\Debug\Lavery.Helper.WcfClassResponseGenerator.csproj.AssemblyReference.cache

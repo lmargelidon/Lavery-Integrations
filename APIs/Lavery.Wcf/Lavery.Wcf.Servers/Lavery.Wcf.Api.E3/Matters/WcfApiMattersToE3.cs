@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
+using System.Reflection;
 
 using Lavery.Events.Listeners;
 using Lavery.Tools.Configuration.Management;
@@ -12,8 +13,7 @@ using Lavery.Tools;
 using Lavery.Tools.Runtime;
 using Lavery.Client.E3;
 using Org.OpenAPITools.Model;
-using Laverfy.Wcf.Schemas;
-using Laverfy.Wcf.Schemas.Matters;
+
 using Lavery.Wcf.Core;
 
 
@@ -27,8 +27,7 @@ namespace Lavery.Wcf.Api.E3
         public WcfApiMattersToE3(connectionFactory oCF, String sPrefix, Guid oGuid) :base(oCF, sPrefix, oGuid)
         {
             try
-            {
-                
+            {                
                
                 oFacadeMatter = new MatterApiFacade(OCF);                
 
@@ -44,28 +43,31 @@ namespace Lavery.Wcf.Api.E3
 
         }
 
-        public override MatterGetResponse postListOfMatter(MattersGet data)
+        public override MattersGetResponse postListOfMatter(MatterGetMattersRequest dataE3)//MattersGetInformations data)
         {
-            MatterGetResponse oRet = new MatterGetResponse();
+            MattersGetResponse oRet = new MattersGetResponse();
             try
             {
 
-                if (data != default(MattersGet))
-                {
+                if (dataE3 != default(MatterGetMattersRequest))
+                {/*
                     MatterGetMattersRequest dataE3 = new MatterGetMattersRequest();
+                    Type myType = data.GetType();
 
-                    dataE3.matterId = data.matterId;
-                    dataE3.mattIndex = data.mattIndex;
-                    dataE3.number = data.number;
-                    dataE3.advancedFilterChildObjectsToInclude = null;
-                    dataE3.advancedFilterAttributesToInclude = null;
-                    dataE3.advancedFilterFilterXOQL = null;
-                    dataE3.advancedFilterFilterPredicates = null;
-                    dataE3.advancedFilterFilterOperator = null;
-                    dataE3.advancedFilterFilterGroups = null;
-                    dataE3.x3ESessionId = null;
-                    dataE3.x3EUserId = null;
-                    dataE3.acceptLanguage = null;
+
+                    foreach (var PropertyInfo in myType.GetProperties())
+                    {
+                        try
+                        {
+                            PropertyInfo prop = dataE3.GetType().GetProperty(PropertyInfo.Name);
+                            object oObj = PropertyInfo.GetValue(data);
+                            if(oObj != null)
+                                prop.SetValue(dataE3, oObj);
+                        }
+                        catch (Exception ex)
+                        { }
+                    }
+                    */
                     E3EAPIMatterModelsMatterGetResponse oRetE3 = default(E3EAPIMatterModelsMatterGetResponse);
                     Console.WriteLine("\t\t\tListener Wcf to E3 called ...");
                     oRetE3 = oFacadeMatter.MatterGetMatters(dataE3);
@@ -75,19 +77,15 @@ namespace Lavery.Wcf.Api.E3
                                                        "Call E3 MatterGetMatters()...",
                                                        OGuid.ToString(), SPrefix);
 
-                    /*
-                    oRet.Attributes = new Dictionary<string, KeyValuePair<String, Type>>();
+
+
 
                     foreach (E3EAPIMatterModelsMatter oElt in oRetE3.Matters)
                     {
-                        foreach (KeyValuePair<String,E3EAPIDataModelsAttribute> pair in oElt.Attributes)
-                        {
-                            Console.WriteLine("{2} {0} = {1}",pair.Key, pair.Value.Value, pair.Value.DataType);
-                            //oRet.Attributes.Add(pair.Key, new KeyValuePair<String, Type>(pair.Value.Value, pair.Value.DataType.GetType()));
-                            
-                        }
+                        parseAttributes(oRet, new MatterGetResponseDetail(), oElt.Attributes);
                     }
-                    */
+
+                    
                     oRet.Success = oRetE3.Success;
                     oRet.Message = oRetE3.Message;
                 }

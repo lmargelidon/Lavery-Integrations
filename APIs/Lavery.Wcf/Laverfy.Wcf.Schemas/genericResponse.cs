@@ -9,11 +9,10 @@ namespace Lavery.Wcf.Core
 { 
 
     [DataContract]
-    public class genericResponse : Object
+    public abstract class genericResponse : Object
     {
-        [DataMemberAttribute(Name = "response", EmitDefaultValue = true)]
-        public String Response  { get; set; }       
-        //
+        
+               //
         // Summary:
         //     Gets or Sets Success
         [DataMemberAttribute(Name = "success", EmitDefaultValue = false)]
@@ -21,7 +20,11 @@ namespace Lavery.Wcf.Core
         //
         // Summary:
         //     Gets or Sets Message
+        
         [DataMemberAttribute(Name = "message", EmitDefaultValue = true)]
         public string Message { get; set; }
+
+        abstract public void Add(responseBase oBase);
+       
     }
 }

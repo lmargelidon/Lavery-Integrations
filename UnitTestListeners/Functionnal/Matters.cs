@@ -4,8 +4,8 @@ using Lavery.Wcf.Api.E3;
 using Lavery.Client.E3;
 using Org.OpenAPITools.Model;
 using Lavery.Wcf.Api.Client.E3;
-using Laverfy.Wcf.Schemas;
-using Laverfy.Wcf.Schemas.Matters;
+
+
 using Lavery.Wcf.Core;
 
 namespace UnitTestListeners.Functionnal
@@ -17,8 +17,8 @@ namespace UnitTestListeners.Functionnal
         public void MatterGetMattersTest()
         {
 
-            MattersGet oRequest = new MattersGet();
-            MatterGetResponse response =  default(MatterGetResponse);
+            MatterGetMattersRequest oRequest = new MatterGetMattersRequest();
+            genericResponse response =  default(genericResponse);
             WcfApiClientToFacade oApi = new WcfApiClientToFacade("postListOfMatter");
             // TODO uncomment below to test the method and replace null with proper value
             //List<Guid> matterId = null;
@@ -30,7 +30,7 @@ namespace UnitTestListeners.Functionnal
             
             response = oApi.postListOfMatter(oRequest);
             
-            Assert.IsInstanceOfType(response, typeof(MatterGetResponse), "response is genericResponse");
+            Assert.IsInstanceOfType(response, typeof(genericResponse), "response is MatterGetResponse");
         }
     }
 }

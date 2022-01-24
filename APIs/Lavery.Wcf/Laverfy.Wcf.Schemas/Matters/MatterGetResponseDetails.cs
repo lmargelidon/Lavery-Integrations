@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace Lavery.Wcf.Core
 {
      [DataContract]
-    public class MatterGetResponse : genericResponse
+    public class MatterGetResponseDetail: responseBase
     {
 
             [DataMember]
@@ -20,7 +20,7 @@ namespace Lavery.Wcf.Core
             [DataMember]
             public System.Guid OrigProcItemID { get; set; }
             [DataMember]
-            public System.Boolean HasAttachments { get; set; }
+            public System.Int32 HasAttachments { get; set; }
             [DataMember]
             public System.DateTime TimeStamp { get; set; }
             [DataMember]
