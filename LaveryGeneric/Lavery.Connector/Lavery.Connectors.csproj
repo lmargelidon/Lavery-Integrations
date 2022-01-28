@@ -64,7 +64,7 @@
       <Project>{aff8dbe0-e162-44bd-8fcd-9f8da78e1457}</Project>
       <Name>Lavery.Tools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpecificListeners\Lavery.Listener.Base\Lavery.Objects.Base.csproj">
+    <ProjectReference Include="..\Lavery.Listener.Base\Lavery.Objects.Base.csproj">
       <Project>{53766e9e-f85c-431c-868d-54e4b3191ec1}</Project>
       <Name>Lavery.Objects.Base</Name>
     </ProjectReference>

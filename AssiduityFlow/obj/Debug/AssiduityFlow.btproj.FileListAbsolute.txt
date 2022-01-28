@@ -1,6 +1,0 @@
-C:\Users\LMargelidon\source\repos\SqlDependency\AssiduityFlow\bin\Debug\AssiduityFlow.dll
-C:\Users\LMargelidon\source\repos\SqlDependency\AssiduityFlow\bin\Debug\AssiduityFlow.pdb
-C:\Users\LMargelidon\source\repos\SqlDependency\AssiduityFlow\obj\Debug\AssiduityFlow.btproj.AssemblyReference.cache
-C:\Users\LMargelidon\source\repos\SqlDependency\AssiduityFlow\obj\Debug\AssiduityFlow.btproj.CoreCompileInputs.cache
-C:\Users\LMargelidon\source\repos\SqlDependency\AssiduityFlow\obj\Debug\AssiduityFlow.dll
-C:\Users\LMargelidon\source\repos\SqlDependency\AssiduityFlow\obj\Debug\AssiduityFlow.pdb

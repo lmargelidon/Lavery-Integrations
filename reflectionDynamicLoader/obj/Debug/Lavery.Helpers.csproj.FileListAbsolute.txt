@@ -1,6 +1,0 @@
-C:\Users\LMargelidon\source\repos\LaveryIntegration\reflectionDynamicLoader\bin\Debug\reflectionDynamicLoader.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\reflectionDynamicLoader\bin\Debug\reflectionDynamicLoader.pdb
-C:\Users\LMargelidon\source\repos\LaveryIntegration\reflectionDynamicLoader\obj\Debug\Lavery.Helpers.csproj.AssemblyReference.cache
-C:\Users\LMargelidon\source\repos\LaveryIntegration\reflectionDynamicLoader\obj\Debug\Lavery.Helpers.csproj.CoreCompileInputs.cache
-C:\Users\LMargelidon\source\repos\LaveryIntegration\reflectionDynamicLoader\obj\Debug\reflectionDynamicLoader.dll
-C:\Users\LMargelidon\source\repos\LaveryIntegration\reflectionDynamicLoader\obj\Debug\reflectionDynamicLoader.pdb

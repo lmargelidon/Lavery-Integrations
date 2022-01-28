@@ -576,6 +576,5 @@ namespace Lavery.Tools.DBLibrary
             return bRet;
 
         }
-
     }
 }

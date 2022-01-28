@@ -146,7 +146,7 @@ namespace Lavery.Listeners
                     {
                         
                         oTS = oMsMq.receiveInTransaction();
-                        if (oTS != null)
+                        if (oTS != null && oTS.WorkHrs > 0)
                         {
                             bInsideTrx = true;
                             oConnectionReferentialTrx.Open();
@@ -334,9 +334,9 @@ namespace Lavery.Listeners
                         iTimeType = oTimeType.LaveryType;
 
 
-                command.CommandType = CommandType.StoredProcedure;               
+                command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add(new SqlParameter("@user_id", oTimeCard.Timekeeper));     //@user_id int
+                if (!is_forUpdate) command.Parameters.Add(new SqlParameter("@timeKeeper_id", oTimeCard.Timekeeper));     //@user_id int
                 command.Parameters.Add(new SqlParameter("@absence_type_id", iTimeType.ToString())); //@absence_type_iD int,
                 if (oTimeCard.WorkDate.Year > 2020)
                 {
@@ -366,7 +366,19 @@ namespace Lavery.Listeners
 
 
                 if (is_forUpdate)
-                {   
+                {
+                    using (var cmd = new SqlCommand("Select top(1)user_id from usr where UsrTkinit = CAST(@timeKeeper_id as varchar)", OConnectionTarget))
+                    {
+                        cmd.Parameters.Add("@timeKeeper_id", System.Data.SqlDbType.Int);
+                        cmd.Parameters["@timeKeeper_id"].Value = oTimeCard.Timekeeper;
+                        //sRet = (String)cmd.ExecuteScalar();
+                        int userId = (int)cmd.ExecuteScalar();
+
+                        command.Parameters.Add(new SqlParameter("@user_id", userId));
+                    }
+
+                    
+
                     command.Parameters.Add(new SqlParameter("@is_exception", false));           //@is_exception bit,
                     command.Parameters.Add(new SqlParameter("@is_invisible", false));           //@is_invisible bit = 0,  
                     command.Parameters.Add(new SqlParameter("@is_cancel", false));              //@is_cancel bit,

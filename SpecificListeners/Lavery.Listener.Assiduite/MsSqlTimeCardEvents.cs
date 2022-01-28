@@ -188,7 +188,16 @@ namespace Lavery.Listeners
                                 int iTimeType = getNonBillableTimeType(oTS);
 
                                 if (iTimeType != -1)
-                                {                                    
+                                {
+                                    using (var cmd = new SqlCommand("SELECT AltNumber FROM [dbo].[Timekeeper] WHERE TkprIndex = @TimeKeeperIndex", OConnectionSource))
+                                    {
+                                        cmd.Parameters.Add("@TimeKeeperIndex", System.Data.SqlDbType.Int);
+                                        cmd.Parameters["@TimeKeeperIndex"].Value = oTS.Timekeeper;
+                                        //sRet = (String)cmd.ExecuteScalar();
+                                        var result = (String)cmd.ExecuteScalar();
+                                        oTS.Timekeeper = int.Parse(result);
+                                    }
+
                                     String sMessageOut = oSerializer.serialize(oTS);
                                     // oMq.send(performTransaction, sMessageOut, oTS);
                                     int iId = ODataReferentialManagement.getLinkPrimaryKeyValue(oTS.TimecardID);

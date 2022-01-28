@@ -1,8 +1,0 @@
-C:\Users\LMargelidon\source\repos\SqlDependency\ListenerTableEvents\obj\Debug\ListenerBase.csproj.CoreCompileInputs.cache
-C:\Users\LMargelidon\source\repos\SqlDependency\ListenerTableEvents\bin\Debug\ListenerTableEvents.dll
-C:\Users\LMargelidon\source\repos\SqlDependency\ListenerTableEvents\bin\Debug\ListenerTableEvents.pdb
-C:\Users\LMargelidon\source\repos\SqlDependency\ListenerTableEvents\bin\Debug\Newtonsoft.Json.dll
-C:\Users\LMargelidon\source\repos\SqlDependency\ListenerTableEvents\bin\Debug\Newtonsoft.Json.xml
-C:\Users\LMargelidon\source\repos\SqlDependency\ListenerTableEvents\obj\Debug\ListenerBase.csproj.CopyComplete
-C:\Users\LMargelidon\source\repos\SqlDependency\ListenerTableEvents\obj\Debug\ListenerTableEvents.dll
-C:\Users\LMargelidon\source\repos\SqlDependency\ListenerTableEvents\obj\Debug\ListenerTableEvents.pdb

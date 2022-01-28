@@ -1,2 +1,0 @@
-C:\Users\LMargelidon\source\repos\SqlDependency\AzureFrameWork\obj\Debug\AzureFrameWork.csproj.AssemblyReference.cache
-C:\Users\LMargelidon\source\repos\SqlDependency\AzureFrameWork\obj\Debug\AzureFrameWork.csproj.CoreCompileInputs.cache
