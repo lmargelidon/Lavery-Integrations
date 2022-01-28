@@ -50,8 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Matters\WcfApiMattersToE3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WcfApiToE3.cs" />
+    <Compile Include="WcfBaseApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\LaveryGeneric\Lavery.Constants\Lavery.Constants.csproj">
@@ -79,5 +81,6 @@
       <Name>Lavery.Wcf.Interface.E3</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,8 +11,9 @@ using Lavery.Tools;
 using Lavery.Tools.Runtime;
 using Lavery.Client.E3;
 using Org.OpenAPITools.Model;
-using Laverfy.Wcf.Schemas;
-using Laverfy.Wcf.Schemas.Matters;
+
+
+using Lavery.Wcf.Core;
 
 
 namespace Lavery.Wcf.Api.E3
@@ -20,23 +21,27 @@ namespace Lavery.Wcf.Api.E3
    
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
                   ConcurrencyMode = ConcurrencyMode.Multiple)]
-    public class WcfApiToE3 : WcfBaseClass, IE3Api//, IWcfClientBas
+    public partial class WcfApiToE3 :  IE3Api//, IE3MatterApi//,WcfBaseClass
     {        
-        connectionFactory OCF;
+        connectionFactory oCF;
         ClientApiFacade oFacadeClient;
-        MatterApiFacade oFacadeMatter;
+        //MatterApiFacade oFacadeMatter;
+        List<WcfBaseApi> lOfApis = new List<WcfBaseApi>();
         String sPrefix;
         Guid oGuid;
+
+        public connectionFactory OCF { get => oCF;  }
 
         public WcfApiToE3()
         {
             try
             {
-                OCF = new connectionFactory();
+                oCF = new connectionFactory();
                 oFacadeClient = new ClientApiFacade(OCF);
-                oFacadeMatter = new MatterApiFacade(OCF);
+                //oFacadeMatter = new MatterApiFacade(OCF);
                 oGuid = Guid.NewGuid();
                 sPrefix = "WcfServer";
+                initializeApis();
 
                 //TracePending.Trace("WcfServiceSlaDispatchRequest Object created");
             }
@@ -49,13 +54,24 @@ namespace Lavery.Wcf.Api.E3
                                                 OCF.getKeyValueString("Environment"), "WcfServiceSlaParsingApi object Instance created Succesfully", oGuid.ToString());
 
         }
-        static public void initializeService()
+        void initializeApis()
         {
             try
             {
 
-                
+                lOfApis.Add(new WcfApiMattersToE3(oCF, sPrefix, oGuid));
 
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        static public void initializeService()
+        {
+            try
+            {
+                
             }
             catch (Exception ex)
             {
@@ -73,7 +89,12 @@ namespace Lavery.Wcf.Api.E3
                 throw (ex);
             }
         }
-        
+        WcfBaseApi getApi(Type oType)
+        {       
+            return lOfApis.Find(x => x.GetType() == oType); ;
+        }
+
+
         public String postExistClient(ClientGetClientsRequest data)
         {
             String sRet = "false";
@@ -127,83 +148,26 @@ namespace Lavery.Wcf.Api.E3
         }
         /*
          * ********************************************************************************
+         * Matters
          * ********************************************************************************
          */
-        
-        public genericResponse postListOfMatter(MattersGet data)
+        public MattersGetResponse postListOfMatter(MatterGetMattersRequest data)
         {
-            genericResponse oRet = new genericResponse();
-            try
-            {
-
-                if (data != default(MattersGet))
-                {
-                    MatterGetMattersRequest dataE3 = new MatterGetMattersRequest();
-
-                    dataE3.matterId = data.matterId;
-                    dataE3.mattIndex = data.mattIndex;
-                    dataE3.number = data.number;
-                    dataE3.advancedFilterChildObjectsToInclude = null;
-                    dataE3.advancedFilterAttributesToInclude = null;
-                    dataE3.advancedFilterFilterXOQL = null;
-                    dataE3.advancedFilterFilterPredicates = null;
-                    dataE3.advancedFilterFilterOperator = null;
-                    dataE3.advancedFilterFilterGroups = null;
-                    dataE3.x3ESessionId = null;
-                    dataE3.x3EUserId = null;
-                    dataE3.acceptLanguage = null;
-                    E3EAPIMatterModelsMatterGetResponse oRetE3 = default(E3EAPIMatterModelsMatterGetResponse);
-                    Console.WriteLine("\t\t\tListener Wcf to E3 called ...");
-                    oRetE3 = oFacadeMatter.MatterGetMatters(dataE3);                    
-                    persistEventManager.logInformation(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
-                                                       LaveryBusinessFunctions.eBusinessFunction.Initialize.ToString(),
-                                                       OCF.getKeyValueString("Environment"),
-                                                       "Call E3 MatterGetMatters()...",
-                                                       oGuid.ToString(), sPrefix);
-
-                    
-                    oRet.Attributes = new Dictionary<string, KeyValuePair<String, Type>>();
-
-                    foreach (E3EAPIMatterModelsMatter oElt in oRetE3.Matters)
-                    {
-                        foreach (KeyValuePair<String,E3EAPIDataModelsAttribute> pair in oElt.Attributes)
-                        {
-                            Console.WriteLine("{2} {0} = {1}",pair.Key, pair.Value.Value, pair.Value.DataType);
-                            //oRet.Attributes.Add(pair.Key, new KeyValuePair<String, Type>(pair.Value.Value, pair.Value.DataType.GetType()));
-                            
-                        }
-                    }
-                    oRet.Success = oRetE3.Success;
-                    oRet.Message = oRetE3.Message;
-                }
+            MattersGetResponse oRet;
+            WcfApiMattersToE3 oApi = (WcfApiMattersToE3)getApi(typeof(WcfApiMattersToE3));
+            if (oApi == default(WcfApiMattersToE3))
+            { 
+                oRet = new MattersGetResponse();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("\t\t\tCall E3 MatterGetMatters()->Exception Thrown : {0}", ex.Message);
-                persistEventManager.logError(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
-                                                   LaveryBusinessFunctions.eBusinessFunction.Initialize.ToString(),
-                                                   OCF.getKeyValueString("Environment"),
-                                                   String.Format("Excetion catched : {0}\n{1}", "Listen on the Wcf to E3...", ex.Message),
-                                                   oGuid.ToString(), sPrefix);
-                oRet.Success = false;
-                oRet.Message = ex.Message;
-            }
+            else
+                oRet = oApi.postListOfMatter(data);
             return oRet;
         }
-       
-
+      
         public String postEcho()
         {
             return "Echo from service";
         }
-        public String PingService(String sWithCorrelId)
-        {
-
-            TracePending.Trace(String.Format("Ping received with CorrelId {0}", sWithCorrelId));
-            String sRet = getServiceInformation();
-            stopActivity();
-            return sRet;
-
-        }
+        
     }
 }

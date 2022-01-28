@@ -52,10 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IE3MatterApi.cs" />
-    <Compile Include="IE3Api.cs" />
-    <Compile Include="IWcfClientMattersApi.cs" />
-    <Compile Include="IWcfClientBase.cs" />
+    <Compile Include="Servers\IE3MatterApi.cs" />
+    <Compile Include="Servers\IE3Api.cs" />
+    <Compile Include="Clients\IWcfClientMattersApi.cs" />
+    <Compile Include="IWcfBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

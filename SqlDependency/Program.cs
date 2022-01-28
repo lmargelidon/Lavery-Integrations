@@ -18,8 +18,8 @@ using Lavery.Tools.Configuration.Management;
 using Org.OpenAPITools.Model;
 using Newtonsoft.Json;
 using System.Messaging;
-using Laverfy.Wcf.Schemas;
-using Laverfy.Wcf.Schemas.Matters;
+
+
 using Lavery.ClassResponse.Generator;
 using Lavery.Wcf.Core;
 
@@ -288,14 +288,14 @@ namespace SqlDependency
             Boolean bLoop = true;
             int i = 10;
             
-            
-           /* genereAllResponsesClasses oGEneration = new genereAllResponsesClasses(oCF, "WcfResApiResponseGenerationPath");
+          
+          genereAllResponsesClasses oGEneration = new genereAllResponsesClasses(oCF, "WcfResApiResponseGenerationPath");
             oGEneration.doJob("ConnectionSource", "Lavery.Wcf.Core");
-           */
+          
             
             while (bLoop)
                     {
-                    //MattterGetResponse oRep = oMatter.getMatters(i++);
+                    //MatterGetResponse oRep = oMatter.getMatters(i++);
                     ConsoleKeyInfo key = Console.ReadKey();
                 
                     switch (key.Key)

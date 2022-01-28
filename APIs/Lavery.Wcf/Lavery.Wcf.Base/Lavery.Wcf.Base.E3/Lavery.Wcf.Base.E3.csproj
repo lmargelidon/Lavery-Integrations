@@ -50,6 +50,10 @@
     <Compile Include="WcfBaseClient.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\LaveryGeneric\Lavery.Tools\Lavery.Tools.csproj">
+      <Project>{aff8dbe0-e162-44bd-8fcd-9f8da78e1457}</Project>
+      <Name>Lavery.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Lavery.Wcf.Interfaces\Lavery.Wcf.Interface.E3\Lavery.Wcf.Interface.E3.csproj">
       <Project>{217eea4d-bf3b-41c6-b3a9-570c3bf05ee6}</Project>
       <Name>Lavery.Wcf.Interface.E3</Name>

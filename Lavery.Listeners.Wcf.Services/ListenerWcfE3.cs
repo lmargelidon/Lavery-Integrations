@@ -92,7 +92,8 @@ namespace Lavery.Listeners
                 isInitialized = true;
             }
             catch (Exception ex)
-            {               
+            {
+                Console.WriteLine("\t\t\tFail to Initializing listener on Wcf to E3 execption catched : " +ex.Message);
                 persistEventManager.logError(LaveryBusinessFunctions.eCategory.ListenerAssiduityMsMq.ToString(),
                                                    LaveryBusinessFunctions.eBusinessFunction.Initialize.ToString(),
                                                    OConnectionFactory.getKeyValueString("Environment"),

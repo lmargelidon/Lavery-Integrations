@@ -8,7 +8,8 @@ namespace Lavery.Schemas.E3
 {
     public class TimeCard
 	{
-		public typeEnvelopp etypeEnvelopp { get; set; }		
+		public typeEnvelopp etypeEnvelopp { get; set; }
+		
 		public Guid refGuid { get; set; }
 		public Guid TimecardID { get; set; } 
 		public int TimeIndex { get; set; }

@@ -157,7 +157,7 @@ namespace Lavery.ClassResponse.Generator
             if (sColName.Equals("ItemID", StringComparison.CurrentCultureIgnoreCase))
                 sType = "uniqueidentifier";
             else if(sColName.Substring(0, 2).Equals("is", StringComparison.CurrentCultureIgnoreCase))
-                sType = "tinyint";
+                sType = "Boolean";
             else if (sColName.Substring(0, 3).Equals("has", StringComparison.CurrentCultureIgnoreCase))
                 sType = "tinyint";
 

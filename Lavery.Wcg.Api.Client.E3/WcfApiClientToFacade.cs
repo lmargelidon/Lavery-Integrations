@@ -17,9 +17,12 @@ using Lavery.Client.E3;
 using Org.OpenAPITools.Model;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using Laverfy.Wcf.Schemas;
-using Laverfy.Wcf.Schemas.Matters;
+
+
 using Lavery.Wcf.Core;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Lavery.Wcf.Api.Client.E3
 {
@@ -27,13 +30,13 @@ namespace Lavery.Wcf.Api.Client.E3
     public class WcfApiClientToFacade : WcfBaseClient
     {
         //ConnectionPool<IGenericConnection, genericWCFConnection<IWcfClientMattersApi>> oPool = new ConnectionPool<IGenericConnection, genericWCFConnection<IWcfClientMattersApi>>();
-        IWcfClientMattersApi proxy = default(IWcfClientMattersApi);
+        IE3Api proxy = default(IE3Api);
         public WcfApiClientToFacade(String sWithWCFEndPointName)
             : base(sWithWCFEndPointName)
         {
             try
             {
-                var factory = new ChannelFactory<IWcfClientMattersApi>(new WebHttpBinding(), "HTTP://Localhost:8100");
+                var factory = new ChannelFactory<IE3Api>(new WebHttpBinding(), "HTTP://Localhost:8100");
                 factory.Endpoint.Behaviors.Add(new WebHttpBehavior());
                 proxy = factory.CreateChannel();
             }
@@ -44,32 +47,15 @@ namespace Lavery.Wcf.Api.Client.E3
 
         }
 
-        public MattterGetResponse postListOfMatter(MattersGet data)
+        public genericResponse postListOfMatter(MatterGetMattersRequest data)
         {
-            MattterGetResponse oRet = default(MattterGetResponse);
-             
+            genericResponse oRet = default(genericResponse);
+
             try
             {
                 
-                //genericWCFConnection<IWcfClientMattersApi> oGenericWrapper = (genericWCFConnection<IWcfClientMattersApi>)oPool.getConnection(sWCFEndPointName);
-                try
-                {
-                    //IWcfClientMattersApi proxy = (IWcfClientMattersApi)oGenericWrapper.getConnection();
-
-                    //E3EAPIMatterModelsMatterGetResponse oRet1 = default(E3EAPIMatterModelsMatterGetResponse);
-                    oRet = proxy.postListOfMatter(data);
-                }
-                catch (Exception ex)
-                {
-
-                    throw (ex);
-                }
-                finally
-                {
-                    //oPool.releaseGenericConnection(oGenericWrapper);
-
-                }
-                
+                oRet = proxy.postListOfMatter(data);
+               
             }
             catch (Exception ex)
             {
@@ -77,6 +63,31 @@ namespace Lavery.Wcf.Api.Client.E3
             }
             return oRet;
         }
+        /*
+        private async Task<HttpResponseMessage> SendRequestAsync(string adaptiveUri, string xmlRequest)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                StringContent httpConent = new StringContent(xmlRequest, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage responseMessage = null;
+                try
+                {
+                    responseMessage = await httpClient.PostAsync(adaptiveUri, httpConent);
+                }
+                catch (Exception ex)
+                {
+                    if (responseMessage == null)
+                    {
+                        responseMessage = new HttpResponseMessage();
+                    }
+                    responseMessage.StatusCode = HttpStatusCode.InternalServerError;
+                    responseMessage.ReasonPhrase = string.Format("RestHttpClient.SendRequest failed: {0}", ex);
+                }
+                return responseMessage;
+            }
+        }
+        */
 
     }
 }

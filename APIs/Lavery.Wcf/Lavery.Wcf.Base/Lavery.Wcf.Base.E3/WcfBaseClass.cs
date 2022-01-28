@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Lavery.Tools;
+using Lavery.Tools.Runtime;
 //using LsaAspects;
 
 namespace Lavery.Wcf.Api.E3
@@ -86,7 +88,18 @@ namespace Lavery.Wcf.Api.E3
             { }
             return sRet;
         }
+        public String PingService()
+        {
 
-       
+            TracePending.Trace(String.Format("Ping received with CorrelId {0}", "mé.,més.gm"));
+            String sRet = getServiceInformation();
+            stopActivity();
+            return sRet;
+
+        }
+
+
+
+
     }
 }

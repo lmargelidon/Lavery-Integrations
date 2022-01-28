@@ -20,7 +20,7 @@ namespace Lavery.ClassResponse.Generator
         public void doJob(String sConnectionStringName, String sNameSpace)
         {
             List<classBuilderGeneric> lGeneric = new List<classBuilderGeneric>();
-            lGeneric.Add(new classBuilderMatters(OCF, "MattterGetResponse"));
+            lGeneric.Add(new classBuilderMatters(OCF, "MatterGetResponse"));
             
             classBuilderFromTableDefinition oDef = new classBuilderFromTableDefinition(OCF,sConnectionStringName);
             
