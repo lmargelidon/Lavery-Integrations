@@ -4,18 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{217EEA4D-BF3B-41C6-B3A9-570C3BF05EE6}</ProjectGuid>
+    <ProjectGuid>{98A12C03-E47C-4CC2-ADC7-396F35527C60}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lavery.Wcf.Interface.E3</RootNamespace>
-    <AssemblyName>Lavery.Wcf.Interface.E3</AssemblyName>
+    <RootNamespace>Laverfy.Wcf.Schemas</RootNamespace>
+    <AssemblyName>Laverfy.Wcf.Schemas</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,15 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Org.OpenAPITools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Lavery.Client.E3\bin\Debug\Org.OpenAPITools.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,25 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Servers\IE3MatterApi.cs" />
-    <Compile Include="Servers\IE3Api.cs" />
-    <Compile Include="Clients\IWcfClientMattersApi.cs" />
-    <Compile Include="IWcfBase.cs" />
+    <Compile Include="genericResponse.cs" />
+    <Compile Include="Matters\MattDate.cs" />
+    <Compile Include="Matters\MatterGetResponseDetail.cs" />
+    <Compile Include="Matters\MattersGetResponse.cs" />
+    <Compile Include="Matters\MattRate.cs" />
+    <Compile Include="Matters\RateExc.cs" />
+    <Compile Include="Matters\RateExcDet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\LaveryGeneric\Lavery.Tools\Lavery.Tools.csproj">
-      <Project>{aff8dbe0-e162-44bd-8fcd-9f8da78e1457}</Project>
-      <Name>Lavery.Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Lavery.Client.E3\Lavery.Client.E3.csproj">
-      <Project>{cb1e2ac9-670a-4e85-9e21-72bd4dadad34}</Project>
-      <Name>Lavery.Client.E3</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Lavery.Wcf.Schemas\Lavery.Wcf.Schemas.csproj">
-      <Project>{98a12c03-e47c-4cc2-adc7-396f35527c60}</Project>
-      <Name>Lavery.Wcf.Schemas</Name>
-    </ProjectReference>
+    <Compile Include="responseBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

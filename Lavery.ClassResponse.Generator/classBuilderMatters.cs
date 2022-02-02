@@ -15,7 +15,7 @@ namespace Lavery.ClassResponse.Generator
         
         MatterApiFacade oFacadeMatter;        
 
-        public classBuilderMatters(connectionFactory OCF, String sFinalClassName): base(OCF, sFinalClassName)
+        public classBuilderMatters(connectionFactory OCF, String sFinalClassName, String sBaseTableName) : base(OCF, sFinalClassName, sBaseTableName)
         {
             try
             {        
@@ -27,15 +27,15 @@ namespace Lavery.ClassResponse.Generator
             }
         }
 
-        public override Dictionary<String, tableDS> getInformations()
+        public override Composite getInformations()
         {
-            Dictionary<String, tableDS> oDico = default(Dictionary<String, tableDS>);
+            Composite oComposite = default(Composite); 
             try
             {
                 MatterGetMattersRequest dataE3 = new MatterGetMattersRequest();
 
                 dataE3.matterId = null;
-                dataE3.mattIndex = 10;
+                dataE3.mattIndex = 467;
                 dataE3.number = null;
                 dataE3.advancedFilterChildObjectsToInclude = null;
                 dataE3.advancedFilterAttributesToInclude = null;
@@ -48,25 +48,30 @@ namespace Lavery.ClassResponse.Generator
                 dataE3.acceptLanguage = null;
                 E3EAPIMatterModelsMatterGetResponse oRetE3 = default(E3EAPIMatterModelsMatterGetResponse);
                 Console.WriteLine("\t\t\tListener Wcf to E3 called ...");
-                oRetE3 = oFacadeMatter.MatterGetMatters(dataE3);                               
+                oRetE3 = oFacadeMatter.MatterGetMatters(dataE3);
 
+                recursiveInformation<E3EAPIMatterModelsMatter> oRecINfo = new recursiveInformation<E3EAPIMatterModelsMatter>();
+
+                
                 foreach (E3EAPIMatterModelsMatter oElt in oRetE3.Matters)
                 {
                     List<String> lDef = new List<String>();
                     foreach (KeyValuePair<String, E3EAPIDataModelsAttribute> pair in oElt.Attributes)                    
                         lDef.Add(pair.Key.Replace("1",""));
-                    
-                    oDico = organizeClassesInformations("Matter", lDef);
-                    break; // just one
-                }               
-               
+
+                    //oDico = organizeClassesInformations("Matter", lDef);
+
+                    oComposite = oRecINfo.recursOrganizeInformation(oElt, this.SBaseTableName);
+
+                } 
+                
             }
             catch (Exception ex)
             {
                 Console.WriteLine("\t\t\tCall E3 MatterGetMatters()->Exception Thrown : {0}", ex.Message);
                
             }
-            return oDico;
+            return oComposite;
         }
     }
 }

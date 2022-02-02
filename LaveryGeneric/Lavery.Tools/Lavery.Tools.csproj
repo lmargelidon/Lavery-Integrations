@@ -125,6 +125,7 @@
     <Compile Include="Runtime\TracePending.cs" />
     <Compile Include="Stack.cs" />
     <Compile Include="SynchronizeGlobalInstance.cs" />
+    <Compile Include="Templates\ComposantComposite.cs" />
     <Compile Include="Traces\Events\AuditEventEntry.cs" />
     <Compile Include="Traces\Events\EventEntry.cs" />
     <Compile Include="Traces\Events\EventEntryBase.cs" />

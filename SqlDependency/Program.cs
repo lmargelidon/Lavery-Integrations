@@ -277,7 +277,7 @@ namespace SqlDependency
 
             connectionFactory oCF = new connectionFactory();
             
-            Helpers.Start(true, "S1");
+            //Helpers.Start(true, "S1");
             
             MattersManagement oMatter = new MattersManagement();
             /*
@@ -288,14 +288,14 @@ namespace SqlDependency
             Boolean bLoop = true;
             int i = 10;
             
-          
-          genereAllResponsesClasses oGEneration = new genereAllResponsesClasses(oCF, "WcfResApiResponseGenerationPath");
+         
+            genereAllResponsesClasses oGEneration = new genereAllResponsesClasses(oCF, "WcfResApiResponseGenerationPath");
             oGEneration.doJob("ConnectionSource", "Lavery.Wcf.Core");
-          
+         
             
             while (bLoop)
                     {
-                    //MatterGetResponse oRep = oMatter.getMatters(i++);
+                    //genericResponse oRep = oMatter.getMatters(i++);
                     ConsoleKeyInfo key = Console.ReadKey();
                 
                     switch (key.Key)

@@ -16,7 +16,7 @@ using System.Runtime.Serialization;
 namespace {0}
 {{
      [DataContract]
-    public class {1} : Object
+    public class {1} : responseBase
     {{
 {2}
     }}

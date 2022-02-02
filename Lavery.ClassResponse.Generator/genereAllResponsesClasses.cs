@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lavery.Tools;
 using Lavery.Tools.Configuration.Management;
 
 namespace Lavery.ClassResponse.Generator
@@ -20,14 +21,14 @@ namespace Lavery.ClassResponse.Generator
         public void doJob(String sConnectionStringName, String sNameSpace)
         {
             List<classBuilderGeneric> lGeneric = new List<classBuilderGeneric>();
-            lGeneric.Add(new classBuilderMatters(OCF, "MatterGetResponse"));
+            lGeneric.Add(new classBuilderMatters(OCF, "MatterGetResponseDetail", "Matters"));
             
             classBuilderFromTableDefinition oDef = new classBuilderFromTableDefinition(OCF,sConnectionStringName);
             
             foreach (classBuilderGeneric oObj in lGeneric)
-            {                
-                Dictionary<String, tableDS> oGeneric = oObj.getInformations();
-                oDef.genereAllClasses(oGeneric, sNameSpace, OCF.getKeyValueString(sKeyConfigPath), oObj.SFinaleClassName);
+            {
+                Composite oGeneric = oObj.getInformations();
+                oDef.genereAllClasses(oGeneric, sNameSpace, OCF.getKeyValueString(sKeyConfigPath), oObj.SFinaleClassName, oObj.SBaseTableName);
             }
         }
     }

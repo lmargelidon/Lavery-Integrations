@@ -8,68 +8,93 @@ using Lavery.Tools.Configuration.Management;
 using System.Data;
 using System.Data.SqlClient;
 using Lavery.Constants;
+using Lavery.Tools;
 
 namespace Lavery.ClassResponse.Generator
 {
-    public class fieldDef
+    public class fieldDef : Composant
     {
-        String sName;
-        Type oType;
+
         int iLen;
-        public fieldDef(String sName)
-        {
-            this.sName = sName;
+        
+        public fieldDef(String sName, String sExtendedTypeType = default(String)) : base(sName, sExtendedTypeType)
+        {            
+            
         }
 
-        public Type OType { get => oType; set => oType = value; }
         public int ILen { get => iLen; set => iLen = value; }
-        public string SName { get => sName; }
 
         public void setTypeFromSqlType(String sWithSqlType)
         {
-            if (sWithSqlType.Equals("varchar", StringComparison.CurrentCultureIgnoreCase) ||
-                sWithSqlType.Equals("nvarchar", StringComparison.CurrentCultureIgnoreCase))
-                oType = typeof(String);
-            else if (sWithSqlType.Equals("uniqueidentifier", StringComparison.CurrentCultureIgnoreCase))
-                oType = typeof(Guid);
-            else if (sWithSqlType.Equals("int", StringComparison.CurrentCultureIgnoreCase))
-                oType = typeof(int);
-            else if (sWithSqlType.Equals("tinyint", StringComparison.CurrentCultureIgnoreCase))
-                oType = typeof(Boolean);
-            else if (sWithSqlType.Equals("dateTime", StringComparison.CurrentCultureIgnoreCase))
-                oType = typeof(DateTime);
-            else if (sWithSqlType.Equals("date", StringComparison.CurrentCultureIgnoreCase))
-                oType = typeof(DateTime);
-            else if (sWithSqlType.Equals("void", StringComparison.CurrentCultureIgnoreCase))
-                oType = typeof(void);
-            else if (sWithSqlType.Equals("decimal", StringComparison.CurrentCultureIgnoreCase))
-                oType = typeof(Decimal);
-            else
-                throw (new Exception(String.Format("Type Sql<{0}> not supported", sWithSqlType)));
-        }   
+            if (SExtendedTypeType == default(String))
+            {
+                if (sWithSqlType.Equals("varchar", StringComparison.CurrentCultureIgnoreCase) ||
+                    sWithSqlType.Equals("nvarchar", StringComparison.CurrentCultureIgnoreCase))
+                    OType = typeof(String);
+                else if (sWithSqlType.Equals("uniqueidentifier", StringComparison.CurrentCultureIgnoreCase))
+                    OType = typeof(Guid);
+                else if (sWithSqlType.Equals("int", StringComparison.CurrentCultureIgnoreCase))
+                    OType = typeof(int);
+                else if (sWithSqlType.Equals("tinyint", StringComparison.CurrentCultureIgnoreCase))
+                    OType = typeof(Boolean);
+                else if (sWithSqlType.Equals("Boolean", StringComparison.CurrentCultureIgnoreCase))
+                    OType = typeof(Boolean);
+                else if (sWithSqlType.Equals("dateTime", StringComparison.CurrentCultureIgnoreCase))
+                    OType = typeof(DateTime);
+                else if (sWithSqlType.Equals("date", StringComparison.CurrentCultureIgnoreCase))
+                    OType = typeof(DateTime);
+                else if (sWithSqlType.Equals("void", StringComparison.CurrentCultureIgnoreCase))
+                    OType = typeof(void);
+                else if (sWithSqlType.Equals("decimal", StringComparison.CurrentCultureIgnoreCase))
+                    OType = typeof(Decimal);
+                else
+                    throw (new Exception(String.Format("Type Sql<{0}> not supported", sWithSqlType)));
+            }
+        }
     }
+    /*
+   
     public class tableDS : Object 
     {
         
         String sSchema;
         String sTableName;
-        List<fieldDef> lField;
+        composansite oComposansite;
         public tableDS(String sSchema, String sTableName)
         {
             this.sSchema = sSchema;
-            this.sTableName = sTableName;
-            lField = new List<fieldDef>();            
+            this.sTableName = sTableName;                        
         }
 
         public string SSchema { get => sSchema;  }
         public string STableName { get => sTableName;  }
-        public List<fieldDef> LField { get => lField; }
+        public composansite OComposansite { get => oComposansite; }
 
         public void addField(String sFieldName)
         {
-            LField.Add(new fieldDef(sFieldName));
+            oComposansite.add(new fieldDef(sFieldName));
         }
+        public composansite addComposite(String sComposansite, String sCompisteParent)
+        {
+            composansite oRet = default(composansite);
+            if (sCompisteParent == default(String))
+            {
+                oComposansite = new composansite(sComposansite);
+                oRet = oComposansite;
+            }
+            else
+                if (oComposansite.SName.Equals(sCompisteParent))
+                {
+                    oRet = new composansite(sComposansite);
+                    oComposansite.add(oRet);
+                }
+                else
+                    foreach (composantBase oBase in oComposansite.LComposants)
+                    if(oBase.GetType() = kindoff
+                        
+        }        
     }
+    */
     public class classBuilderFromTableDefinition : Object
     {
         connectionFactory oConnectionFactory;
@@ -81,32 +106,60 @@ namespace Lavery.ClassResponse.Generator
             this.sConnectionStringName = sConnectionStringName;
         }
 
-        public void genereAllClasses(Dictionary<String, tableDS> oDico, String sNameSpace, String sPath, String sFinalClassName)
+        public void genereAllClasses(Composite oComposite, String sNameSpace, String sPath, String sFinalClassName, String sBaseTableName)
         {
-            SqlConnection oConnection = default(SqlConnection);
+            SqlConnection oConnection = default(SqlConnection);           
+
             using (oConnection = new SqlConnection(oConnectionFactory.ConnectionString(sConnectionStringName)))
             {
                 oConnection.Open();
-                foreach (KeyValuePair<String, tableDS> oPair in oDico)
-                {
-                    genereClass(oConnection, oPair.Value, sNameSpace, sPath, sFinalClassName);
-                }
-            }
-            if(oConnection != default(SqlConnection))
-                oConnection.Close();
-            
-        }
-        
-        private void genereClass(SqlConnection oConnection, tableDS oTableDs, String sNameSpace, String sPath, String sClasseName)
-        {
-
+                genereAllClasses(oConnection, oComposite, sNameSpace, sPath, sFinalClassName, sBaseTableName);
+               /*
                 Dictionary<String, fieldDef> oDicField = new Dictionary<String, fieldDef>();
-                using (var command = new SqlCommand(String.Format("select * from information_schema.columns where table_schema = '{0}' and table_name = '{1}'", oTableDs.SSchema, oTableDs.STableName), oConnection))
+                fieldDef oDef = new fieldDef("L" + sFinalClassName + "s", String.Format("List<{0}>", sFinalClassName));
+                oDicField.Add(sFinalClassName, oDef);
+                genereClass(oConnection, oDicField, sNameSpace, sPath, sFinalClassName + "s", sBaseTableName);
+               */
+            }
+            if (oConnection != default(SqlConnection))
+                oConnection.Close();
+
+        }
+        public void genereAllClasses(SqlConnection oConnection, Composite oComposite, String sNameSpace, String sPath, String sFinalClassName, String sBaseTableName)
+        {   
+            Dictionary<String, fieldDef> oDicField = new Dictionary<String, fieldDef>();
+
+            
+            foreach (ComposantComposite oValue in oComposite.LComposants)
+            {
+                if (oValue.GetType() == typeof(Composite))
+                {
+                    genereAllClasses(oConnection, (Composite)oValue, sNameSpace, sPath, oValue.SName, oValue.SName);
+                    try
+                    {
+                        fieldDef oDef = new fieldDef("L" + oValue.SName, String.Format("List<{0}>", oValue.SName));
+                        oDicField.Add(oValue.SName, oDef);
+                    }
+                    catch (Exception ex)
+                    { 
+                    }
+                }
+                else
+                    oDicField.Add(oValue.SName,  (fieldDef)oValue);
+                // genereClass(oConnection, oValue, sNameSpace, sPath, sFinalClassName);
+            }
+            genereClass(oConnection, oDicField, sNameSpace, sPath, sFinalClassName, sBaseTableName);
+
+           
+        }
+
+        private void genereClass(SqlConnection oConnection, Dictionary<String, fieldDef> oDicField , String sNameSpace, String sPath, String sClasseName, String sBaseTableName)
+        {
+                
+                using (var command = new SqlCommand(String.Format("select * from information_schema.columns where table_schema = '{0}' and table_name = '{1}'", "dbo", sBaseTableName), oConnection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        foreach (fieldDef oField in oTableDs.LField)
-                            oDicField.Add(oField.SName, oField);
+                    {     
                         try
                         {
                             while (reader.Read())
@@ -139,17 +192,19 @@ namespace Lavery.ClassResponse.Generator
                 {
                     if (oPair.Value.OType == default(Type))
                         adjustTypeApproximatively(oPair.Value);                        
-                    sAttributes += String.Format(LaveryTemplates.sAttributesTemplate, oPair.Value.OType.ToString(), oPair.Value.SName.Replace(".", "_"));
+                    sAttributes += String.Format(LaveryTemplates.sAttributesTemplate, oPair.Value.SExtendedTypeType!= default(String)? oPair.Value.SExtendedTypeType : oPair.Value.OType.ToString(), oPair.Value.SName.Replace(".", "_"));
                 }
                 String sOut = String.Format(LaveryTemplates.sClasseTemplate, sNameSpace, sClasseName, sAttributes);
                 if(sPath[sPath.Length - 1] != '\\')
                     sPath += '\\';
                 using (var sw = new StreamWriter(string.Format("{0}{1}.cs", sPath,sClasseName)))
                     sw.WriteLine(sOut);
+          
 
         }
         private void adjustTypeApproximatively(fieldDef oField)
         {
+          
             String sType = "nvarchar";
             String[] aVal = oField.SName.Split('.');
             String sColName = aVal[aVal.Length - 1];
@@ -162,6 +217,10 @@ namespace Lavery.ClassResponse.Generator
                 sType = "tinyint";
 
             oField.setTypeFromSqlType(sType);
+          
         }
+        
+        
+
     }
 }
