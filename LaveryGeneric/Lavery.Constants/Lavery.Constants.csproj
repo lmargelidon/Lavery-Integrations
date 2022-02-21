@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LaveryBusinessFunctions.cs" />
+    <Compile Include="LaverySql.cs" />
     <Compile Include="LaveryTemplates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="reflectionGeneration.cs" />

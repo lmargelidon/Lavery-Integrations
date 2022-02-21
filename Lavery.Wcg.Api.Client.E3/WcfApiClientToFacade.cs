@@ -23,6 +23,7 @@ using Lavery.Wcf.Core;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Lavery.Tools.Configuration.Management;
 
 namespace Lavery.Wcf.Api.Client.E3
 {
@@ -36,7 +37,8 @@ namespace Lavery.Wcf.Api.Client.E3
         {
             try
             {
-                var factory = new ChannelFactory<IE3Api>(new WebHttpBinding(), "HTTP://Localhost:8100");
+                connectionFactory oCF = new connectionFactory();
+                var factory = new ChannelFactory<IE3Api>(new WebHttpBinding(), oCF.getKeyValueString("WcfListenerClient"));
                 factory.Endpoint.Behaviors.Add(new WebHttpBehavior());
                 proxy = factory.CreateChannel();
             }

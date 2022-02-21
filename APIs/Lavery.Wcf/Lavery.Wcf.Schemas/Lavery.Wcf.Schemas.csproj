@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="genericResponse.cs" />
+    <Compile Include="Matters\Mandat.cs" />
     <Compile Include="Matters\MattDate.cs" />
     <Compile Include="Matters\MatterGetResponseDetail.cs" />
     <Compile Include="Matters\MattersGetResponse.cs" />

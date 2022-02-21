@@ -22,6 +22,7 @@ using System.Messaging;
 
 using Lavery.ClassResponse.Generator;
 using Lavery.Wcf.Core;
+using EF.Entities.management;
 
 
 
@@ -270,6 +271,10 @@ namespace SqlDependency
             }
             */
             //int x = (int)Math.Ceiling((double)12 / (double)8);
+
+
+
+
            
             persistEventManager.init();
             Guid oGuid = Guid.NewGuid();
@@ -287,12 +292,17 @@ namespace SqlDependency
            */
             Boolean bLoop = true;
             int i = 10;
+
+
+            EntitiesGenerator oEntitiesGenerator = new EntitiesGenerator(oCF, "Matter", "MattBudget", "InvMaster");
+            oEntitiesGenerator.doJob("Notarier", "Lavery.OData.Notarier");
             
-         
-            genereAllResponsesClasses oGEneration = new genereAllResponsesClasses(oCF, "WcfResApiResponseGenerationPath");
-            oGEneration.doJob("ConnectionSource", "Lavery.Wcf.Core");
-         
-            
+
+
+            //genereAllResponsesClasses oGEneration = new genereAllResponsesClasses(oCF, "WcfResApiResponseGenerationPath");
+            //oGEneration.doJob("ConnectionSource", "Lavery.Wcf.Core");
+
+
             while (bLoop)
                     {
                     //genericResponse oRep = oMatter.getMatters(i++);
