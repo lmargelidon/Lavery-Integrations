@@ -16,17 +16,26 @@ namespace Lavery.Helper.ClassGenerator
     {
 
         int iLen;
+        Boolean isPK;
+        Boolean isNullable;
         List<String> lAttributes = new List<String>();
+        String sForeignTable;
 
 
-        public fieldDef(String sName, String sExtendedTypeType = default(String), List<String> lAttributes = default(List<String>)) : base(sName, sExtendedTypeType)
+        public fieldDef(String sName, Boolean IsPK, Boolean isNullable, String sExtendedTypeType = default(String), String sForeignTable = default(String),  List<String> lAttributes = default(List<String>) ) : base(sName, sExtendedTypeType)
         {
             if(lAttributes != default(List<String>))
                 this.LAttributes.AddRange(lAttributes);
+            this.sForeignTable = sForeignTable;
+            this.isPK = IsPK;
+            this.isNullable = isNullable;
         }
 
         public int ILen { get => iLen; set => iLen = value; }
         public List<string> LAttributes { get => lAttributes; }
+        public string SForeignTable { get => sForeignTable; }
+        public bool IsPK { get => isPK;  }
+        public bool IsNullable { get => isNullable; }
 
         public void setTypeFromSqlType(String sWithSqlType)
         {
@@ -56,54 +65,15 @@ namespace Lavery.Helper.ClassGenerator
             }
         }
     }
-    /*
-   
-    public class tableDS : Object 
-    {
-        
-        String sSchema;
-        String sTableName;
-        composansite oComposansite;
-        public tableDS(String sSchema, String sTableName)
-        {
-            this.sSchema = sSchema;
-            this.sTableName = sTableName;                        
-        }
-
-        public string SSchema { get => sSchema;  }
-        public string STableName { get => sTableName;  }
-        public composansite OComposansite { get => oComposansite; }
-
-        public void addField(String sFieldName)
-        {
-            oComposansite.add(new fieldDef(sFieldName));
-        }
-        public composansite addComposite(String sComposansite, String sCompisteParent)
-        {
-            composansite oRet = default(composansite);
-            if (sCompisteParent == default(String))
-            {
-                oComposansite = new composansite(sComposansite);
-                oRet = oComposansite;
-            }
-            else
-                if (oComposansite.SName.Equals(sCompisteParent))
-                {
-                    oRet = new composansite(sComposansite);
-                    oComposansite.add(oRet);
-                }
-                else
-                    foreach (composantBase oBase in oComposansite.LComposants)
-                    if(oBase.GetType() = kindoff
-                        
-        }        
-    }
-    */
+    
     public class classBuilderFromTableDefinition : Object
     {
         connectionFactory oConnectionFactory;
         String sConnectionStringName;
-       
+        String sSqlOutputStatement;
+
+        public string SSqlOutputStatement { get => sSqlOutputStatement;  }
+
         public classBuilderFromTableDefinition(connectionFactory oConnectionFactory, String sConnectionStringName)
         {
             this.oConnectionFactory = oConnectionFactory;
@@ -123,12 +93,7 @@ namespace Lavery.Helper.ClassGenerator
             {
                 oConnection.Open();
                 genereAllClasses(oConnection, oComposite, sNameSpace, sPath, sFinalClassName, sBaseTableName);
-               /*
-                Dictionary<String, fieldDef> oDicField = new Dictionary<String, fieldDef>();
-                fieldDef oDef = new fieldDef("L" + sFinalClassName + "s", String.Format("List<{0}>", sFinalClassName));
-                oDicField.Add(sFinalClassName, oDef);
-                genereClass(oConnection, oDicField, sNameSpace, sPath, sFinalClassName + "s", sBaseTableName);
-               */
+               
             }
             if (oConnection != default(SqlConnection))
                 oConnection.Close();
@@ -146,7 +111,7 @@ namespace Lavery.Helper.ClassGenerator
                     genereAllClasses(oConnection, (Composite)oValue, sNameSpace, sPath, oValue.SName, oValue.SName);
                     try
                     {
-                        fieldDef oDef = new fieldDef("L" + oValue.SName, String.Format("List<{0}>", oValue.SName));
+                        fieldDef oDef = new fieldDef("L" + oValue.SName, false, false, String.Format("List<{0}>", oValue.SName));
                         oDicField.Add(oValue.SName, oDef);
                     }
                     catch (Exception ex)
@@ -196,14 +161,112 @@ namespace Lavery.Helper.ClassGenerator
                     }
                  
                 }
-                writeClasse(oDicField, sPath, sNameSpace, sClasseName, "responseBase");
+                writeClasse(oDicField, sPath, sNameSpace, sClasseName, true, "responseBase");
+        }
+        public String genereSqlStatement(SqlConnection oConnection, String sSqlStatement, String sBaseTable,
+                                            List<String> lAssociatedTable = default(List<String>),
+                                            List<String> lTableDirectRelationToInclude = default(List<String>))
+        {
+            String sRet = "";
+            /*
+            sRet = "select * from {0} {3}";
+
+
+            Dictionary<String, KeyValuePair<String, List<fieldDef>>> oDicoTemp = new Dictionary<String, KeyValuePair<String, List<fieldDef>>>();
+
+            Dictionary<String, fieldDef> oDicField = getListOfFields(oConnection, sSqlStatement, lAssociatedTable, lTableDirectRelationToInclude);
+            String sMemTableName = "";
+            List<fieldDef> lFK = default(List<fieldDef>);
+            String sKey = default(String);
+            int iPrefix = 1;
+            foreach (KeyValuePair<String, fieldDef> oEntry in oDicField.OrderBy(ch => ch.Key).ToList())
+            {
+                String sEntTableName = oEntry.Key.Split('|')[0];
+
+
+                if (!sEntTableName.Equals(sMemTableName, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    if (sKey != default(String))
+                        if (sMemTableName.Equals(sBaseTable))
+                            oDicoTemp.Add(String.Format("A00|{1}", iPrefix++, sMemTableName), new KeyValuePair<String, List<fieldDef>>(sKey, lFK));
+                        else
+                            oDicoTemp.Add(String.Format("A{0:D2}|{1}", iPrefix++, sMemTableName), new KeyValuePair<String, List<fieldDef>>(sKey, lFK));
+
+                    sMemTableName = sEntTableName;
+                    lFK = new List<fieldDef>();
+                    sKey = default(String);
+                }
+
+                if (oEntry.Value.LAttributes.AsEnumerable().Contains("Key"))
+                    sKey = oEntry.Value.SName;
+                if (oEntry.Value.SForeignTable.Length > 0)
+                    lFK.Add(oEntry.Value);
+            }
+            if (sKey != default(String))
+                oDicoTemp.Add(sMemTableName, new KeyValuePair<String, List<fieldDef>>(sKey, lFK));
+
+            String sFrom = "";
+            List<String> lPerformed = new List<String>();
+            foreach (KeyValuePair<String, KeyValuePair<String, List<fieldDef>>> oTemp in oDicoTemp.OrderBy(ch => ch.Key).ToList())
+            {
+                String sEntTableName = oTemp.Key.Split('|')[1];
+                String sPref = oTemp.Key.Split('|')[0];
+                if (sPref.Equals("00"))
+                {
+                    sFrom = sEntTableName + " " + sPref;
+                    lPerformed.Add(sEntTableName);
+                }
+                else
+                {
+                    foreach (fieldDef oFD in oTemp.Value.Value)
+                    {
+                        KeyValuePair<String, KeyValuePair<String, List<fieldDef>>> oTarget = oDicoTemp.First(o => o.Key.Split('|')[1].Equals(oFD.SForeignTable));
+                        sFrom += (String.Format("left outer join {0} {1}  on {1}.{2} = {4}.{3}", sEntTableName, sPref, oTarget.Key.Split('|')[0], oFD.SForeignTable));
+                        // voir la reccurssion des tables liee quand plusieurs...
+                    }
+                }
+            }
+            */
+            return sRet;
         }
         
-        public List<String> genereEntities(SqlConnection oConnection, String sNameSpace, String sPath, String sSqlStatement, List<String> lAssociatedTable = default(List<String>))
+        public List<String> genereEntities(SqlConnection oConnection, String sNameSpace, String sPath, String sSqlStatement, 
+                                            List<String> lAssociatedTable = default(List<String>),
+                                            List<String> lTableDirectRelationToInclude = default(List<String>))
         {
             List<String> lRet = new List<String>();
             // TableName, ColumnName, TargetTableName,  ColumnType, ColumnMaxLength, ColumnPrecision, ColumnScale
             String sMemTableName = "";
+            Dictionary<String, fieldDef> oDicField = getListOfFields(oConnection, sSqlStatement, lAssociatedTable, lTableDirectRelationToInclude);
+
+            Dictionary<String, fieldDef> oDicFieldFinal = default(Dictionary<String, fieldDef>);
+            foreach (KeyValuePair<String, fieldDef> oEntry in oDicField.OrderBy(ch => ch.Key).ToList())
+            {
+                String sEntTableName = oEntry.Key.Split('|')[0];
+                if (!sEntTableName.Equals(sMemTableName, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    if (oDicFieldFinal != default(Dictionary<String, fieldDef>))
+                        writeClasse(oDicFieldFinal, sPath, sNameSpace, sMemTableName, true, "Object",  "Models");
+                    oDicFieldFinal = new Dictionary<String, fieldDef>();
+                    sMemTableName = sEntTableName;
+                    lRet.Add(sMemTableName);
+                    
+                }
+                oDicFieldFinal.Add(oEntry.Key, oEntry.Value);
+            }
+            if(oDicFieldFinal != default(Dictionary<String, fieldDef>))
+                writeClasse(oDicFieldFinal, sPath, sNameSpace, sMemTableName, true, "Object", "Models");
+
+            return lRet;
+
+        }
+        private Dictionary<String, fieldDef> getListOfFields(    SqlConnection oConnection, String sSqlStatement,
+                                                                List<String> lAssociatedTable = default(List<String>),
+                                                                List<String> lTableDirectRelationToInclude = default(List<String>))
+        {
+            
+            // TableName, ColumnName, TargetTableName,  ColumnType, ColumnMaxLength, ColumnPrecision, ColumnScale
+           
             Dictionary<String, fieldDef> oDicField = new Dictionary<String, fieldDef>();
 
             using (var command = new SqlCommand(sSqlStatement, oConnection))
@@ -219,52 +282,66 @@ namespace Lavery.Helper.ClassGenerator
                             String sTargetTableName = "";
                             String sColumnType = "";
                             int iColumnMaxLength = -1;
+                            Boolean isNullable = false;
+                            Boolean isPk = false;
                             Byte iColumnPrecision = default(Byte);
                             Byte iColumnScale = default(Byte);
-                            int isPk = 0;
+                            
                             List<String> lAttr = new List<string>();
                             fieldDef oField = default(fieldDef);
                             if (reader["TableName"] != DBNull.Value)
-                                sTableName        = (String)reader["TableName"];
+                                sTableName = (String)reader["TableName"];
                             if (reader["ColumnName"] != DBNull.Value)
-                                sColName         = (String)reader["ColumnName"];
+                                sColName = (String)reader["ColumnName"];
                             if (reader["TargetTableName"] != DBNull.Value)
                                 sTargetTableName = (String)reader["TargetTableName"];
                             if (reader["ColumnType"] != DBNull.Value)
-                                sColumnType      = (String)reader["ColumnType"];
+                                sColumnType = (String)reader["ColumnType"];                           
+                            if (reader["isNullable"] != DBNull.Value)
+                                isNullable = ((String)reader["isNullable"]).Equals("Yes", StringComparison.InvariantCultureIgnoreCase) ;                            
                             if (reader["is_PK"] != DBNull.Value)
-                                isPk = (int)reader["is_PK"];
+                                isPk = (Int32)reader["is_PK"] != 0; 
                             if (reader["ColumnMaxLength"] != DBNull.Value)
                                 iColumnMaxLength = (Int16)reader["ColumnMaxLength"];
                             if (reader["ColumnPrecision"] != DBNull.Value)
                                 iColumnPrecision = (Byte)reader["ColumnPrecision"];
                             if (reader["ColumnScale"] != DBNull.Value)
-                                iColumnScale     = (Byte)reader["ColumnScale"];
-                            if (isPk == 1)
+                                iColumnScale = (Byte)reader["ColumnScale"];
+                            if (isPk )
                                 lAttr.Add("Key");
 
-                            if (sTargetTableName.Length > 0 && (lAssociatedTable == default(List<String>) || lAssociatedTable.AsEnumerable().Contains(sTableName)))
+                            if (lTableDirectRelationToInclude == default(List<String>) ||
+                                lTableDirectRelationToInclude.FirstOrDefault(item => item == sTableName) != default(String) ||
+                                lAssociatedTable.FirstOrDefault(item => item == sTableName) != default(String)
+                                )
                             {
-                                sColName = sTableName + "s";
-                                oField = new fieldDef(sColName, String.Format("ICollection<{0}>", sTableName, lAttr));
-                                sTableName = sTargetTableName;
+                                Console.WriteLine(sTableName + "|" + sColName);
+                                if (sTargetTableName.Length > 0 && (lAssociatedTable == default(List<String>) || lAssociatedTable.AsEnumerable().Contains(sTableName)))
+                                {
+                                    oField = new fieldDef(sColName, isPk, isNullable, sTargetTableName, sTargetTableName, lAttr);
+                                    oDicField.Add(sTableName + "|" + sColName, oField);
+                                    sColName = sTableName + "s";
+                                    oField = new fieldDef(sColName, isPk, isNullable, String.Format("ICollection<{0}>", sTableName), sTargetTableName, lAttr);
+                                    oDicField.Add(sTargetTableName + "|" + sColName, oField);                                   
+                                    sTableName = sTargetTableName;
+                                }
+                                else
+                                {
+                                    oField = new fieldDef(sColName, isPk, isNullable, default(String), sTargetTableName, lAttr);
+                                    oDicField.Add(sTableName + "|" + sColName, oField);
+                                }
                                 
+
+                                try
+                                {
+                                    oField.setTypeFromSqlType(sColumnType);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Exception catched : " + ex.Message);
+                                    adjustTypeApproximatively(oField);
+                                }
                             }
-                            else
-                                oField = new fieldDef(sColName, default(String), lAttr);
-                            Console.WriteLine(sTableName + "|" + sColName);
-                            oDicField.Add(sTableName + "|" + sColName, oField); 
-                            
-                            try
-                            {
-                                oField.setTypeFromSqlType(sColumnType);
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine("Exception catched : " + ex.Message);
-                                adjustTypeApproximatively(oField);
-                            }
-                            
                         }
                     }
                     catch (Exception ex)
@@ -274,27 +351,12 @@ namespace Lavery.Helper.ClassGenerator
                 }
 
             }
-            Dictionary<String, fieldDef> oDicFieldFinal = default(Dictionary<String, fieldDef>);
-            foreach (KeyValuePair<String, fieldDef> oEntry in oDicField.OrderBy(ch => ch.Key).ToList())
-            {
-                String sEntTableName = oEntry.Key.Split('|')[0];
-                if (!sEntTableName.Equals(sMemTableName, StringComparison.CurrentCultureIgnoreCase))
-                {
-                    if (oDicFieldFinal != default(Dictionary<String, fieldDef>))
-                        writeClasse(oDicFieldFinal, sPath, sNameSpace, sMemTableName, "Object", true, "Models");
-                    oDicFieldFinal = new Dictionary<String, fieldDef>();
-                    sMemTableName = sEntTableName;
-                    lRet.Add(sMemTableName);
-                }
-                oDicFieldFinal.Add(oEntry.Key, oEntry.Value);
-            }
-            if(oDicFieldFinal != default(Dictionary<String, fieldDef>))
-                writeClasse(oDicFieldFinal, sPath, sNameSpace, sMemTableName, "Object", true, "Models");
-
-            return lRet;
+            
+            return oDicField;
 
         }
-        private void writeClasse(Dictionary<String, fieldDef> oDicField, String sPath, String sNameSpace, String sClasseName, String sDerivedClass, Boolean bForOdata = false, String sSubFolder = default(String))
+        private void writeClasse(Dictionary<String, fieldDef> oDicField, String sPath, String sNameSpace, String sClasseName, Boolean isForEntityFramework, String sDerivedClass,
+                                 String sSubFolder = default(String))
         {
 
             String sAttributes = "";
@@ -303,19 +365,34 @@ namespace Lavery.Helper.ClassGenerator
                 if (oPair.Value.OType == default(Type))
                     adjustTypeApproximatively(oPair.Value);
 
-                if (bForOdata)
+                if (isForEntityFramework)
                 {
                     String sAttr = "";
                     foreach (String s in oPair.Value.LAttributes)
                         sAttr += String.Format("\t\t\t[{0}]", s);
-                    sAttributes += String.Format(LaveryTemplates.sOdataAttributesTemplate, oPair.Value.SExtendedTypeType != default(String) ? oPair.Value.SExtendedTypeType : oPair.Value.OType.ToString(), oPair.Value.SName.Replace(".", "_"), sAttr);
+
+                    String sType = oPair.Value.SExtendedTypeType != default(String) ? oPair.Value.SExtendedTypeType : oPair.Value.OType.ToString();
+                    if (sType.Equals("Boolean"))
+                        sType = "byte";
+                    if (oPair.Value.IsNullable && !sType.Equals("System.String") && !sType.Contains("ICollection"))
+                        sAttributes += String.Format(LaveryTemplates.sOdataAttributesNullabeTemplate, sType, oPair.Value.SName.Replace(".", "_"), sAttr);
+                    else
+                        sAttributes += String.Format(LaveryTemplates.sOdataAttributesTemplate, sType, oPair.Value.SName.Replace(".", "_"), sAttr);
                 }
-                else              
-                    sAttributes += String.Format(LaveryTemplates.sAttributesTemplate, oPair.Value.SExtendedTypeType != default(String) ? oPair.Value.SExtendedTypeType : oPair.Value.OType.ToString(), oPair.Value.SName.Replace(".", "_"));
-               
+                else
+                {
+                    String sType = oPair.Value.SExtendedTypeType != default(String) ? oPair.Value.SExtendedTypeType : oPair.Value.OType.ToString();
+                    if (sType.Equals("Boolean"))
+                        sType = "byte";
+                    if (oPair.Value.IsNullable && !sType.Equals("System.String"))
+                        sAttributes += String.Format(LaveryTemplates.sAttributesNullabeTemplate, sType, oPair.Value.SName.Replace(".", "_"));
+                    else
+                        sAttributes += String.Format(LaveryTemplates.sAttributesTemplate, sType, oPair.Value.SName.Replace(".", "_"));
+                }
+
             }
             String sOut = String.Format(LaveryTemplates.sClasseTemplate, sNameSpace, sClasseName, sAttributes, sDerivedClass);
-            if (bForOdata)
+            if (isForEntityFramework)
                 sOut = String.Format(LaveryTemplates.sODataClasseTemplate, sNameSpace, sClasseName, sAttributes, sDerivedClass);
             else
             {                

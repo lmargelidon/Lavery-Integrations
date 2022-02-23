@@ -128,46 +128,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BankAcct.cs" />
-    <Compile Include="Models\BillingFrequency.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\ConflictStatus.cs" />
-    <Compile Include="Models\CurrencyDateList.cs" />
-    <Compile Include="Models\EBillValList.cs" />
-    <Compile Include="Models\ElecBillingType.cs" />
-    <Compile Include="Models\ElecCostTypeMap.cs" />
-    <Compile Include="Models\ElecTitleMap.cs" />
-    <Compile Include="Models\ElectronicTaxCodeMap.cs" />
-    <Compile Include="Models\Entity.cs" />
-    <Compile Include="Models\GLActivity.cs" />
-    <Compile Include="Models\GLProject.cs" />
     <Compile Include="Models\InvMaster.cs" />
-    <Compile Include="Models\InvoiceOverride.cs" />
-    <Compile Include="Models\Language.cs" />
-    <Compile Include="Models\LxLabel.cs" />
-    <Compile Include="Models\Markup.cs" />
-    <Compile Include="Models\MattAttribute.cs" />
     <Compile Include="Models\MattBudget.cs" />
-    <Compile Include="Models\MattCategory.cs" />
-    <Compile Include="Models\MattCloseType.cs" />
     <Compile Include="Models\Matter.cs" />
-    <Compile Include="Models\MattInterest.cs" />
-    <Compile Include="Models\MattMinType.cs" />
-    <Compile Include="Models\MattStatus.cs" />
-    <Compile Include="Models\MattType.cs" />
-    <Compile Include="Models\NonBillMatType.cs" />
-    <Compile Include="Models\NxCurrencyCode.cs" />
-    <Compile Include="Models\NxFWKUnit.cs" />
-    <Compile Include="Models\NxPrinterTemplate.cs" />
-    <Compile Include="Models\Office.cs" />
-    <Compile Include="Models\Site.cs" />
-    <Compile Include="Models\TaxArea.cs" />
-    <Compile Include="Models\TaxCode.cs" />
-    <Compile Include="Models\TimeIncrement.cs" />
-    <Compile Include="Models\Timekeeper.cs" />
-    <Compile Include="Models\VolumeDiscountGroup.cs" />
-    <Compile Include="Models\WithholdingTax.cs" />
-    <Compile Include="Models\WPType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

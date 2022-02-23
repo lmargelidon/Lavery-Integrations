@@ -15,21 +15,21 @@ namespace Lavery.OData.Notarier.Models
 
             public System.String AltNumber { get; set; } 
 
-            public System.DateTime ApproveDate { get; set; } 
+            public Nullable<System.DateTime> ApproveDate { get; set; } 
 
-            public System.Int32 ApproveTkpr { get; set; } 
+            public Nullable<System.Int32> ApproveTkpr { get; set; } 
 
             public System.String ArchetypeCode { get; set; } 
 
-            public System.Int32 BankAcctAp { get; set; } 
+            public Nullable<System.Int32> BankAcctAp { get; set; } 
 
-            public System.Int32 BillAsMatter { get; set; } 
+            public Nullable<System.Int32> BillAsMatter { get; set; } 
 
-            public System.Guid BillDCSTemplate { get; set; } 
+            public Nullable<System.Guid> BillDCSTemplate { get; set; } 
 
             public System.String BillEmail { get; set; } 
 
-            public System.Guid BillGroupDCSTemplate { get; set; } 
+            public Nullable<System.Guid> BillGroupDCSTemplate { get; set; } 
 
             public System.String BillingFrequency { get; set; } 
 
@@ -37,15 +37,15 @@ namespace Lavery.OData.Notarier.Models
 
             public System.String BillingOffice { get; set; } 
 
-            public System.Int32 BillSite { get; set; } 
+            public Nullable<System.Int32> BillSite { get; set; } 
 
             public System.String ChrgTaxCode { get; set; } 
 
             public System.Int32 Client { get; set; } 
 
-            public System.DateTime CloseDate { get; set; } 
+            public Nullable<System.DateTime> CloseDate { get; set; } 
 
-            public System.Int32 CloseTkpr { get; set; } 
+            public Nullable<System.Int32> CloseTkpr { get; set; } 
 
             public System.String Comments { get; set; } 
 
@@ -61,21 +61,21 @@ namespace Lavery.OData.Notarier.Models
 
             public System.String CostTaxCode { get; set; } 
 
-            public System.Guid CreditNoteDCSTemplate { get; set; } 
+            public Nullable<System.Guid> CreditNoteDCSTemplate { get; set; } 
 
-            public System.Guid CreditNoteGroupDCSTemplate { get; set; } 
+            public Nullable<System.Guid> CreditNoteGroupDCSTemplate { get; set; } 
 
             public System.String Currency { get; set; } 
 
             public System.String CurrencyDateList { get; set; } 
 
-            public System.Guid CurrProcItemID { get; set; } 
+            public Nullable<System.Guid> CurrProcItemID { get; set; } 
 
             public System.String Description { get; set; } 
 
             public System.String DisplayName { get; set; } 
 
-            public System.Int32 DueDays { get; set; } 
+            public Nullable<System.Int32> DueDays { get; set; } 
 
             public System.String EbillValidationList { get; set; } 
 
@@ -83,7 +83,7 @@ namespace Lavery.OData.Notarier.Models
 
             public System.String ElecCostTypeMap { get; set; } 
 
-            public System.Guid ElecDCSTemplate { get; set; } 
+            public Nullable<System.Guid> ElecDCSTemplate { get; set; } 
 
             public System.String ElecInfo { get; set; } 
 
@@ -95,15 +95,15 @@ namespace Lavery.OData.Notarier.Models
 
             public System.String EngageLetterComment { get; set; } 
 
-            public System.DateTime EngageLetterRecDate { get; set; } 
+            public Nullable<System.DateTime> EngageLetterRecDate { get; set; } 
 
-            public System.DateTime EngageLetterSubDate { get; set; } 
+            public Nullable<System.DateTime> EngageLetterSubDate { get; set; } 
 
-            public System.DateTime EntryDate { get; set; } 
+            public Nullable<System.DateTime> EntryDate { get; set; } 
 
-            public System.DateTime EstimatedCompletionDate { get; set; } 
+            public Nullable<System.DateTime> EstimatedCompletionDate { get; set; } 
 
-            public System.Decimal FeeEstimateAmount { get; set; } 
+            public Nullable<System.Decimal> FeeEstimateAmount { get; set; } 
 
             public System.String Field1 { get; set; } 
 
@@ -111,13 +111,13 @@ namespace Lavery.OData.Notarier.Models
 
             public System.String Field3 { get; set; } 
 
-            public System.Guid GLActivity { get; set; } 
+            public Nullable<System.Guid> GLActivity { get; set; } 
 
             public System.String GLProject { get; set; } 
 
-            public System.Int32 GLRespTkpr { get; set; } 
+            public Nullable<System.Int32> GLRespTkpr { get; set; } 
 
-            public System.Boolean HasAttachments { get; set; } 
+            public Nullable<System.Boolean> HasAttachments { get; set; } 
 
             public System.String ICBUnitDueFrom { get; set; } 
 
@@ -133,9 +133,9 @@ namespace Lavery.OData.Notarier.Models
 
             public System.Boolean IsBillStatementIncludeDoubtful { get; set; } 
 
-            public System.Boolean IsConflictsConfidential { get; set; } 
+            public Nullable<System.Boolean> IsConflictsConfidential { get; set; } 
 
-            public System.Boolean IsDefault { get; set; } 
+            public Nullable<System.Boolean> IsDefault { get; set; } 
 
             public System.Boolean IsEBill { get; set; } 
 
@@ -145,7 +145,7 @@ namespace Lavery.OData.Notarier.Models
 
             public System.Boolean IsFeeEstimate { get; set; } 
 
-            public System.Boolean IsForeign { get; set; } 
+            public Nullable<System.Boolean> IsForeign { get; set; } 
 
             public System.Boolean IsICBAcctRec { get; set; } 
 
@@ -157,7 +157,7 @@ namespace Lavery.OData.Notarier.Models
 
             public System.Boolean IsNoBill { get; set; } 
 
-            public System.Boolean IsNonBillable { get; set; } 
+            public Nullable<System.Boolean> IsNonBillable { get; set; } 
 
             public System.Boolean IsNoProforma { get; set; } 
 
@@ -169,7 +169,7 @@ namespace Lavery.OData.Notarier.Models
 
             public System.Int32 Language { get; set; } 
 
-            public System.Guid LastProcItemID { get; set; } 
+            public Nullable<System.Guid> LastProcItemID { get; set; } 
 
             public System.String LoadGroup { get; set; } 
 
@@ -201,7 +201,7 @@ namespace Lavery.OData.Notarier.Models
 
             public System.String MattStatus { get; set; } 
 
-            public System.DateTime MattStatusDate { get; set; } 
+            public Nullable<System.DateTime> MattStatusDate { get; set; } 
 
             public System.String MattType { get; set; } 
 
@@ -217,25 +217,25 @@ namespace Lavery.OData.Notarier.Models
 
             public System.Int32 OpenTkpr { get; set; } 
 
-            public System.Guid OrigProcItemID { get; set; } 
+            public Nullable<System.Guid> OrigProcItemID { get; set; } 
 
             public System.String PaymentTermsInfo { get; set; } 
 
-            public System.Int32 ProBonoEntity { get; set; } 
+            public Nullable<System.Int32> ProBonoEntity { get; set; } 
 
             public System.String ProBonoInfo { get; set; } 
 
-            public System.Guid ProfDCSTemplate { get; set; } 
+            public Nullable<System.Guid> ProfDCSTemplate { get; set; } 
 
             public System.String ProformaEmail { get; set; } 
 
             public System.String ReferralInfo { get; set; } 
 
-            public System.Int32 RelMattIndex { get; set; } 
+            public Nullable<System.Int32> RelMattIndex { get; set; } 
 
-            public System.Int32 StatementSite { get; set; } 
+            public Nullable<System.Int32> StatementSite { get; set; } 
 
-            public System.Guid StmtDCSTemplate { get; set; } 
+            public Nullable<System.Guid> StmtDCSTemplate { get; set; } 
 
             public System.String TaxReportID1 { get; set; } 
 
@@ -243,7 +243,7 @@ namespace Lavery.OData.Notarier.Models
 
             public System.String TimeIncrement { get; set; } 
 
-            public System.DateTime TimeStamp { get; set; } 
+            public Nullable<System.DateTime> TimeStamp { get; set; } 
 
             public System.String TimeTaxCode { get; set; } 
 
@@ -255,9 +255,9 @@ namespace Lavery.OData.Notarier.Models
 
             public System.String WaiverLetterComment { get; set; } 
 
-            public System.DateTime WaiverLetterRecDate { get; set; } 
+            public Nullable<System.DateTime> WaiverLetterRecDate { get; set; } 
 
-            public System.DateTime WaiverLetterSubDate { get; set; } 
+            public Nullable<System.DateTime> WaiverLetterSubDate { get; set; } 
 
             public System.String WithholdingTax { get; set; } 
 

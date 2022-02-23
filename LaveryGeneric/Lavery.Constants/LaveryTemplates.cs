@@ -38,6 +38,9 @@ namespace {0}.Models
         static public String sAttributesTemplate = @"
             [DataMember]
             public {0} {1} {{ get; set; }}";
+        static public String sAttributesNullabeTemplate = @"
+            [DataMember]
+            public Nullable<{0}> {1} {{ get; set; }}";
 
         static public String sOdataClasseContextTemplate = @"
 using System;
@@ -55,13 +58,15 @@ namespace {0}.Controllers
     public class {1}Context : DbContext
     {{
 
-        public {1}Context() : base(""{1}"")
+        public {1}Context() : base(""{1}Context"")
         {{
         }}
 {2}
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {{
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            Database.SetInitializer<{1}Context>(null);
+			base.OnModelCreating(modelBuilder);						
         }}
     }}
 }}
@@ -129,6 +134,9 @@ namespace {0}.Service
         static public String sOdataAttributesTemplate = @" 
 {2}
             public {0} {1} {{ get; set; }}";
+        static public String sOdataAttributesNullabeTemplate = @" 
+{2}
+            public Nullable<{0}> {1} {{ get; set; }}";
 
     }
 }

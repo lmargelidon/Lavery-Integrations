@@ -239,10 +239,6 @@
       <Project>{0f4d3579-dbf2-4a9b-aa35-91e75d2ea898}</Project>
       <Name>Lavery.Wcf.Api.Client.E3</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LaveryGeneric\AutomaticBuilders\EntityFrameworkManagement\EntityFrameworkManagement.csproj">
-      <Project>{c9057700-51f9-4cd1-b4c9-7272309dbaa0}</Project>
-      <Name>EntityFrameworkManagement</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LaveryGeneric\AutomaticBuilders\Lavery.Helper.ClassGenerator\Lavery.Helper.ClassGenerator.csproj">
       <Project>{a6ac225e-234d-446e-8b0b-92a2f20bf8d7}</Project>
       <Name>Lavery.Helper.ClassGenerator</Name>
@@ -250,6 +246,10 @@
     <ProjectReference Include="..\LaveryGeneric\AutomaticBuilders\Lavery.Helper.Wcf.ClassGenerator\Lavery.Helper.Wcf.ClassGenerator.csproj">
       <Project>{553408eb-6978-44cf-8cf0-f930eb6726eb}</Project>
       <Name>Lavery.Helper.Wcf.ClassGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LaveryGeneric\AutomaticBuilders\ODataManagement\ODataManagement.csproj">
+      <Project>{c9057700-51f9-4cd1-b4c9-7272309dbaa0}</Project>
+      <Name>ODataManagement</Name>
     </ProjectReference>
     <ProjectReference Include="..\LaveryGeneric\Lavery.Connector\Lavery.Connectors.csproj">
       <Project>{d98372c4-16d9-4ada-8cd6-d651b967b97d}</Project>

@@ -293,9 +293,13 @@ namespace SqlDependency
             Boolean bLoop = true;
             int i = 10;
 
-
-            EntitiesGenerator oEntitiesGenerator = new EntitiesGenerator(oCF, "Matter", "MattBudget", "InvMaster");
-            oEntitiesGenerator.doJob("Notarier", "Lavery.OData.Notarier");
+            List<String> lDirectRelation = new List<String>();            
+            List<String> lInverseRelation = new List<String>();
+            lInverseRelation.Add("MattBudget");
+            lInverseRelation.Add("InvMaster");
+            
+            EntitiesGenerator oEntitiesGenerator = new EntitiesGenerator(oCF, LaverySql.sSqlForThreeEntities, "Matter", lInverseRelation, lDirectRelation);
+            oEntitiesGenerator.doJob("Notarier", "Lavery.OData.Notarier", false);
             
 
 

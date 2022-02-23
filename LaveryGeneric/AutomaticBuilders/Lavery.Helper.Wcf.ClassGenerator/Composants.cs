@@ -62,7 +62,7 @@ namespace Lavery.ClassResponse.Generator
             foreach (String oElt in lField)
             {   
                 String sField = oElt;
-                fieldDef oFI = new fieldDef(oElt);
+                fieldDef oFI = new fieldDef(oElt, false, false);
                 oRet.add(oFI);
             }
             return oRet;
