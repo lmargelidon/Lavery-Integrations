@@ -3,10 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Lavery.OData.Notarier.Models
 {     
-    public class InvMaster : Object
+    public class InvMaster 
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public  InvMaster()
+        {
+
+        }
  
 
             public Nullable<System.Decimal> AdjAmt { get; set; } 
@@ -98,7 +105,7 @@ namespace Lavery.OData.Notarier.Models
             public Nullable<System.DateTime> InvDate { get; set; } 
 
             public System.Int32 InvIndex { get; set; } 
-			[Key]
+
             public System.Guid InvMasterID { get; set; } 
 
             public System.String InvNumber { get; set; } 
@@ -132,8 +139,10 @@ namespace Lavery.OData.Notarier.Models
             public System.Boolean IsTaxReportable { get; set; } 
 
             public Nullable<System.Guid> LastProcItemID { get; set; } 
+			[ForeignKey("LinkInvMasterAndMatter")]
+            public Nullable<int> LeadMatter { get; set; } 
 
-            public Nullable<Matter> LeadMatter { get; set; } 
+            public Matter LinkInvMasterAndMatter { get; set; } 
 
             public System.Int32 LxLabel { get; set; } 
 

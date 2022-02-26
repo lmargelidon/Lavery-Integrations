@@ -3,11 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Lavery.OData.Notarier.Models
 {     
-    public class MattBudget : Object
+    public class MattBudget 
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public  MattBudget()
+        {
+
+        }
  
+			[ForeignKey("LinkMattBudgetAndMatter")]			[Key]
+            public int Matter { get; set; } 
 
             public Nullable<System.Guid> Activity { get; set; } 
 
@@ -44,10 +53,10 @@ namespace Lavery.OData.Notarier.Models
             public System.Boolean IsFee { get; set; } 
 
             public Nullable<System.Guid> LastProcItemID { get; set; } 
-			[Key]
-            public System.Guid MattBudgetID { get; set; } 
 
-            public Matter Matter { get; set; } 
+            public Matter LinkMattBudgetAndMatter { get; set; } 
+
+            public System.Guid MattBudgetID { get; set; } 
 
             public Nullable<System.Decimal> NBAmount { get; set; } 
 

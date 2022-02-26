@@ -3,11 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Lavery.OData.Notarier.Models
 {     
-    public class Matter : Object
+    public class Matter 
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public  Matter()
+        {
+				this.InvMasters = new HashSet<InvMaster>();
+				this.MattBudgets = new HashSet<MattBudget>();
+
+        }
  
+			[Key]
+            public System.Int32 MattIndex { get; set; } 
 
             public System.String AdminAccount { get; set; } 
 
@@ -122,7 +133,8 @@ namespace Lavery.OData.Notarier.Models
             public System.String ICBUnitDueFrom { get; set; } 
 
             public System.String ICBUnitDueTo { get; set; } 
-
+			[InverseProperty(  "LinkInvMasterAndMatter"), 
+            System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
             public ICollection<InvMaster> InvMasters { get; set; } 
 
             public System.String InvoiceOverride { get; set; } 
@@ -182,16 +194,15 @@ namespace Lavery.OData.Notarier.Models
             public System.String Markup { get; set; } 
 
             public System.String MattAttribute { get; set; } 
-
+			[InverseProperty(  "LinkMattBudgetAndMatter"), 
+            System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
             public ICollection<MattBudget> MattBudgets { get; set; } 
 
             public System.String MattCategory { get; set; } 
 
             public System.String MattCloseType { get; set; } 
-			[Key]
-            public System.Guid MatterID { get; set; } 
 
-            public System.Int32 MattIndex { get; set; } 
+            public System.Guid MatterID { get; set; } 
 
             public System.String MattInfo { get; set; } 
 

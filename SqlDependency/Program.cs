@@ -299,7 +299,7 @@ namespace SqlDependency
             lInverseRelation.Add("InvMaster");
             
             EntitiesGenerator oEntitiesGenerator = new EntitiesGenerator(oCF, LaverySql.sSqlForThreeEntities, "Matter", lInverseRelation, lDirectRelation);
-            oEntitiesGenerator.doJob("Notarier", "Lavery.OData.Notarier", false);
+            oEntitiesGenerator.doJob("Matters", "Lavery.ODataMatter", false);
             
 
 

@@ -106,9 +106,11 @@ namespace EF.Entities.management
                 String sPath = OCF.getKeyValueString("oDataGenerationPath");
                 Array.ForEach(Directory.GetFiles(sPath + @"\Models\"), delegate (string path) { File.Delete(path); });
                 Array.ForEach(Directory.GetFiles(sPath + @"\Controllers\"), delegate (string path) { File.Delete(path); });
-                lTableContext.AddRange(oCBD.genereEntities(oConnectionSource, sNameSpace, sPath, sQlGeneration, lTableAssociated, lTableDirectRelationToInclude));                
+                lTableContext.AddRange(oCBD.genereEntities(oConnectionSource, sNameSpace, sPath, sQlGeneration, lTableAssociated, lTableDirectRelationToInclude));
+                String sKey = getPrimaryKey(oCBD.OCompleteDicoField);
+
                 genereEntityContext(oDataEndpoint, sNameSpace, sPath, "Controllers");
-                genereEntityController(oDataEndpoint, sNameSpace, sPath, "Controllers");
+                genereEntityController(oDataEndpoint, sKey, sNameSpace, sPath, "Controllers");
                 genereWebConfig(oDataEndpoint, sNameSpace, sPath, "App_Start");
                 
             }
@@ -117,6 +119,27 @@ namespace EF.Entities.management
 
             }
             
+        }
+        private String getPrimaryKey(Dictionary<String, fieldDef> oDicoField)
+        {
+            String sRet = "Missing Key";
+            try
+            {
+                foreach (KeyValuePair<String, fieldDef> oEntry in oDicoField.OrderBy(ch => ch.Key).ToList())
+                {
+                    String sEntTableName = oEntry.Key.Split('|')[0];
+                    if (sEntTableName.Equals(sBaseTableName, StringComparison.CurrentCultureIgnoreCase))
+                        if (oEntry.Value.IsPK)
+                        {
+                            sRet = oEntry.Value.SName;
+                            break;
+                        }
+                }
+            }
+            catch (Exception ex)
+            { }
+
+            return sRet;
         }
         private void genereEntityContext(String sCODataEndPoint, String sNameSpace, String sPath, String sSubFolder)
         {
@@ -144,13 +167,13 @@ namespace EF.Entities.management
 
             }
         }
-        private void genereEntityController(String sCODataEndPoint, String sNameSpace, String sPath, String sSubFolder)
+        private void genereEntityController(String sCODataEndPoint, String sPrimayKey, String sNameSpace, String sPath, String sSubFolder)
         {
             try
             {
                 
                 
-                String sControllerClass = String.Format(LaveryTemplates.sODataControllerTemplate, sNameSpace, sCODataEndPoint, sBaseTableName);
+                String sControllerClass = String.Format(LaveryTemplates.sODataControllerTemplate, sNameSpace, sCODataEndPoint, sBaseTableName, sPrimayKey);
                 if (sPath[sPath.Length - 1] != '\\')
                     sPath += '\\';
                 if (sSubFolder != default(String))

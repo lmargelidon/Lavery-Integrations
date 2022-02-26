@@ -18,8 +18,12 @@ namespace Lavery.OData.Notarier.Service
 			builder.EntitySet<Matter>("Notarier");
 			builder.EntitySet<InvMaster>("InvMaster");
 			builder.EntitySet<MattBudget>("MattBudget");
-
-            config.MapODataServiceRoute("ODataRoute", null, builder.GetEdmModel());
+            
+            config.MapODataServiceRoute(
+            routeName: "ODataRoute",
+            routePrefix: null,
+            model: builder.GetEdmModel());
+            config.Select().Expand().Filter().OrderBy().MaxTop(null).Count();
         }
     }
 }

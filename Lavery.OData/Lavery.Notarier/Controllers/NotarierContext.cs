@@ -24,7 +24,7 @@ namespace Lavery.OData.Notarier.Controllers
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            Database.SetInitializer<NotarierContext>(null);
+            //Database.SetInitializer<NotarierContext>(null);
 			base.OnModelCreating(modelBuilder);						
         }
     }
