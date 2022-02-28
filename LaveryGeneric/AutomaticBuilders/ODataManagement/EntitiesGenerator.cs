@@ -15,7 +15,7 @@ namespace EF.Entities.management
     {
         connectionFactory OCF;
         List<String> lTableAssociated = new List<String>();
-        List<String> lTableContext = new List<String>();
+        
         List<String> lTableDirectRelationToInclude;
 
         String sBaseTableName;
@@ -49,15 +49,21 @@ namespace EF.Entities.management
                 Disposed = true;
             }
         }
-        public EntitiesGenerator(connectionFactory OCF, String sBaseTableName, String dSecondTableName, String dThirdTableName) 
+        public EntitiesGenerator(connectionFactory OCF, String sBaseTableName, List<String> lLinkedTableName) 
         {
             try
             {
                 this.OCF = OCF;                
-                lTableAssociated.Add(dSecondTableName);
-                lTableAssociated.Add(dThirdTableName);
+                lTableAssociated.AddRange(lLinkedTableName);
                 this.sBaseTableName = sBaseTableName;
-                sQlGeneration = String.Format(LaverySql.sSqlForThreeEntities, sBaseTableName, dSecondTableName, dThirdTableName);
+                String sSetOfSqlTable = "";
+                String sSep = "";
+                foreach (String sTable in lTableAssociated)
+                {
+                    sSetOfSqlTable += String.Format("{0}'{1}'", sSep, sTable);
+                    sSep  = ", ";
+                }
+                sQlGeneration = String.Format(LaverySql.sSqlForTEntitieDescriptions, sBaseTableName, sSetOfSqlTable);
                 oConnectionSource = new SqlConnection(OCF.ConnectionString("ConnectionSource"));
                 oConnectionSource.Open();                
 
@@ -81,14 +87,14 @@ namespace EF.Entities.management
 
                 this.sBaseTableName = sBaseTableName;
 
-                int iLaquelle = 1;
-                sQlGeneration = sSQlTemplate;
-                foreach (String sTable in lTableNameInverseRelation)
-                    sQlGeneration = sQlGeneration.Replace(String.Format("{{{0}}}", iLaquelle++), sTable);
-
-                sQlGeneration = String.Format(sQlGeneration, sBaseTableName);
-                
-
+                String sSetOfSqlTable = "";
+                String sSep = "";
+                foreach (String sTable in lTableAssociated)
+                {
+                    sSetOfSqlTable += String.Format("{0}'{1}'", sSep, sTable);
+                    sSep = ", ";
+                }
+                sQlGeneration = String.Format(LaverySql.sSqlForTEntitieDescriptions, sBaseTableName, sSetOfSqlTable);
                 oConnectionSource = new SqlConnection(OCF.ConnectionString("ConnectionSource"));
                 oConnectionSource.Open();
 
@@ -98,20 +104,20 @@ namespace EF.Entities.management
 
             }
         }
-        public void doJob(String oDataEndpoint, String sNameSpace, Boolean isForEntityFramework)
+        public void doJob(String sPath, String oDataEndpoint, String sNameSpace, Boolean isForEntityFramework)
         {
             try
             {
                 classBuilderFromTableDefinition oCBD = new classBuilderFromTableDefinition(OCF);
-                String sPath = OCF.getKeyValueString("oDataGenerationPath");
+                oCBD.OEntitySet.Add(sBaseTableName, sBaseTableName +"s");
                 Array.ForEach(Directory.GetFiles(sPath + @"\Models\"), delegate (string path) { File.Delete(path); });
                 Array.ForEach(Directory.GetFiles(sPath + @"\Controllers\"), delegate (string path) { File.Delete(path); });
-                lTableContext.AddRange(oCBD.genereEntities(oConnectionSource, sNameSpace, sPath, sQlGeneration, lTableAssociated, lTableDirectRelationToInclude));
+                oCBD.genereEntities(oConnectionSource, sNameSpace, sPath, sQlGeneration, lTableAssociated, lTableDirectRelationToInclude);
                 String sKey = getPrimaryKey(oCBD.OCompleteDicoField);
-
-                genereEntityContext(oDataEndpoint, sNameSpace, sPath, "Controllers");
+                
+                genereEntityContext(oDataEndpoint, oCBD.OEntitySet, sNameSpace, sPath, "Controllers");
                 genereEntityController(oDataEndpoint, sKey, sNameSpace, sPath, "Controllers");
-                genereWebConfig(oDataEndpoint, sNameSpace, sPath, "App_Start");
+                genereWebConfig(oDataEndpoint, oCBD.OEntitySet, sNameSpace, sPath, "App_Start");
                 
             }
             catch(Exception ex)
@@ -141,15 +147,15 @@ namespace EF.Entities.management
 
             return sRet;
         }
-        private void genereEntityContext(String sCODataEndPoint, String sNameSpace, String sPath, String sSubFolder)
+        private void genereEntityContext(String sCODataEndPoint, Dictionary<String, String> dicoEntitySet, String sNameSpace, String sPath, String sSubFolder)
         {
             try
             {
                 String sDbSet = "";
 
-                foreach (String sEntity in lTableContext)
+                foreach (KeyValuePair<String, String>  oEntity in dicoEntitySet)
                 {
-                    String sEntry = String.Format(LaveryTemplates.sDbSetTemplate, sEntity);
+                    String sEntry = String.Format(LaveryTemplates.sDbSetTemplate, oEntity.Key, oEntity.Value);
                     sDbSet += String.Format("\t\t{0}\n", sEntry);
                 }
 
@@ -187,18 +193,18 @@ namespace EF.Entities.management
 
             }
         }
-        private void genereWebConfig(String sCODataEndPoint, String sNameSpace, String sPath, String sSubFolder)
+        private void genereWebConfig(String sCODataEndPoint, Dictionary<String, String> dicoEntitySet, String sNameSpace, String sPath, String sSubFolder)
         {
             try
             {
                 
-                String sEntry = String.Format(LaveryTemplates.sODataBuilder, sBaseTableName, sCODataEndPoint);
+                String sEntry = String.Format(LaveryTemplates.sODataBuilderEntityset, sBaseTableName, sCODataEndPoint);
                 String sBuilder = String.Format("\t\t\t{0}\n", sEntry);
-                foreach (String sEntity in lTableContext)
+                foreach (KeyValuePair<String, String> oEntity in dicoEntitySet)
                 {
-                    if (!sEntity.Equals(sBaseTableName))
+                    if (!oEntity.Key.Equals(sBaseTableName))
                     {
-                        sEntry = String.Format(LaveryTemplates.sODataBuilder, sEntity, sEntity);
+                        sEntry = String.Format(LaveryTemplates.sODataBuilderEntityset, oEntity.Key, oEntity.Value);
                         sBuilder += String.Format("\t\t\t{0}\n", sEntry);
                     }
                 }

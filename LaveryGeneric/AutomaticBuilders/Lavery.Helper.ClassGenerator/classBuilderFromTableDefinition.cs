@@ -78,9 +78,11 @@ namespace Lavery.Helper.ClassGenerator
         String sConnectionStringName;
         String sSqlOutputStatement;
         Dictionary<String, fieldDef> oCompleteDicoField;
+        Dictionary<String, String> oEntitySet = new Dictionary<String, String>();
 
         public string SSqlOutputStatement { get => sSqlOutputStatement;  }
         public Dictionary<string, fieldDef> OCompleteDicoField { get => oCompleteDicoField; }
+        public Dictionary<string, string> OEntitySet { get => oEntitySet; }
 
         public classBuilderFromTableDefinition(connectionFactory oConnectionFactory, String sConnectionStringName)
         {
@@ -324,51 +326,86 @@ namespace Lavery.Helper.ClassGenerator
                             if (isPk)
                             {
                                 lAttr.Add("Key");
-                                sPrefixe = "AA-";
+                                sPrefixe = "AAA";
                             }
 
-                            if (lTableDirectRelationToInclude == default(List<String>) ||
+                            if ( !sTableName.Equals(sTargetTableName) &&
+                                (lTableDirectRelationToInclude == default(List<String>) ||
                                 lTableDirectRelationToInclude.FirstOrDefault(item => item == sTableName) != default(String) ||
-                                lAssociatedTable.FirstOrDefault(item => item == sTableName) != default(String)
+                                lAssociatedTable.FirstOrDefault(item => item == sTableName) != default(String))
                                 )
                             {
                                 Console.WriteLine(sTableName + "|" + sPrefixe + sColName);
-                                if (sTargetTableName.Length > 0 && (lAssociatedTable == default(List<String>) || lAssociatedTable.AsEnumerable().Contains(sTableName)))
+                                
+                                if (sTargetTableName.Length > 0  && (lAssociatedTable == default(List<String>) || lAssociatedTable.AsEnumerable().Contains(sTableName)))
                                 {
                                     lAttr = new List<string>();
-                                    lAttr.Add(String.Format(LaveryTemplates.sODataDirectRelationAttribut, sTableName, sTargetTableName));
-                                    oField = new fieldDef(sColName, isNullable, isNullable, sColumnType, sTargetTableName, sTargetColumnName, lAttr);                                    
-                                    oDicField.Add(sTableName + "|BB1" + sPrefixe + sColName, oField);
-
+                                   
+                                    lAttr.Add(String.Format(LaveryTemplates.sODataDirectRelationAttributForInverRelation, sTableName, sTargetTableName));
+                                    oField = new fieldDef(sColName, isNullable, isNullable, default(String), sTargetTableName, sTargetColumnName, lAttr);                                    
+                                    oDicField.Add(sTableName + "|AAB1" + sPrefixe + sColName, oField);
+                                    setFieldType(oField, sColumnType);
+                                    
                                     lAttr = new List<string>();
-                                    String sName = String.Format(LaveryTemplates.sODataDirectRelationField, sTableName, sTargetTableName);
+                                    String sName = String.Format(LaveryTemplates.sODataDirectRelationFieldForInverRelation, sTableName, sTargetTableName);
                                     oField = new fieldDef(sName, isPk, false, sTargetTableName, "", "", lAttr);
                                     oField.IsNullable = false;
-                                    oDicField.Add(sTableName + "|BB2" + sPrefixe + sName, oField);
+                                    oDicField.Add(sTableName + "|AAB2" + sPrefixe + sName, oField);
+
+                                    try
+                                    {
+                                        oEntitySet.Add(sTableName, sTableName + "s");
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                    }
 
                                     sColName = sTableName + "s";
                                     lAttr = new List<string>();
-                                    lAttr.Add(String.Format(LaveryTemplates.sODataInverseRelationAttribut, sTableName, sTargetTableName));
+                                    String sAttribInverseName = String.Format(LaveryTemplates.sODataInverseRelationAttribut, sTableName, sTargetTableName);
+                                    lAttr.Add(sAttribInverseName);
                                     oField = new fieldDef(sColName, isPk, isNullable, String.Format("ICollection<{0}>", sTableName), sTableName, "", lAttr);
                                     oDicField.Add(sTargetTableName + "|" + sPrefixe + sColName, oField);
                                     sTableName = sTargetTableName;
+                                   
                                 }
                                 else
                                 {
-                                    oField = new fieldDef(sColName, isPk, isNullable, default(String), sTargetTableName, sTargetColumnName, lAttr);
-                                    oDicField.Add(sTableName + "|" + sPrefixe + sColName, oField);
-                                }
+                                    if (sTargetTableName.Length > 0)
+                                    {
+                                        String sName = String.Format(LaveryTemplates.sODataDirectRelationField, sTargetTableName);
+                                        if (sTableName.Equals("Matter") && sTargetTableName.Equals("Client"))
+                                            Console.WriteLine(sTableName + "|" + sPrefixe + sColName);
 
+                                        if (!oDicField.ContainsKey(sTableName + "|AAC2" + sName  ))
+                                        {
+                                            try
+                                            {
+                                                oEntitySet.Add(sTargetTableName, sName);
+                                            }
+                                            catch (Exception ex)
+                                            { 
+                                            }
 
-                                try
-                                {
-                                    oField.setTypeFromSqlType(sColumnType);
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine("Exception catched : " + ex.Message);
-                                    adjustTypeApproximatively(oField);
-                                }
+                                            lAttr.Add(String.Format(LaveryTemplates.sODataDirectRelationAttribut, sTargetTableName));
+                                            oField = new fieldDef(sColName, isNullable, isNullable, default(String), sTargetTableName, sTargetColumnName, lAttr);
+                                            oDicField.Add(sTableName + "|AAC1" + sColName , oField);
+                                            setFieldType(oField, sColumnType);
+
+                                            lAttr = new List<string>();
+                                            oField = new fieldDef(sName, isPk, false, sTargetTableName, "", "", lAttr);
+                                            oField.IsNullable = false;
+                                            oDicField.Add( sTableName + "|AAC2" + sName, oField);
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        oField = new fieldDef(sColName, isPk, isNullable, default(String), sTargetTableName, sTargetColumnName, lAttr);
+                                        oDicField.Add(sTableName + "|" + sPrefixe + sColName, oField);
+                                        setFieldType(oField, sColumnType);
+                                    }
+                                }                                
                             }
                         }
                     }
@@ -395,13 +432,30 @@ namespace Lavery.Helper.ClassGenerator
                     }
                 }
                 foreach (KeyValuePair<String, fieldDef> oEntry in oDicField.OrderBy(ch => ch.Key).ToList())
+                {
+                    Console.WriteLine("---->" + oEntry.Key + "           " + oEntry.Value.SName);
+                    if (oEntry.Key.StartsWith("Matter") && oEntry.Value.SName.StartsWith("Client"))
+                        Console.WriteLine("Trouve");
                     if (!oEntry.Value.BReorg)
                         oUpdatedField.Add(oEntry.Key, oEntry.Value);
+                }
 
             }
             
             return oUpdatedField;
         }
+        private void setFieldType(fieldDef oField, String sColumnType)
+        { 
+            try
+            {
+                oField.setTypeFromSqlType(sColumnType);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception catched : " + ex.Message);
+                adjustTypeApproximatively(oField);
+    }
+}
         private void setNewPrimaryKey(Dictionary<String, fieldDef> oDicField, Dictionary<String, fieldDef> oUpdatedField, String sTargetTable, String sTargetColumn)
         {            
             try 

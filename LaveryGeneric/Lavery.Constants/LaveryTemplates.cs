@@ -146,7 +146,7 @@ namespace {0}.Service
     }}
 }}
 ";
-        static public String sODataBuilder = @"builder.EntitySet<{0}>(""{1}"");";
+        static public String sODataBuilderEntityset = @"builder.EntitySet<{0}>(""{1}"");";
 
 
         static public String sODataInverseRelationAttribut =
@@ -154,10 +154,13 @@ namespace {0}.Service
             System.Diagnostics.CodeAnalysis.SuppressMessage(""Microsoft.Usage"", ""CA2227:CollectionPropertiesShouldBeReadOnly"")";
 
 
-        static public String sODataDirectRelationAttribut = @"ForeignKey(""Link{0}And{1}"")";
-        static public String sODataDirectRelationField = @"Link{0}And{1}";
+        static public String sODataDirectRelationAttributForInverRelation = @"ForeignKey(""Link{0}And{1}"")";
+        static public String sODataDirectRelationFieldForInverRelation = @"Link{0}And{1}";
 
-        static public String sDbSetTemplate = @"public DbSet<{0}> {0}s {{ get; set; }}";
+        static public String sODataDirectRelationAttribut = @"ForeignKey(""{0}EntitySet"")";
+        static public String sODataDirectRelationField = @"{0}EntitySet";
+
+        static public String sDbSetTemplate = @"public DbSet<{0}> {1} {{ get; set; }}";
                 
 
         static public String sOdataAttributesTemplate = @" 
