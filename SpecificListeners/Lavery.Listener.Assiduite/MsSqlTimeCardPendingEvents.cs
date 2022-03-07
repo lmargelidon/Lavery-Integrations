@@ -108,20 +108,24 @@ namespace Lavery.Listeners
                     JArray jArray = (JArray)data.First.First;
                     foreach (JObject item in jArray) 
                     {
-                        String sVal = item.ToString();                            
-                        TimeCardPending oPending = oSerializer.deserialize(sVal, "dd/MM/yyyy");
-                        Guid oGuid = this.ODataReferentialManagement.getLinkCorrelationId(oPending.TimeCardPendingID);
-                        if (oGuid != default(Guid))
+
+                        if (item["Matter"].ToString().Length > 0)
                         {
-                            oPending.etypeEnvelopp = typeEnvelopp.Update;
-                            oPending.refGuid = oGuid;
+                            String sVal = item.ToString();
+                            TimeCardPending oPending = oSerializer.deserialize(sVal, "dd/MM/yyyy");
+                            Guid oGuid = this.ODataReferentialManagement.getLinkCorrelationId(oPending.TimeCardPendingID);
+                            if (oGuid != default(Guid))
+                            {
+                                oPending.etypeEnvelopp = typeEnvelopp.Update;
+                                oPending.refGuid = oGuid;
+                            }
+                            else
+                            {
+                                oPending.etypeEnvelopp = typeEnvelopp.Insert;
+                                oPending.refGuid = Guid.NewGuid();
+                            }
+                            OStackEnvelopp.push(oPending);
                         }
-                        else
-                        {
-                            oPending.etypeEnvelopp = typeEnvelopp.Insert;
-                            oPending.refGuid = Guid.NewGuid();
-                        }
-                        OStackEnvelopp.push(oPending);
                     }
                     
                 }

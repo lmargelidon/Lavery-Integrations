@@ -35,7 +35,9 @@ namespace Lavery.Listeners
         jsonSerializer<TimeCard> oSerializer = new jsonSerializer<TimeCard>();
         MsMq<TimeCard> oMq;
         String[] aNoBillabeJobTypes;
-        
+        Dictionary<Guid, int> oDictFailedRequest = new Dictionary<Guid, int>();
+        int iMaxRetryAttempt = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxRetryAttempt"]);
+
 
 
         public MsSqlTimeCardEvents(connectionFactory oConnectionFactory, String SPrefixeName, Guid oGuid) : base(oConnectionFactory) 
@@ -171,8 +173,36 @@ namespace Lavery.Listeners
             Boolean bRet = true;
             try
             {
-                //Envelopp<TimeSheet> oEnv = default(Envelopp<TimeSheet>);
                 TimeCard oTS = default(TimeCard);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (MsMq<TimeCard> oMsMqDlq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateDLQRead", true, true))
+                    using (MsMq<TimeCard> oMsMq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateQueue", true, true))
+                    {
+
+                        oTS = oMsMqDlq.receiveInTransaction();
+                        if (oTS != default(TimeCard))
+                        {
+                            if (!oDictFailedRequest.ContainsKey(oTS.TimecardID)) oDictFailedRequest.Add(oTS.TimecardID, 0);
+
+                            if (oDictFailedRequest[oTS.TimecardID] < 5)
+                            {
+                                oDictFailedRequest[oTS.TimecardID]++;
+                                String sMessageOut = oSerializer.serialize(oTS);
+                                oMsMq.send(sMessageOut, oTS);
+                            }
+                            else
+                            {
+                                //send email
+                            }
+                        }
+
+                    }
+                    scope.Complete();
+                }
+
+                //Envelopp<TimeSheet> oEnv = default(Envelopp<TimeSheet>);
+
                 if ((oTS = (TimeCard)OStackEnvelopp.pop()) != default(TimeCard) )
                 {
                     try
@@ -235,15 +265,18 @@ namespace Lavery.Listeners
                                             using (TransactionScope scope = new TransactionScope())
                                             {
                                                 using (SqlConnection oConnectionReferentialTrx = new SqlConnection(OConnectionFactory.ConnectionString("ConnectionReferential")))
-                                                using (MsMq<TimeCard> oMsMqDlq = new MsMq<TimeCard>(OConnectionFactory, "AssiduiteValidateDLQWrite", true, true))
                                                 {
                                                     /*
                                                      * Enrtegistreer5 dans une DLQ pour traitement ulterieur
                                                      * ne pas oublier d'enregistrer 
                                                      */
                                                     oConnectionReferentialTrx.Open();
+                                                    
+                                                    //register link as error ceci pour eviter au prochain redemarage du system, on ne reprocess pas les notifications qui n'ont pas aboutie
+                                                    //faire un trhead au demarage du do initialize qui esseyera de processer automatiquement la deadletterqueue pour la metre dans la queue de validation
+                                                    //verifier le nombre de fois ou elle sera retraiter et envoyer un message qu'il faut le traiter a la main apres x try
+                                                    ODataReferentialManagement.registerLink(oTS.TimecardID, oTS.TimeStamp, -1, oTS.refGuid, sMessageOut, oTS.etypeEnvelopp == typeEnvelopp.Delete, oConnectionReferentialTrx);
                                                     ODataReferentialManagement.registerRequestProcessed(true, oTS.TimecardID, oConnectionReferentialTrx);
-                                                    oMsMqDlq.send(sMessageOut, oTS);                                                   
 
                                                 }
                                                 scope.Complete();
