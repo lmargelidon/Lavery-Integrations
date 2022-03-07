@@ -22,6 +22,7 @@ using System.Messaging;
 
 using Lavery.ClassResponse.Generator;
 using Lavery.Wcf.Core;
+using EF.Entities.management;
 
 
 
@@ -270,6 +271,10 @@ namespace SqlDependency
             }
             */
             //int x = (int)Math.Ceiling((double)12 / (double)8);
+
+
+
+
            
             persistEventManager.init();
             Guid oGuid = Guid.NewGuid();
@@ -277,7 +282,7 @@ namespace SqlDependency
 
             connectionFactory oCF = new connectionFactory();
             
-            Helpers.Start(true, "S1");
+            //Helpers.Start(true, "S1");
             
             MattersManagement oMatter = new MattersManagement();
             /*
@@ -287,15 +292,24 @@ namespace SqlDependency
            */
             Boolean bLoop = true;
             int i = 10;
+
+                       
+            List<String> lInverseRelation = new List<String>();
+            lInverseRelation.Add("MattBudget");
+            lInverseRelation.Add("InvMaster");
             
-          
-          genereAllResponsesClasses oGEneration = new genereAllResponsesClasses(oCF, "WcfResApiResponseGenerationPath");
-            oGEneration.doJob("ConnectionSource", "Lavery.Wcf.Core");
-          
+            EntitiesGenerator oEntitiesGenerator = new EntitiesGenerator(oCF, LaverySql.sSqlForTEntitieDescriptions, "Matter", lInverseRelation);
+            oEntitiesGenerator.doJob(oCF.getKeyValueString("oDataGenerationPath"), "Matters", "Lavery.ODataMatter", false);
             
+
+
+            //genereAllResponsesClasses oGEneration = new genereAllResponsesClasses(oCF, "WcfResApiResponseGenerationPath");
+            //oGEneration.doJob("ConnectionSource", "Lavery.Wcf.Core");
+
+
             while (bLoop)
                     {
-                    //MatterGetResponse oRep = oMatter.getMatters(i++);
+                    //genericResponse oRep = oMatter.getMatters(i++);
                     ConsoleKeyInfo key = Console.ReadKey();
                 
                     switch (key.Key)

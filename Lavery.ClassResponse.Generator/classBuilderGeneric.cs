@@ -4,58 +4,76 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lavery.Tools.Configuration.Management;
+using Org.OpenAPITools.Model;
+using Lavery.Tools;
+using Lavery.Constants;
+using Lavery.Client.E3;
+using Lavery.Helper.ClassGenerator;
 
 namespace Lavery.ClassResponse.Generator
 {
-    public abstract class classBuilderGeneric: Object
+    public class recursiveInformation<T>
     {
-        protected connectionFactory OCF;
-        String sFinaleClassName;
-
-
-        public classBuilderGeneric(connectionFactory OCF, string sFinaleClassName)
+        public Composite recursOrganizeInformation(T oType, String sClassId = default(String))
         {
-            OCF = new connectionFactory();
-            this.sFinaleClassName = sFinaleClassName;
-        }
-
-        public string SFinaleClassName { get => sFinaleClassName;  }
-
-        abstract public Dictionary<String, tableDS> getInformations();
-       
-        public Dictionary<String, tableDS> organizeClassesInformations(String sBaseTable, List<String> lField)
-        {
-            Dictionary<String, tableDS> oRet = new Dictionary<String, tableDS>();
-            foreach (String oElt in lField)
+            Composite oComposite = default(Composite);
+            
+            Dictionary<String, E3EAPIDataModelsAttribute> lAttributes;
+            if ((lAttributes = (Dictionary<String, E3EAPIDataModelsAttribute>)LaveryReflection.getProperty("Attributes", oType)) != default(Dictionary<String, E3EAPIDataModelsAttribute>))
             {
-                
+                List<String> lDef = new List<String>();
+                foreach (KeyValuePair<String, E3EAPIDataModelsAttribute> pair in lAttributes)
+                    lDef.Add(pair.Key.Replace("1", ""));
 
-                String sSchema = "dbo";
+                oComposite = organizeClassesInformations(sClassId != default(String)? sClassId : oType.ToString(), lDef);
+            }
+            else
+                oComposite = new Composite(oType.ToString());
+
+            List<E3EAPIDataObjectModelsDataObjectLiteCollection> lChildObjects;
+                
+            if ((lChildObjects =(List<E3EAPIDataObjectModelsDataObjectLiteCollection>)LaveryReflection.getProperty("ChildObjects", oType)) != default(List<E3EAPIDataObjectModelsDataObjectLiteCollection>))
+            {
+                List<String> lDef = new List<String>();
+                foreach (E3EAPIDataObjectModelsDataObjectLiteCollection oVal in lChildObjects)
+                {
+                    recursiveInformation<E3EAPIDataObjectModelsDataObjectLite> oRecINfo = new recursiveInformation<E3EAPIDataObjectModelsDataObjectLite>();
+
+                    foreach (E3EAPIDataObjectModelsDataObjectLite eElt in oVal.Rows)
+                    {
+                        /*
+                         * Monter inclusion de l'object recursivement
+                         */
+
+                        List<String> lDefObjectRelation = new List<String>();
+                        lDefObjectRelation.Add(String.Format(reflectionGeneration.sStartStructure, eElt.SubclassId));
+
+                        oComposite.add( oRecINfo.recursOrganizeInformation(eElt, eElt.SubclassId));              
+
+                    }
+                }
+            }
+            
+            return oComposite;
+        }
+        public Composite organizeClassesInformations(String sBaseTable, List<String> lField)
+        {
+            Composite oRet = new Composite(sBaseTable);
+            foreach (String oElt in lField)
+            {   
                 String sField = oElt;
-                /*
-                String[] aVal = oElt.Split('.');
-                int iBase = 0;
-                if (aVal.Length > 1)
-                {
-                    sBaseTable = aVal[0];
-                    iBase = 1;
-                }
-                
-                for (int i = iBase; i < aVal.Length; i++)
-                    sField += ((sField.Length > 0 ? "-":"") + aVal[i]);
-                */
-
-                tableDS otableDS;
-                if (oRet.ContainsKey(sBaseTable))
-                    otableDS = oRet[sBaseTable];
-                else
-                {
-                    otableDS = new tableDS(sSchema, sBaseTable);
-                    oRet.Add(sBaseTable, otableDS);
-                }
-                otableDS.addField(sField);
+                fieldDef oFI = new fieldDef(oElt);
+                oRet.add(oFI);
             }
             return oRet;
         }
+        public Composite  addComposit(Composite oCompositeBase, Composite oComposite)
+        {
+            oCompositeBase.add(oComposite);
+            return oCompositeBase;
+        }
+
+
     }
+   
 }

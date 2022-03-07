@@ -24,7 +24,7 @@ namespace UnitTestListeners.Functionnal
             //List<Guid> matterId = null;
             oRequest.matterId = null;
             //int? mattIndex = null;
-            oRequest.mattIndex = 10;
+            oRequest.mattIndex = 647;
             //string number = null;
             oRequest.number = null;
             

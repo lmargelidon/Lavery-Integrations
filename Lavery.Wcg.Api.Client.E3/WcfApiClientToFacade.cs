@@ -23,6 +23,7 @@ using Lavery.Wcf.Core;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Lavery.Tools.Configuration.Management;
 
 namespace Lavery.Wcf.Api.Client.E3
 {
@@ -36,7 +37,8 @@ namespace Lavery.Wcf.Api.Client.E3
         {
             try
             {
-                var factory = new ChannelFactory<IE3Api>(new WebHttpBinding(), "HTTP://Localhost:8100");
+                connectionFactory oCF = new connectionFactory();
+                var factory = new ChannelFactory<IE3Api>(new WebHttpBinding(), oCF.getKeyValueString("WcfListenerClient"));
                 factory.Endpoint.Behaviors.Add(new WebHttpBehavior());
                 proxy = factory.CreateChannel();
             }
@@ -63,31 +65,8 @@ namespace Lavery.Wcf.Api.Client.E3
             }
             return oRet;
         }
-        /*
-        private async Task<HttpResponseMessage> SendRequestAsync(string adaptiveUri, string xmlRequest)
-        {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                StringContent httpConent = new StringContent(xmlRequest, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage responseMessage = null;
-                try
-                {
-                    responseMessage = await httpClient.PostAsync(adaptiveUri, httpConent);
-                }
-                catch (Exception ex)
-                {
-                    if (responseMessage == null)
-                    {
-                        responseMessage = new HttpResponseMessage();
-                    }
-                    responseMessage.StatusCode = HttpStatusCode.InternalServerError;
-                    responseMessage.ReasonPhrase = string.Format("RestHttpClient.SendRequest failed: {0}", ex);
-                }
-                return responseMessage;
-            }
-        }
-        */
+        /*Auto Insert here*/
 
     }
 }

@@ -35,6 +35,11 @@ namespace Lavery.Tools
             }
             return iHah;
         }
+        public static Object getProperty(String sPropertyName, Object oObj)
+        {
+            return oObj.GetType().GetProperty(sPropertyName).GetValue(oObj, null);
+        }
 
     }
+
 }
