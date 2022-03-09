@@ -86,10 +86,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DDL", "DDL", "{4C06AB34-F10
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{364F741F-339E-466A-8482-544970EDB1BF}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\Integrations\services\LaveryInboundOutboundStream.bat = ..\..\..\..\..\Integrations\services\LaveryInboundOutboundStream.bat
-		..\..\..\..\..\Integrations\services\LaveryInboundOutboundStreamHA.bat = ..\..\..\..\..\Integrations\services\LaveryInboundOutboundStreamHA.bat
-		..\..\..\..\..\Integrations\services\LaveryInboundOutboundStreamUnInstall.bat = ..\..\..\..\..\Integrations\services\LaveryInboundOutboundStreamUnInstall.bat
-		..\..\..\..\..\Integrations\services\LaveryInboundOutboundStreamUnInstallHA.bat = ..\..\..\..\..\Integrations\services\LaveryInboundOutboundStreamUnInstallHA.bat
+		AddedItems\Scripts\LaveryInboundOutboundStream.bat = AddedItems\Scripts\LaveryInboundOutboundStream.bat
+		AddedItems\Scripts\LaveryInboundOutboundStreamHA.bat = AddedItems\Scripts\LaveryInboundOutboundStreamHA.bat
+		AddedItems\Scripts\LaveryInboundOutboundStreamUnInstall.bat = AddedItems\Scripts\LaveryInboundOutboundStreamUnInstall.bat
+		AddedItems\Scripts\LaveryInboundOutboundStreamUnInstallHA.bat = AddedItems\Scripts\LaveryInboundOutboundStreamUnInstallHA.bat
 	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LaveryReferential", "LaveryReferential\LaveryReferential.sqlproj", "{C28670BA-BE0E-46D7-B254-AC0AD0E79CE7}"
