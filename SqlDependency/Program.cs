@@ -142,8 +142,8 @@ namespace SqlDependency
             //E3EAPIAttachmentModelsAttachmentCreateResponse AttachmentUploadDMSAttachment(AttachmentUploadDMSAttachmentRequest oClassRequestValue)
             //E3EAPIClientModelsClientGetResponse oResponse1 = oFacade.ClientGetClients((new ClientGetClientsRequest() { ClientIndex = 74 }));
 
-            //ClientApiFacade oFacade = new ClientApiFacade(new connectionFactory());
-            //E3EAPIClientModelsClientGetResponse oResponse1 = oFacade.ClientGetClients((new ClientGetClientsRequest() { number = "10073" }));
+            ClientApiFacade oFacade = new ClientApiFacade(new connectionFactory());
+            E3EAPIClientModelsClientGetResponse oResponse1 = oFacade.ClientGetClients((new ClientGetClientsRequest() { number = "10073" }));
 
 
             const string filePath = @".\json.txt";
@@ -293,7 +293,7 @@ namespace SqlDependency
             Boolean bLoop = true;
             int i = 10;
 
-                       
+           /*            
             List<String> lInverseRelation = new List<String>();
             lInverseRelation.Add("MattBudget");
             lInverseRelation.Add("InvMaster");
@@ -301,7 +301,7 @@ namespace SqlDependency
             EntitiesGenerator oEntitiesGenerator = new EntitiesGenerator(oCF, LaverySql.sSqlForTEntitieDescriptions, "Matter", lInverseRelation);
             oEntitiesGenerator.doJob(oCF.getKeyValueString("oDataGenerationPath"), "Matters", "Lavery.ODataMatter", false);
             
-
+            */
 
             //genereAllResponsesClasses oGEneration = new genereAllResponsesClasses(oCF, "WcfResApiResponseGenerationPath");
             //oGEneration.doJob("ConnectionSource", "Lavery.Wcf.Core");

@@ -63,16 +63,18 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>keyPairLavery.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\APIs\Lavery.Client.E3\bin\Debug\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Org.OpenAPITools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\APIs\Lavery.E3\src\Org.OpenAPITools\bin\Debug\Org.OpenAPITools.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -131,7 +133,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagramServiceEndPoint.cd" />
-    <None Include="LaveryInboundOutBoundStream_TemporaryKey.pfx" />
+    <None Include="keyPairLavery.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +148,10 @@
     <ProjectReference Include="..\APIs\Lavery.Client.E3\Lavery.Client.E3.csproj">
       <Project>{cb1e2ac9-670a-4e85-9e21-72bd4dadad34}</Project>
       <Name>Lavery.Client.E3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\APIs\Lavery.Org.OpenAPITools\Org.OpenAPITools.csproj">
+      <Project>{c3bca7c1-0e9e-4c43-8eec-9d7b160f7957}</Project>
+      <Name>Org.OpenAPITools</Name>
     </ProjectReference>
     <ProjectReference Include="..\APIs\Lavery.Wcf\Lavery.Wcf.Base\Lavery.Wcf.Base.E3\Lavery.Wcf.Base.E3.csproj">
       <Project>{a7bdb42a-b35b-41fd-8606-0b91b52a57c1}</Project>
