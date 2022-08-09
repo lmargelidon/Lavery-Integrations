@@ -85,7 +85,7 @@ using System.Collections.Generic;
 using Microsoft.AspNet.OData;
 using System.Linq;
 using System.Web.Http;
-using Lavery.ODataMatter.Models;
+using {0}.Models;
 
 namespace {0}.Controllers
 {{
@@ -111,7 +111,7 @@ namespace {0}.Controllers
             return db.{2}s;
         }}
         [EnableQuery]
-        public System.Web.Http.SingleResult<Matter> Get([FromODataUri] int key)
+        public System.Web.Http.SingleResult<{2}> Get([FromODataUri] {4} key)
         {{
             IQueryable<{2}> result = db.{2}s.Where(p => p.{3} == key);
             return SingleResult.Create(result);

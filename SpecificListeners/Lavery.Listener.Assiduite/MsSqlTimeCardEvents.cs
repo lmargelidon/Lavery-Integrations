@@ -35,8 +35,8 @@ namespace Lavery.Listeners
         jsonSerializer<TimeCard> oSerializer = new jsonSerializer<TimeCard>();
         MsMq<TimeCard> oMq;
         String[] aNoBillabeJobTypes;
-        Dictionary<Guid, int> oDictFailedRequest = new Dictionary<Guid, int>();
-        int iMaxRetryAttempt = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxRetryAttempt"]);
+        Dictionary<Guid, int> oDictFailedRequest = new Dictionary<Guid, int>();        
+        int iMaxRetryAttempt = default(int);
 
 
 
@@ -44,7 +44,9 @@ namespace Lavery.Listeners
         {
             try
             {
-                
+                String sVal = System.Configuration.ConfigurationManager.AppSettings["MaxRetryAttempt"];
+                this.iMaxRetryAttempt = int.Parse(sVal);
+
                 this.oSerializer = new jsonSerializer<TimeCard>();                
                 this.sMutextHost = OConnectionFactory.getKeyValueString("MutexHost");
                 this.IWaitOnMutex = OConnectionFactory.getKeyValueInt("MutexTimeOut");

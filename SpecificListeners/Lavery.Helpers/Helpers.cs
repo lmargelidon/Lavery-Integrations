@@ -141,6 +141,7 @@ namespace Lavery.specific.Listeners
             {
                 try
                 {
+                    TracePending.Trace("Assembly " + instance.ClassName + " wait to be stopped...");
                     if (instance.Active.Equals("True", StringComparison.InvariantCultureIgnoreCase))
                     {
                         assemblyLoaderHelper loader = getAssembly(instance.Assembly);
@@ -151,8 +152,10 @@ namespace Lavery.specific.Listeners
                             {                                
                                 if (loader.ExecuteMethod(sClasse.Trim(), "IsAlive", null))
                                 {
+                                    TracePending.Trace("Listener " + sClasse + " wait to be stopped...");
                                     Object[] oParam1 = { bWait };
                                     loader.ExecuteMethod(sClasse.Trim(), "stop", oParam1);
+                                    TracePending.Trace("Listener " + sClasse + " stopped...");
                                 }
                             }
                         }
@@ -164,7 +167,7 @@ namespace Lavery.specific.Listeners
                                                     oCF.getKeyValueString("Environment"),
                                                     "All Listener stopped...",
                                                     oGuid.ToString(), sPrefix);
-                    TracePending.Trace("All Listener stopped...");
+                    TracePending.Trace("Assembly " + instance.ClassName +  " stopped...");
                 }
                 catch (Exception ex)
                 {

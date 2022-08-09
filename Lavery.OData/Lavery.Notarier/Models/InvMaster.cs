@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Lavery.OData.Notarier.Models
+namespace Lavery.OData.Models
 {     
     public class InvMaster 
     {
@@ -15,6 +15,12 @@ namespace Lavery.OData.Notarier.Models
 
         }
  
+			[Key]
+            public System.Guid InvMasterID { get; set; } 
+			[ForeignKey("LinkInvMasterAndMatter")]
+            public Nullable<System.Int32> LeadMatter { get; set; } 
+
+            public Matter LinkInvMasterAndMatter { get; set; } 
 
             public Nullable<System.Decimal> AdjAmt { get; set; } 
 
@@ -84,6 +90,8 @@ namespace Lavery.OData.Notarier.Models
 
             public Nullable<System.DateTime> DueDate { get; set; } 
 
+            public System.String eBHInvoicePostFix { get; set; } 
+
             public Nullable<System.DateTime> eBHPostTime { get; set; } 
 
             public Nullable<System.Guid> eBHPostUser { get; set; } 
@@ -96,7 +104,7 @@ namespace Lavery.OData.Notarier.Models
 
             public Nullable<System.DateTime> GLDate { get; set; } 
 
-            public Nullable<System.Boolean> HasAttachments { get; set; } 
+            public Nullable<byte> HasAttachments { get; set; } 
 
             public System.String Hash { get; set; } 
 
@@ -106,43 +114,37 @@ namespace Lavery.OData.Notarier.Models
 
             public System.Int32 InvIndex { get; set; } 
 
-            public System.Guid InvMasterID { get; set; } 
-
             public System.String InvNumber { get; set; } 
 
-            public System.Boolean IsArchived { get; set; } 
+            public byte IsArchived { get; set; } 
 
-            public System.Boolean IsBOABalanceTransfer { get; set; } 
+            public byte IsBOABalanceTransfer { get; set; } 
 
-            public System.Boolean IsDonotReinstate { get; set; } 
+            public byte IsDonotReinstate { get; set; } 
 
-            public System.Boolean IsDonotUpdateWIP { get; set; } 
+            public byte IsDonotUpdateWIP { get; set; } 
 
-            public System.Boolean IsEbilled { get; set; } 
+            public byte IsEbilled { get; set; } 
 
-            public System.Boolean IseBillingHub { get; set; } 
+            public byte IseBillingHub { get; set; } 
 
-            public System.Boolean IsPaid { get; set; } 
+            public byte IsPaid { get; set; } 
 
-            public Nullable<System.Boolean> IsReinstateTrustBal { get; set; } 
+            public Nullable<byte> IsReinstateTrustBal { get; set; } 
 
-            public System.Boolean IsRequireEbill { get; set; } 
+            public byte IsRequireEbill { get; set; } 
 
-            public System.Boolean IsRetainInvNumber { get; set; } 
+            public byte IsRetainInvNumber { get; set; } 
 
-            public System.Boolean IsReversed { get; set; } 
+            public byte IsReversed { get; set; } 
 
-            public System.Boolean IsReversePayment { get; set; } 
+            public byte IsReversePayment { get; set; } 
 
-            public System.Boolean IsTaxbyMultipayor { get; set; } 
+            public byte IsTaxbyMultipayor { get; set; } 
 
-            public System.Boolean IsTaxReportable { get; set; } 
+            public byte IsTaxReportable { get; set; } 
 
             public Nullable<System.Guid> LastProcItemID { get; set; } 
-			[ForeignKey("LinkInvMasterAndMatter")]
-            public Nullable<int> LeadMatter { get; set; } 
-
-            public Matter LinkInvMasterAndMatter { get; set; } 
 
             public System.Int32 LxLabel { get; set; } 
 

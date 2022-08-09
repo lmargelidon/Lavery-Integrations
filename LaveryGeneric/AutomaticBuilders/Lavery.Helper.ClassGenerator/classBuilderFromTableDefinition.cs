@@ -282,6 +282,7 @@ namespace Lavery.Helper.ClassGenerator
 
             using (var command = new SqlCommand(sSqlStatement, oConnection))
             {
+                command.CommandTimeout = 120;
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     try
@@ -328,6 +329,8 @@ namespace Lavery.Helper.ClassGenerator
                                 lAttr.Add("Key");
                                 sPrefixe = "AAA";
                             }
+                            if (sColName.Equals("RspTkpr"))
+                                Console.WriteLine(sColName);
 
                             if ( !sTableName.Equals(sTargetTableName) &&
                                 (lTableDirectRelationToInclude == default(List<String>) ||
@@ -377,31 +380,40 @@ namespace Lavery.Helper.ClassGenerator
                                         if (sTableName.Equals("Matter") && sTargetTableName.Equals("Client"))
                                             Console.WriteLine(sTableName + "|" + sPrefixe + sColName);
 
-                                        if (!oDicField.ContainsKey(sTableName + "|AAC2" + sName  ))
+                                        //if (!oDicField.ContainsKey(sTableName + "|AAC2" + sColName + "-" + sName))
+                                        if (!oDicField.ContainsKey(sTableName + "|AAC2" + sName))
                                         {
                                             try
                                             {
                                                 oEntitySet.Add(sTargetTableName, sName);
                                             }
                                             catch (Exception ex)
-                                            { 
+                                            {
                                             }
 
                                             lAttr.Add(String.Format(LaveryTemplates.sODataDirectRelationAttribut, sTargetTableName));
                                             oField = new fieldDef(sColName, isNullable, isNullable, default(String), sTargetTableName, sTargetColumnName, lAttr);
-                                            oDicField.Add(sTableName + "|AAC1" + sColName , oField);
+                                            oDicField.Add(sTableName + "|AAC1" + sColName, oField);
                                             setFieldType(oField, sColumnType);
 
                                             lAttr = new List<string>();
                                             oField = new fieldDef(sName, isPk, false, sTargetTableName, "", "", lAttr);
                                             oField.IsNullable = false;
-                                            oDicField.Add( sTableName + "|AAC2" + sName, oField);
+                                            //oDicField.Add( sTableName + "|AAC2" + sColName+ "-" + sName , oField);
+                                            oDicField.Add(sTableName + "|AAC2" + sName, oField);
                                         }
+                                        else
+                                        {
+                                            oField = new fieldDef(sColName, isPk, isNullable, default(String), sTargetTableName, sTargetColumnName, lAttr);
+                                            oDicField.Add(sTableName + "|" + sPrefixe + sColName, oField);
+                                            setFieldType(oField, sColumnType);
+                                        }
+
                                     }
                                     else
                                     {
 
-                                        oField = new fieldDef(sColName, isPk, isNullable, default(String), sTargetTableName, sTargetColumnName, lAttr);
+                                        oField = new fieldDef(sColName, isPk, isNullable, default(String), "", "", lAttr);
                                         oDicField.Add(sTableName + "|" + sPrefixe + sColName, oField);
                                         setFieldType(oField, sColumnType);
                                     }

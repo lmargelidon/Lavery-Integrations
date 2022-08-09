@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Lavery.OData.Notarier.Models
+namespace Lavery.OData.Models
 {     
     public class MattBudget 
     {
@@ -15,8 +15,12 @@ namespace Lavery.OData.Notarier.Models
 
         }
  
-			[ForeignKey("LinkMattBudgetAndMatter")]			[Key]
-            public int Matter { get; set; } 
+			[Key]
+            public System.Guid MattBudgetID { get; set; } 
+			[ForeignKey("LinkMattBudgetAndMatter")]
+            public System.Int32 Matter { get; set; } 
+
+            public Matter LinkMattBudgetAndMatter { get; set; } 
 
             public Nullable<System.Guid> Activity { get; set; } 
 
@@ -44,19 +48,15 @@ namespace Lavery.OData.Notarier.Models
 
             public System.DateTime EndDate { get; set; } 
 
-            public Nullable<System.Boolean> HasAttachments { get; set; } 
+            public Nullable<byte> HasAttachments { get; set; } 
 
-            public System.Boolean IsActive { get; set; } 
+            public byte IsActive { get; set; } 
 
-            public System.Boolean IsCost { get; set; } 
+            public byte IsCost { get; set; } 
 
-            public System.Boolean IsFee { get; set; } 
+            public byte IsFee { get; set; } 
 
             public Nullable<System.Guid> LastProcItemID { get; set; } 
-
-            public Matter LinkMattBudgetAndMatter { get; set; } 
-
-            public System.Guid MattBudgetID { get; set; } 
 
             public Nullable<System.Decimal> NBAmount { get; set; } 
 
